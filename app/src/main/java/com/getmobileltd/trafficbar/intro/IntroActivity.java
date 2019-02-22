@@ -1,3 +1,11 @@
+/*
+ * *
+ * Creator: Tobiloba Adejumo on 2/22/19 4:19 PM Last modified: 2/22/19 4:17 PM Copyright: All rights reserved Ⓒ 2019
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ * /
+ */
+
 package com.getmobileltd.trafficbar.intro;
 
 import android.app.ActionBar;
@@ -9,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.intro.adapter.IntroAdapter;
@@ -21,6 +30,7 @@ public class IntroActivity extends AppCompatActivity {
     private IntroAdapter mIntroAdapter;
     private int[] layouts = {R.layout.first_intro_screen, R.layout.second_intro_screen, R.layout.third_intro_screen, R.layout.fourth_intro_screen};
     private LinearLayout mDotsLayout;
+    private TextView mTvNext, mTvSkip;
 
     @Override
 
@@ -46,6 +56,8 @@ public class IntroActivity extends AppCompatActivity {
         mIntroAdapter = new IntroAdapter(layouts, this);
         mDotsLayout = findViewById(R.id.linearlayout_dots);
         mViewPager.setAdapter(mIntroAdapter);
+        mTvNext = findViewById(R.id.textview_next);
+        mTvSkip = findViewById(R.id.textview_skip);
     }
 
     private void createDots(int current_position) {
@@ -60,6 +72,13 @@ public class IntroActivity extends AppCompatActivity {
 
             } else {
                 dots[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.inactive_dots));
+            }
+            if (current_position == 3) {
+                mTvNext.setVisibility(View.INVISIBLE);
+                mTvSkip.setVisibility(View.INVISIBLE);
+            } else {
+                mTvSkip.setVisibility(View.VISIBLE);
+                mTvNext.setVisibility(View.VISIBLE);
             }
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(8, 0, 8, 0);
