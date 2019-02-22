@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Traffic Bar</string>
+    <string name="welcome">Welcome</string>
+    <string name="welcome_intro">Traffic bar the best restaurant near you\nfor your hospitality</string>
+    <string name="primary_text_second_slide">Best Meal Of The Day</string>
+    <string name="secondary_text_second_slide">Create an account in minutes for free\nwith your full name, email address and\nphone number. Your identity will be</string>
+    <string name="primary_text_third_slide">High Quality Drinks</string>
+    <string name="primary_text_fourth_slide">Book a Table</string>
+    <string name="button_get_started">Get Started</string>
 </resources>
