@@ -2,7 +2,12 @@
  * *
  * Creator: Tobiloba Adejumo on 2/22/19 4:19 PM Last modified: 2/22/19 4:17 PM Copyright: All rights reserved Ⓒ 2019
  *
- *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+  * Unless required by applicable law or agreed to in writing, software distributed under the License is
+   *distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. S
+   * ee the License for the specific language governing permissions and limitations under the License.
  * /
  */
 
@@ -13,6 +18,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -31,6 +37,7 @@ public class IntroActivity extends AppCompatActivity {
     private int[] layouts = {R.layout.first_intro_screen, R.layout.second_intro_screen, R.layout.third_intro_screen, R.layout.fourth_intro_screen};
     private LinearLayout mDotsLayout;
     private TextView mTvNext, mTvSkip;
+    LayoutInflater inflater = getLayoutInflater();
 
     @Override
 

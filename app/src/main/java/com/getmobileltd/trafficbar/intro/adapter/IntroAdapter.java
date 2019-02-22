@@ -27,7 +27,8 @@ public class IntroAdapter extends PagerAdapter {
     public IntroAdapter(int[] layouts, Context context) {
         this.layouts = layouts;
         this.context = context;
-        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+       inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
     }
 
     @Override
@@ -49,6 +50,8 @@ public class IntroAdapter extends PagerAdapter {
         return view;
 
     }
+
+   
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
