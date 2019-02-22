@@ -3,6 +3,9 @@ package com.getmobileltd.trafficbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+/**
+ * Created by themavencoder
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

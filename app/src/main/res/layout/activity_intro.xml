@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
     android:layout_height="match_parent"
     tools:context=".intro.IntroActivity">
 
@@ -21,6 +22,31 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:text="@string/skip"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="43dp"
+
+        android:textSize="@dimen/text_size_eighteen"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="43dp"
+
+        android:textSize="@dimen/text_size_eighteen"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        />
 </RelativeLayout>
