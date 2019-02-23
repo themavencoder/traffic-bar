@@ -1,6 +1,6 @@
 /*
  * *
- * Creator: Tobiloba Adejumo on 2/23/19 4:45 PM Last modified: 2/22/19 9:13 PM Copyright: All rights reserved Ⓒ 2019
+ * Creator: Tobiloba Adejumo on 2/23/19 4:44 PM Last modified: 2/23/19 4:40 PM Copyright: All rights reserved Ⓒ 2019
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,18 +12,18 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.registration.register;
+package com.getmobileltd.trafficbar.registration.register.confirmregister;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.getmobileltd.trafficbar.R;
 
-public class SignUpActivity extends AppCompatActivity {
+public class ConfirmRegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_confirm_register);
     }
 }
