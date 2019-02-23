@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".registration.login.LoginActivity"></activity>
         <activity android:name=".registration.register.confirmregister.ConfirmRegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,10 +19,8 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity android:name=".registration.register.SignUpActivity">
-
-        </activity>
-        <activity android:name=".intro.IntroActivity"></activity>
+        <activity android:name=".registration.register.SignUpActivity"></activity>
+        <activity android:name=".intro.IntroActivity" />
         <activity android:name=".MainActivity" />
     </application>
 

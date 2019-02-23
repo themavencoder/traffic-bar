@@ -34,6 +34,9 @@
     <string name="enter_your_email_address">Enter your email address</string>
     <string name="password">PASSWORD</string>
     <string name="enter_your_password">Enter your password</string>
-    <string name="log_in">Log in</string>
+    <string name="log_in">Log In</string>
     <string name="agree_to_receive_newsletter_and_updates">Agree to receive newsletter and updates</string>
+    <string name="access_your_account">Access Your Account</string>
+    <string name="please_enter_your_email_password_to_log_in"><![CDATA[Please enter your email & password to log in]]></string>
+    <string name="i_forgot_my_password">I forgot my password?</string>
 </resources>
