@@ -13,4 +13,8 @@
     <dimen name="intro_medium">14sp</dimen>
     <dimen name="padding_small">8dp</dimen>
     <dimen name="text_size_eighteen">18sp</dimen>
+    <dimen name="twenty_sp">20sp</dimen>
+    <dimen name="twenty_four_sp">24sp</dimen>
+    <dimen name="fourteen_sp">14sp</dimen>
+    <dimen name="sixteen_sp">16sp</dimen>
 </resources>

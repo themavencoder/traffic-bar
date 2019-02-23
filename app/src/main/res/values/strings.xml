@@ -17,4 +17,15 @@
     <string name="button_get_started">Get Started</string>
     <string name="skip">Skip</string>
     <string name="next">Next</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="one_over_two">1/2</string>
+    <string name="new_account">New Account</string>
+    <string name="please_enter_your_full_name">Please enter your full name</string>
+    <string name="first_name">FIRST NAME</string>
+    <string name="hint_first_name">Enter your first name</string>
+    <string name="steps">Steps</string>
+    <string name="last_name">LAST NAME</string>
+    <string name="hint_last_name">Enter your last name</string>
+    <string name="continue_string">Continue</string>
+    <string name="already_have_an_account">Already have an account?</string>
 </resources>

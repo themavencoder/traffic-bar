@@ -13,4 +13,5 @@
     <color name="colorAccent">#F52D56</color>
     <color name="app_background">#32363F</color>
     <color name="white">#fff</color>
+    <color name="black_text">#32363F</color>
 </resources>
