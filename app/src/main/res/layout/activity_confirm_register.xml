@@ -169,7 +169,7 @@
 
                     android:textColor="@color/black_text"
                     android:textSize="@dimen/twelve_sp"
-                    android:textStyle="bold" />
+                   />
             </LinearLayout>
 
             <Button
@@ -204,7 +204,7 @@
                     android:text="@string/already_have_an_account"
                     android:textColor="@color/black_text"
                     android:textSize="14sp"
-                    android:textStyle="bold" />
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
