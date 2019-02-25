@@ -20,44 +20,8 @@ import android.databinding.ObservableField;
 
 import com.getmobileltd.trafficbar.BR;
 
-
 /**
  * Created by themavencoder on 25,February,2019
  */
-public class User extends BaseObservable {
-   private  String firstName;
-    private String lastName;
-
-
-    public static ObservableField<String> sEmailAddress = new ObservableField<>();
-    public static ObservableField<String> sPassword = new ObservableField<>();
-
-    public static ObservableField<String> getsEmailAddress() {
-        return sEmailAddress;
-    }
-
-
-    @Bindable
-    public String getFirstName() {
-return firstName;
-    }
-    @Bindable
-    public String getLastName() {
-        return lastName;
-
-    }
-public void setFirstName(String firstName) {
-        this.firstName = firstName;
-        notifyPropertyChanged(BR.firstName);
-}
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-        notifyPropertyChanged(BR.lastName);
-    }
-
-
-    public static ObservableField<String> getsPassword() {
-        return sPassword;
-    }
+public class User {
 }

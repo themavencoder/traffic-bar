@@ -16,6 +16,7 @@ package com.getmobileltd.trafficbar.registration.register.handlers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -34,20 +35,19 @@ public class RegisterClickHandler {
     private String firstName;
     private String lastName;
 
-    public RegisterClickHandler(Context context, RegisterPresenter presentere) {
+    public RegisterClickHandler(Context context, String firstName,String lastName) {
         this.context = context;
+        this.firstName = firstName;
+        this.lastName = lastName;
 
 
     }
     public void buttonContinueClick(View view) {
 
-            context.startActivity(new Intent(context.getApplicationContext(), ConfirmRegisterActivity.class));
+
 
     }
     public void textViewLoginClick(View view) {
-        context.startActivity(new Intent(context.getApplicationContext(), LoginActivity.class));
-    }
-    public void buttonSignUpClick() {
 
     }
 }

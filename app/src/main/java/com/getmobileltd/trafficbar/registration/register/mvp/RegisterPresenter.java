@@ -33,25 +33,25 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     @Override
     public boolean checkParameters(String firstName, String lastName) {
-        firstName = user.getFirstName();
-        lastName  = user.getLastName();
-        return !firstName.isEmpty() && !lastName.isEmpty();
+        return true;
 
     }
 
     @Override
     public String firstName() {
-        return user.getFirstName();
+        return null;
+
+
     }
 
     @Override
     public String lastName() {
-        return user.getFirstName();
+        return null;
     }
 
     @Override
     public void navigateToNextActivity() {
-        view.buttonClick();
 
     }
 }
+

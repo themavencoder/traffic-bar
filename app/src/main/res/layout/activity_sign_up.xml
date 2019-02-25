@@ -12,13 +12,6 @@
   ~    permissions and limitations under the License.
   ~ */
   -->
-<layout xmlns:bind="http://schemas.android.com/apk/res/android">
-    <data class = "SignUpActivityBinding">
-
-        <variable
-            name="handlers"
-            type="com.getmobileltd.trafficbar.registration.register.handlers.RegisterClickHandler"/>
-    </data>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -163,7 +156,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
-            android:onClick="@{handlers::buttonContinueClick}"
             android:id="@+id/button_continue"
             android:layout_marginLeft="40dp"
             android:layout_below="@id/edit_text_last_name"
@@ -212,4 +204,3 @@
 
 </LinearLayout>
 </LinearLayout>
-</layout>

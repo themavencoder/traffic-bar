@@ -18,17 +18,16 @@ import android.databinding.DataBindingUtil;
 import android.databinding.ObservableField;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
-import com.getmobileltd.trafficbar.databinding.SignUpActivityBinding;
 import com.getmobileltd.trafficbar.registration.register.handlers.RegisterClickHandler;
 import com.getmobileltd.trafficbar.registration.register.model.User;
 import com.getmobileltd.trafficbar.registration.register.mvp.RegisterContract;
 import com.getmobileltd.trafficbar.registration.register.mvp.RegisterPresenter;
 
 public class SignUpActivity extends AppCompatActivity implements RegisterContract.View {
-    private SignUpActivityBinding binding;
     private RegisterClickHandler handler;
     private RegisterPresenter presenter;
     private User user;
@@ -37,35 +36,16 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_sign_up);
-        user = new User();
-        presenter = new RegisterPresenter(user,this);
-        //firstName = binding.editTextFirstName.getText().toString();
-        //lastName = binding.editTextLastName.getText().toString();
-
-        handler = new RegisterClickHandler(this,presenter);
-        binding.setHandlers(handler);
-
-
-
-
-
+        setContentView(R.layout.activity_sign_up);
     }
 
     @Override
     public void showError() {
 
-
-
     }
 
     @Override
     public void buttonClick() {
-        String firstName = binding.editTextFirstName.getText().toString();
-        String lastName = binding.editTextLastName.getText().toString();
-        boolean result = presenter.checkParameters(firstName,lastName);
-
-
 
     }
 }
