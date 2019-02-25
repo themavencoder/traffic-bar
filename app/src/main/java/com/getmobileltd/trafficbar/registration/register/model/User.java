@@ -14,15 +14,21 @@
 
 package com.getmobileltd.trafficbar.registration.register.model;
 
+import android.databinding.BaseObservable;
+import android.databinding.Bindable;
 import android.databinding.ObservableField;
+
+import com.getmobileltd.trafficbar.BR;
+
 
 /**
  * Created by themavencoder on 25,February,2019
  */
-public class User {
+public class User extends BaseObservable {
+   private  String firstName;
+    private String lastName;
 
-    public static ObservableField<String> sFirstName = new ObservableField<>();
-    public static ObservableField<String> sLastName = new ObservableField<>();
+
     public static ObservableField<String> sEmailAddress = new ObservableField<>();
     public static ObservableField<String> sPassword = new ObservableField<>();
 
@@ -30,13 +36,26 @@ public class User {
         return sEmailAddress;
     }
 
-    public static ObservableField<String> getsFirstName() {
-        return sFirstName;
+
+    @Bindable
+    public String getFirstName() {
+return firstName;
+    }
+    @Bindable
+    public String getLastName() {
+        return lastName;
+
+    }
+public void setFirstName(String firstName) {
+        this.firstName = firstName;
+        notifyPropertyChanged(BR.firstName);
+}
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+        notifyPropertyChanged(BR.lastName);
     }
 
-    public static ObservableField<String> getsLastName() {
-        return sLastName;
-    }
 
     public static ObservableField<String> getsPassword() {
         return sPassword;
