@@ -13,6 +13,10 @@
 
         </activity>
         <activity android:name=".registration.register.confirmregister.ConfirmRegisterActivity">
+
+
+        </activity>
+        <activity android:name=".registration.register.SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,9 +24,6 @@
 
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
-
-        </activity>
-        <activity android:name=".registration.register.SignUpActivity">
 
         </activity>
         <activity android:name=".intro.IntroActivity" />
