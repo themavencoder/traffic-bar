@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
+import com.getmobileltd.trafficbar.registration.register.confirmregister.dialog.ConfirmSignUpDialog;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.mvp.ConfirmRegisterContract;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.mvp.ConfirmRegisterPresenter;
 import com.getmobileltd.trafficbar.registration.register.model.User;
@@ -45,7 +46,7 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
     private String lastName;
     private EditText mEditEmailAddress, mEditPassword;
     private Button mButtonSignUp;
-    private ProgressBar progressBar;
+    private ConfirmSignUpDialog mConfirmSignUpDialog;
     private ConfirmRegisterContract.Presenter presenter;
     private User user;
     private Call<SignUpResponse> signUpCall;
@@ -67,7 +68,8 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
         mEditPassword = findViewById(R.id.edit_text_password);
         mButtonSignUp = findViewById(R.id.button_signup);
         mButtonSignUp.setOnClickListener(this);
-        progressBar = findViewById(R.id.progressBar);
+        mConfirmSignUpDialog = new ConfirmSignUpDialog();
+
     }
 
     @Override
@@ -91,11 +93,13 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
 
     @Override
     public void onClick(View v) {
-    progressBar.setVisibility(View.VISIBLE);
+
     String emailAddress = mEditEmailAddress.getText().toString();
     String password = mEditPassword.getText().toString();
     presenter.saveName(emailAddress,password);
     if (presenter.checkParameters()) {
+        mConfirmSignUpDialog.setCancelable(false);
+        mConfirmSignUpDialog.show(getSupportFragmentManager(),"my_dialog");
         user = new User(firstName,lastName,emailAddress,password);
         insertUser(user);        
     } else {
@@ -114,19 +118,23 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
             assert response.body() != null;
 
             if (response.code() == 200) {
+                mConfirmSignUpDialog.dismiss();
                 Toast.makeText(ConfirmRegisterActivity.this, "Successful login", Toast.LENGTH_SHORT).show();
                 presenter.navigateToNextActivity();
             }
             else {
+                mConfirmSignUpDialog.dismiss();
                 Toast.makeText(ConfirmRegisterActivity.this, "Problem occured, try again!" + response.code(), Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         public void onFailure(Call<SignUpResponse> call, Throwable t) {
+            mConfirmSignUpDialog.dismiss();
             Toast.makeText(ConfirmRegisterActivity.this, "Unable to connect to the internet " + t.getMessage(), Toast.LENGTH_SHORT).show();
 
         }
     });
     }
 }
+
