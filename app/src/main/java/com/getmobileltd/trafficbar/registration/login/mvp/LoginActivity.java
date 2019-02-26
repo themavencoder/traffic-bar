@@ -26,6 +26,7 @@ import com.getmobileltd.trafficbar.MainActivity;
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
+import com.getmobileltd.trafficbar.dashboard.DashboardActivity;
 import com.getmobileltd.trafficbar.registration.login.dialog.LoginDialog;
 import com.getmobileltd.trafficbar.registration.login.networkresponse.LogInResponse;
 import com.getmobileltd.trafficbar.registration.register.model.User;
@@ -78,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void buttonClick() {
-       Intent intent = new Intent(this,MainActivity.class);
+       Intent intent = new Intent(this, DashboardActivity.class);
        startActivity(intent);
    //    startActivity(new Intent(this, MainActivity.class));
       //  startActivity(new Intent());
