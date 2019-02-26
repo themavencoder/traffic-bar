@@ -15,17 +15,15 @@
 package com.getmobileltd.trafficbar.registration.register;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
-import android.databinding.ObservableField;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.registration.login.mvp.LoginActivity;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.ConfirmRegisterActivity;
 import com.getmobileltd.trafficbar.registration.register.handlers.RegisterClickHandler;
 import com.getmobileltd.trafficbar.registration.register.model.User;
@@ -42,6 +40,7 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
     public static final String INTENT_FIRSTNAME = "FIRST_NAME";
     public static final String INTENT_LASTNAME = "LAST_NAME";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +55,7 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
         mButtonContinue.setOnClickListener(this);
         mFirstName = findViewById(R.id.edit_text_first_name);
         mLastName = findViewById(R.id.edit_text_last_name);
+        findViewById(R.id.textview_log_in).setOnClickListener(this);
     }
 
     @Override
@@ -77,13 +77,19 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
 
     @Override
     public void onClick(View v) {
-        String firstName = mFirstName.getText().toString();
-        String lastName = mLastName.getText().toString();
-        presenter.saveName(firstName,lastName);
-        if(presenter.checkParameters()) {
-            presenter.navigateToNextActivity();
+        if (v.getId() == R.id.textview_log_in) {
+            startActivity(new Intent(this, LoginActivity.class));
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         } else {
-            presenter.setError();
+            String firstName = mFirstName.getText().toString();
+            String lastName = mLastName.getText().toString();
+            presenter.saveName(firstName,lastName);
+            if(presenter.checkParameters()) {
+                presenter.navigateToNextActivity();
+            } else {
+                presenter.setError();
+            }
+
         }
 
     }

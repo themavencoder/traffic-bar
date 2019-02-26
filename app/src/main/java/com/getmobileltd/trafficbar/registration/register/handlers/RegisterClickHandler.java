@@ -15,15 +15,8 @@
 package com.getmobileltd.trafficbar.registration.register.handlers;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.getmobileltd.trafficbar.registration.login.LoginActivity;
-import com.getmobileltd.trafficbar.registration.register.SignUpActivity;
-import com.getmobileltd.trafficbar.registration.register.confirmregister.ConfirmRegisterActivity;
-import com.getmobileltd.trafficbar.registration.register.model.User;
 import com.getmobileltd.trafficbar.registration.register.mvp.RegisterPresenter;
 
 /**

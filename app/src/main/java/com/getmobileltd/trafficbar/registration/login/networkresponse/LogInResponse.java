@@ -1,6 +1,6 @@
 /*
  * *
- * Creator: Tobiloba Adejumo on 2/23/19 9:12 PM Last modified: 2/23/19 9:11 PM Copyright: All rights reserved Ⓒ 2019
+ * Creator: Tobiloba Adejumo on 2/26/19 1:25 PM Last modified: 2/26/19 1:24 PM Copyright: All rights reserved Ⓒ 2019
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,18 +12,10 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.registration.login;
+package com.getmobileltd.trafficbar.registration.login.networkresponse;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import com.getmobileltd.trafficbar.R;
-
-public class LoginActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-    }
+/**
+ * Created by themavencoder on 26,February,2019
+ */
+public class LogInResponse {
 }

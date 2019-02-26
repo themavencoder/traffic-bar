@@ -14,6 +14,7 @@
 
 package com.getmobileltd.trafficbar.application;
 
+import com.getmobileltd.trafficbar.registration.login.networkresponse.LogInResponse;
 import com.getmobileltd.trafficbar.registration.register.model.User;
 import com.getmobileltd.trafficbar.registration.register.networkresponse.SignUpResponse;
 
@@ -28,4 +29,7 @@ public interface TrafficBarService {
 
     @POST("auth/signup")
     Call<SignUpResponse> createUser(@Body User user);
+
+    @POST("auth/signin")
+    Call<LogInResponse> logUser(@Body User user);
 }

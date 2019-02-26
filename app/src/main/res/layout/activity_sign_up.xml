@@ -187,8 +187,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:textSize="14sp"
-                android:onClick="@{handlers::textViewLoginClick}"
+                android:id="@+id/textview_log_in"
                 android:layout_marginLeft="4dp"
+                android:textStyle="bold"
                 android:textColor="@color/colorAccent"
                 android:layout_height="wrap_content"
                 android:text="Log in "/>

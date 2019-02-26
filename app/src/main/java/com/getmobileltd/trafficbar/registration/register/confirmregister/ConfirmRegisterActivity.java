@@ -20,24 +20,21 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
-import com.getmobileltd.trafficbar.registration.login.LoginActivity;
+import com.getmobileltd.trafficbar.registration.login.mvp.LoginActivity;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.dialog.ConfirmSignUpDialog;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.mvp.ConfirmRegisterContract;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.mvp.ConfirmRegisterPresenter;
 import com.getmobileltd.trafficbar.registration.register.model.User;
 import com.getmobileltd.trafficbar.registration.register.networkresponse.SignUpResponse;
 
-import okhttp3.internal.http2.Header;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Headers;
 
 import static com.getmobileltd.trafficbar.registration.register.SignUpActivity.INTENT_FIRSTNAME;
 import static com.getmobileltd.trafficbar.registration.register.SignUpActivity.INTENT_LASTNAME;
@@ -144,6 +141,11 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
         if (signUpCall != null) {
             signUpCall.cancel();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }
 
