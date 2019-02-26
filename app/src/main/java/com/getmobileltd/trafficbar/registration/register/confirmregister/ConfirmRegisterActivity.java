@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
+import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.registration.login.mvp.LoginActivity;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.dialog.ConfirmSignUpDialog;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.mvp.ConfirmRegisterContract;
@@ -55,6 +56,7 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_register);
+        UiSettings.fullScreen(this);
         trafficBarService  = TrafficBarApplication.get(this).getTrafficBarService();
         passedDataFromSignUp();
         init();
