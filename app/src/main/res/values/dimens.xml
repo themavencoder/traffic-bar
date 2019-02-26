@@ -19,4 +19,7 @@
     <dimen name="twelve_sp">12sp</dimen>
     <dimen name="fourteen_sp">14sp</dimen>
     <dimen name="default_bottom_nav_view_height">56dp</dimen>
+    <dimen name="sixteen_dp">16dp</dimen>
+    <dimen name="thirty_two_dp">32dp</dimen>
+    <dimen name="twenty_four_dp">24dp</dimen>
 </resources>
