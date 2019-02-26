@@ -1,6 +1,6 @@
 /*
  * *
- * Creator: Tobiloba Adejumo on 2/23/19 9:12 PM Last modified: 2/23/19 9:11 PM Copyright: All rights reserved Ⓒ 2019
+ * Creator: Tobiloba Adejumo on 2/26/19 9:28 AM Last modified: 2/26/19 9:28 AM Copyright: All rights reserved Ⓒ 2019
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,18 +12,18 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.registration.login;
+package com.getmobileltd.trafficbar.registration.register.networkresponse;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import com.google.gson.annotations.SerializedName;
 
-import com.getmobileltd.trafficbar.R;
+/**
+ * Created by themavencoder on 26,February,2019
+ */
+public class SignUpResponse {
+    @SerializedName("code")
+   private int code;
 
-public class LoginActivity extends AppCompatActivity {
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+    public int getCode() {
+        return code;
     }
 }
