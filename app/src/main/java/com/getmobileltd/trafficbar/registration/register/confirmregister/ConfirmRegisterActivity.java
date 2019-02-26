@@ -14,16 +14,119 @@
 
 package com.getmobileltd.trafficbar.registration.register.confirmregister;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.application.TrafficBarApplication;
+import com.getmobileltd.trafficbar.application.TrafficBarService;
+import com.getmobileltd.trafficbar.registration.register.confirmregister.mvp.ConfirmRegisterContract;
+import com.getmobileltd.trafficbar.registration.register.confirmregister.mvp.ConfirmRegisterPresenter;
+import com.getmobileltd.trafficbar.registration.register.model.User;
+import com.getmobileltd.trafficbar.registration.register.networkresponse.SignUpResponse;
 
-public class ConfirmRegisterActivity extends AppCompatActivity {
+import okhttp3.internal.http2.Header;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.Headers;
+
+import static com.getmobileltd.trafficbar.registration.register.SignUpActivity.INTENT_FIRSTNAME;
+import static com.getmobileltd.trafficbar.registration.register.SignUpActivity.INTENT_LASTNAME;
+
+public class ConfirmRegisterActivity extends AppCompatActivity implements ConfirmRegisterContract.View, View.OnClickListener {
+    private String firstName;
+    private String lastName;
+    private EditText mEditEmailAddress, mEditPassword;
+    private Button mButtonSignUp;
+    private ProgressBar progressBar;
+    private ConfirmRegisterContract.Presenter presenter;
+    private User user;
+    private Call<SignUpResponse> signUpCall;
+    private TrafficBarService trafficBarService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_register);
+        trafficBarService  = TrafficBarApplication.get(this).getTrafficBarService();
+        passedDataFromSignUp();
+        init();
+        presenter = new ConfirmRegisterPresenter(this);
+    }
+
+    private void init() {
+        mEditEmailAddress = findViewById(R.id.edit_text_email_address);
+        mEditPassword = findViewById(R.id.edit_text_password);
+        mButtonSignUp = findViewById(R.id.button_signup);
+        mButtonSignUp.setOnClickListener(this);
+        progressBar = findViewById(R.id.progressBar);
+    }
+
+    @Override
+    public void showError(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void buttonClick() {
+        Toast.makeText(this, "Navigating to next activity", Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void passedDataFromSignUp() {
+        Intent intent = getIntent();
+         firstName =  intent.getStringExtra(INTENT_FIRSTNAME);
+        lastName =  intent.getStringExtra(INTENT_LASTNAME);
+        Toast.makeText(this, "Your first name is" + firstName + "your last name is " + lastName, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+    progressBar.setVisibility(View.VISIBLE);
+    String emailAddress = mEditEmailAddress.getText().toString();
+    String password = mEditPassword.getText().toString();
+    presenter.saveName(emailAddress,password);
+    if (presenter.checkParameters()) {
+        user = new User(firstName,lastName,emailAddress,password);
+        insertUser(user);        
+    } else {
+        presenter.setError();
+
+    }
+
+
+    }
+
+    private void insertUser(User user) {
+    signUpCall = trafficBarService.createUser(user);
+    signUpCall.enqueue(new Callback<SignUpResponse>() {
+        @Override
+        public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+            assert response.body() != null;
+
+            if (response.code() == 200) {
+                Toast.makeText(ConfirmRegisterActivity.this, "Successful login", Toast.LENGTH_SHORT).show();
+                presenter.navigateToNextActivity();
+            }
+            else {
+                Toast.makeText(ConfirmRegisterActivity.this, "Problem occured, try again!" + response.code(), Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        public void onFailure(Call<SignUpResponse> call, Throwable t) {
+            Toast.makeText(ConfirmRegisterActivity.this, "Unable to connect to the internet " + t.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
+    });
     }
 }

@@ -82,6 +82,7 @@
         android:layout_weight="6">
 
         <RelativeLayout
+            android:id="@+id/relativeLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
@@ -104,12 +105,12 @@
                 android:layout_marginLeft="36dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="40dp"
-                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
                 android:hint="@string/enter_your_email_address"
                 android:importantForAutofill="no"
 
 
-                android:inputType="textCapWords"
+                android:inputType="textEmailAddress"
 
                 android:singleLine="true"
 
@@ -179,7 +180,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/button_continue"
+                android:id="@+id/button_signup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/linearLayout"
@@ -196,9 +197,9 @@
 
             <LinearLayout
                 android:layout_width="wrap_content"
-
+        android:id="@+id/linearLayout2"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/button_continue"
+                android:layout_below="@id/button_signup"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:gravity="center"
@@ -221,7 +222,14 @@
                     android:textStyle="bold" />
 
             </LinearLayout>
-
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:visibility="invisible"
+                android:layout_marginTop="48dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/linearLayout2"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
 
 

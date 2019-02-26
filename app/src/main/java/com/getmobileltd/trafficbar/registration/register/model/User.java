@@ -19,17 +19,31 @@ import android.databinding.Bindable;
 import android.databinding.ObservableField;
 
 import com.getmobileltd.trafficbar.BR;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by themavencoder on 25,February,2019
  */
 public class User {
 
+    @SerializedName("firstname")
     private String firstName;
+    @SerializedName("lastname")
     private String lastName;
+    @SerializedName("email")
     private String emailAddress;
+    @SerializedName("password")
     private String password;
 
+    public User() {
+
+    }
+    public User(String firstName, String lastName, String emailAddress, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailAddress = emailAddress;
+        this.password  = password;
+    }
     public String getLastName() {
         return lastName;
     }

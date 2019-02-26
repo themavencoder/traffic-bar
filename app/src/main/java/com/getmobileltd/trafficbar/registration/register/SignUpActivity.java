@@ -39,15 +39,14 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
     private Button mButtonContinue;
     private EditText mFirstName, mLastName;
     private String firstName, lastName;
-    public static final String INTENT_FIRSTNAME = "com.getmobileltd.trafficbar.registration.register";
-    public static final String INTENT_LASTNAME = "com.getmobileltd.trafficbar.registration.register";
+    public static final String INTENT_FIRSTNAME = "FIRST_NAME";
+    public static final String INTENT_LASTNAME = "LAST_NAME";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         init();
-
     }
 
     private void init() {
@@ -83,7 +82,6 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
             presenter.navigateToNextActivity();
         } else {
             presenter.setError();
-
         }
 
     }
