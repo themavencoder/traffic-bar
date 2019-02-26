@@ -21,15 +21,17 @@ import android.databinding.ObservableField;
  */
 public interface RegisterContract {
     interface View {
-        void showError();
+        void showError(String message);
         void buttonClick();
 
     }
     interface Presenter {
-        boolean checkParameters(String firstName, String lastName);
+        boolean checkParameters();
+        void navigateToNextActivity();
+        void saveName(String firstName, String lastName);
         String firstName();
         String lastName();
-        void navigateToNextActivity();
+        void setError();
 
 
     }

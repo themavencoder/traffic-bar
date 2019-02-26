@@ -32,26 +32,38 @@ public class RegisterPresenter implements RegisterContract.Presenter {
     }
 
     @Override
-    public boolean checkParameters(String firstName, String lastName) {
-        return true;
+    public boolean checkParameters() {
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        return !firstName.trim().isEmpty() && !lastName.trim().isEmpty();
 
+    }
+
+
+    @Override
+    public void navigateToNextActivity() {
+        view.buttonClick();
+    }
+
+    @Override
+    public void saveName(String firstName, String lastName) {
+        user.setFirstName(firstName.trim());
+        user.setLastName(lastName.trim());
     }
 
     @Override
     public String firstName() {
-        return null;
-
-
+        return user.getFirstName();
     }
 
     @Override
     public String lastName() {
-        return null;
+        return user.getLastName();
     }
 
     @Override
-    public void navigateToNextActivity() {
-
+    public void setError() {
+        view.showError("No field should be left empty");
     }
 }
 
