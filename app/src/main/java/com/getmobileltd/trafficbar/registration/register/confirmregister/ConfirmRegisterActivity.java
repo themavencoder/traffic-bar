@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
+import com.getmobileltd.trafficbar.registration.login.LoginActivity;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.dialog.ConfirmSignUpDialog;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.mvp.ConfirmRegisterContract;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.mvp.ConfirmRegisterPresenter;
@@ -79,8 +80,8 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
 
     @Override
     public void buttonClick() {
-        Toast.makeText(this, "Navigating to next activity", Toast.LENGTH_SHORT).show();
-
+        startActivity(new Intent(this, LoginActivity.class));
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 
     }
 
@@ -135,6 +136,14 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
 
         }
     });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (signUpCall != null) {
+            signUpCall.cancel();
+        }
     }
 }
 

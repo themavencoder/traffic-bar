@@ -70,6 +70,8 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
         intent.putExtra(INTENT_FIRSTNAME,presenter.firstName());
         intent.putExtra(INTENT_LASTNAME,presenter.lastName());
         startActivity(intent);
+        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+
 
     }
 
