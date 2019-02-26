@@ -26,6 +26,7 @@ import com.getmobileltd.trafficbar.MainActivity;
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
+import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.registration.login.dialog.LoginDialog;
 import com.getmobileltd.trafficbar.registration.login.networkresponse.LogInResponse;
 import com.getmobileltd.trafficbar.registration.register.model.User;
@@ -47,6 +48,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        UiSettings.fullScreen(this);
         init();
         trafficBarService = TrafficBarApplication.get(this).getTrafficBarService();
 

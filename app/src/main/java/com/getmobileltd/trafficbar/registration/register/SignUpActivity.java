@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.registration.login.mvp.LoginActivity;
 import com.getmobileltd.trafficbar.registration.register.confirmregister.ConfirmRegisterActivity;
 import com.getmobileltd.trafficbar.registration.register.handlers.RegisterClickHandler;
@@ -45,7 +46,9 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        UiSettings.fullScreen(this);
         init();
+
     }
 
     private void init() {
