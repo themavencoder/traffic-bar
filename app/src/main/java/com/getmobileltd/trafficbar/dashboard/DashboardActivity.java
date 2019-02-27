@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.dashboard.discover.DiscoverFragment;
 import com.getmobileltd.trafficbar.dashboard.favourite.FavouriteFragment;
 import com.getmobileltd.trafficbar.dashboard.home.HomeFragment;
@@ -43,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
+        UiSettings.fullScreen(this);
         mFrameLayout = findViewById(R.id.frame_layout);
         mBottomNavigationView = findViewById(R.id.bottom_navigation_view);
         homeFragment = new HomeFragment();
