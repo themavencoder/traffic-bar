@@ -20,6 +20,13 @@
     android:layout_height="match_parent"
     tools:context=".dashboard.DashboardActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         app:menu="@menu/navigation"
@@ -38,4 +45,17 @@
 
     </android.support.design.widget.BottomNavigationView>
 
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/bottom_navigation_view"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true">
+
+
+
+    </FrameLayout>
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

@@ -14,13 +14,29 @@
 
 package com.getmobileltd.trafficbar.dashboard;
 
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.dashboard.discover.DiscoverFragment;
+import com.getmobileltd.trafficbar.dashboard.favourite.FavouriteFragment;
+import com.getmobileltd.trafficbar.dashboard.home.HomeFragment;
+import com.getmobileltd.trafficbar.dashboard.profile.ProfileFragment;
 
 public class DashboardActivity extends AppCompatActivity {
+    private BottomNavigationView mBottomNavigationView;
+    private FrameLayout mFrameLayout;
+  private HomeFragment homeFragment;
+  private DiscoverFragment discoverFragment;
+  private FavouriteFragment favouriteFragment;
+  private ProfileFragment profileFragment;
 
 
     @Override
@@ -28,6 +44,51 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
+        mFrameLayout = findViewById(R.id.frame_layout);
+        mBottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        homeFragment = new HomeFragment();
+        discoverFragment = new DiscoverFragment();
+        favouriteFragment = new FavouriteFragment();
+        profileFragment = new ProfileFragment();
+
+        navListener();
+
+
+    }
+
+    private void navListener() {
+        mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.nav_home:
+                        setFragment(homeFragment);
+                        return true;
+                    case R.id.nav_discover:
+                        setFragment(discoverFragment);
+                        return true;
+                    case R.id.nav_cart:
+                        setFragment(homeFragment);
+                        return true;
+                    case R.id.nav_favourites:
+                        setFragment(favouriteFragment);
+                        return true;
+                    case R.id.nav_profile:
+                        setFragment(profileFragment);
+                        return  true;
+
+                    default:
+                        return false;
+                }
+
+            }
+        });
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.commit();
 
     }
 }

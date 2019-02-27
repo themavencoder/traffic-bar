@@ -17,16 +17,26 @@ package com.getmobileltd.trafficbar.dashboard.discover;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.dashboard.discover.adapter.DiscoveryAdapter;
+import com.getmobileltd.trafficbar.dashboard.discover.model.DiscoveryModel;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class DiscoverFragment extends Fragment {
+    private View v;
+    private RecyclerView mRecyclerView;
+    private DiscoveryAdapter mAdapter;
+    private List<DiscoveryModel> discoveryList = SampleContent.RESTAURANT;
 
 
     public DiscoverFragment() {
@@ -38,7 +48,12 @@ public class DiscoverFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_discover, container, false);
+        v = inflater.inflate(R.layout.fragment_discover, container, false);
+        mRecyclerView = v.findViewById(R.id.recycler_view);
+        mAdapter = new DiscoveryAdapter(getContext(),discoveryList);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mRecyclerView.setAdapter(mAdapter);
+        return v;
     }
 
 }
