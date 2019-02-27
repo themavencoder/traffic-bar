@@ -15,6 +15,8 @@
 package com.getmobileltd.trafficbar.registration.register.confirmregister;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -48,8 +50,11 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
     private ConfirmSignUpDialog mConfirmSignUpDialog;
     private ConfirmRegisterContract.Presenter presenter;
     private User user;
+    private Button mButtonAgree;
     private Call<SignUpResponse> signUpCall;
     private TrafficBarService trafficBarService;
+    private boolean checkAgree = false;
+    private Drawable drawableChecked, drawableUnChecked;
 
 
     @Override
@@ -60,7 +65,52 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
         trafficBarService  = TrafficBarApplication.get(this).getTrafficBarService();
         passedDataFromSignUp();
         init();
+        setDrawable();
+
         presenter = new ConfirmRegisterPresenter(this);
+        mButtonAgree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!checkAgree) {
+                        mButtonAgree.setCompoundDrawables(drawableChecked,null,null,null);
+                    checkAgree = true;
+                        return;
+
+
+                }
+                if (checkAgree) {
+                    mButtonAgree.setCompoundDrawables(drawableUnChecked,null,null,null);
+                    checkAgree = false;
+                    return;
+
+                }
+
+            }
+        });
+    }
+
+    private void setDrawable() {
+        drawableChecked = ContextCompat.getDrawable(
+               this,
+               R.drawable.checked
+       );
+        drawableUnChecked = ContextCompat.getDrawable(
+               this,
+               R.drawable.unchecked
+       );
+        drawableChecked.setBounds(
+                0, // left
+                0, // top
+                drawableChecked.getIntrinsicWidth(), // right
+                drawableChecked.getIntrinsicHeight() // bottom
+        );
+
+        drawableUnChecked.setBounds(
+                0, // left
+                0, // top
+                drawableUnChecked.getIntrinsicWidth(), // right
+                drawableUnChecked.getIntrinsicHeight() // bottom
+        );
     }
 
     private void init() {
@@ -69,6 +119,7 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
         mButtonSignUp = findViewById(R.id.button_signup);
         mButtonSignUp.setOnClickListener(this);
         mConfirmSignUpDialog = new ConfirmSignUpDialog();
+        mButtonAgree = findViewById(R.id.button_agree);
 
     }
 
@@ -98,6 +149,10 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
     String password = mEditPassword.getText().toString();
     presenter.saveName(emailAddress,password);
     if (presenter.checkParameters()) {
+        if (!checkAgree) {
+            Toast.makeText(this, "Please agree to receive newsletter and update", Toast.LENGTH_SHORT).show();
+            return;
+        }
         mConfirmSignUpDialog.setCancelable(false);
         mConfirmSignUpDialog.show(getSupportFragmentManager(),"my_dialog");
         user = new User(firstName,lastName,emailAddress,password);
