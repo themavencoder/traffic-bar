@@ -30,19 +30,19 @@ import com.getmobileltd.trafficbar.registration.register.mvp.RegisterPresenter;
  * Created by themavencoder on 25,February,2019
  */
 public class RegisterClickHandler {
+    SignUpActivity activity = new SignUpActivity();
     private Context context;
-    private RegisterPresenter presenter;
-    private String firstName;
-    private String lastName;
+ private User user;
 
-    public RegisterClickHandler(Context context, String firstName,String lastName) {
+    public RegisterClickHandler(Context context, User user) {
         this.context = context;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.user = user;
+
 
 
     }
     public void buttonContinueClick(View view) {
+        Toast.makeText(context, "Your firstname is " + user.getFirstName()+ "lastName is " +user.getLastName(), Toast.LENGTH_SHORT).show();
 
 
 

@@ -12,6 +12,20 @@
   ~    permissions and limitations under the License.
   ~ */
   -->
+
+<layout  xmlns:bind="http://schemas.android.com/apk/res/android">
+    <data class = "SignUpActivityBinding">
+        
+        <variable
+            name="user"
+            type="com.getmobileltd.trafficbar.registration.register.model.User"/>
+        <variable
+            name="handler"
+            type="com.getmobileltd.trafficbar.registration.register.handlers.RegisterClickHandler"/>
+
+
+    </data>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -102,9 +116,13 @@
         <EditText
             android:id="@+id/edit_text_first_name"
             android:layout_width="match_parent"
+            android:text="@={user.firstName}"
+
+
             android:layout_marginLeft="36dp"
             android:layout_marginRight="40dp"
             android:layout_marginTop="8dp"
+
             android:layout_below="@id/textview_first_name"
             android:layout_height="wrap_content"
             android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -135,7 +153,9 @@
             android:id="@+id/edit_text_last_name"
             android:layout_width="match_parent"
             android:layout_marginLeft="36dp"
+
             android:layout_marginRight="40dp"
+            android:text="@={user.lastName}"
             android:layout_marginTop="8dp"
             android:layout_below="@id/textview_last_name"
             android:layout_height="wrap_content"
@@ -155,17 +175,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
+
             android:layout_marginTop="40dp"
+            android:onClick="@{handler::buttonContinueClick}"
             android:id="@+id/button_continue"
             android:layout_marginLeft="40dp"
             android:layout_below="@id/edit_text_last_name"
             android:layout_marginEnd="40dp"
+            android:clickable="@{user.checkInput(user.firstName,user.lastName) ? true : false }"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="24dp"
-            android:background="@color/colorAccent"
+            android:background="@{user.checkInput(user.firstName,user.lastName) ? @color/colorAccent : @color/white }"
             android:text="@string/continue_string"
             android:textAllCaps="false"
-            android:textColor="@color/white"
+            android:textColor="@{user.checkInput(user.firstName,user.lastName) ? @color/white : @color/black_text }"
          />
         <LinearLayout
             android:layout_width="wrap_content"
@@ -187,7 +210,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:textSize="14sp"
-                android:onClick="@{handlers::textViewLoginClick}"
                 android:layout_marginLeft="4dp"
                 android:textColor="@color/colorAccent"
                 android:layout_height="wrap_content"
@@ -204,3 +226,4 @@
 
 </LinearLayout>
 </LinearLayout>
+</layout>

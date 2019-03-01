@@ -14,14 +14,72 @@
 
 package com.getmobileltd.trafficbar.registration.register.model;
 
+import android.annotation.TargetApi;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.databinding.BindingAdapter;
+import android.databinding.BindingConversion;
 import android.databinding.ObservableField;
+import android.os.Build;
+import android.text.Editable;
+import android.text.TextWatcher;
 
 import com.getmobileltd.trafficbar.BR;
+
+import java.util.Objects;
 
 /**
  * Created by themavencoder on 25,February,2019
  */
-public class User {
+public class User extends BaseObservable {
+    private String firstName;
+    private String lastName;
+    private boolean isEmpty;
+    public ObservableField<String> text = new ObservableField<>();
+
+    @Bindable
+    public boolean getIsEmpty() {
+        return isEmpty;
+    }
+    @Bindable
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setEmpty(boolean empty) {
+        isEmpty = firstName.isEmpty() || lastName.isEmpty();
+        isEmpty = empty;
+        notifyPropertyChanged(BR.isEmpty);
+    }
+
+    @Bindable
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+        notifyPropertyChanged(BR.lastName);
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+        notifyPropertyChanged(BR.firstName);
+
+
+    }
+
+
+
+
+    public boolean checkInput(String firstName, String lastName) {
+        /* if (firstName == null || lastName == null)  {
+            return false;
+         }
+        return firstName.isEmpty() || lastName.isEmpty();
+*/          if (firstName ==null || lastName == null)
+                return false;
+        return !firstName.isEmpty() && !lastName.isEmpty();
+    }
+
 }

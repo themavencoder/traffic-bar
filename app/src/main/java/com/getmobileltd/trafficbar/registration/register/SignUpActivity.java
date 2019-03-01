@@ -22,6 +22,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.databinding.SignUpActivityBinding;
 import com.getmobileltd.trafficbar.registration.register.handlers.RegisterClickHandler;
 import com.getmobileltd.trafficbar.registration.register.model.User;
 import com.getmobileltd.trafficbar.registration.register.mvp.RegisterContract;
@@ -32,11 +33,25 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
     private RegisterPresenter presenter;
     private User user;
     private String firstName, lastName;
+    private SignUpActivityBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_sign_up);
+        user = new User();
+        binding.setUser(user);
+        handler = new RegisterClickHandler(this,user);
+        binding.setHandler(handler);
+
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
     }
 
     @Override
@@ -48,4 +63,6 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
     public void buttonClick() {
 
     }
+
+
 }
