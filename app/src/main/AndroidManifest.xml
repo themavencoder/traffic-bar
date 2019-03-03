@@ -19,7 +19,10 @@
 
 
         </activity>
-        <activity android:name=".dashboard.DashboardActivity"/>
+        <activity android:name=".dashboard.DashboardActivity"
+            android:hardwareAccelerated="true">
+
+        </activity>
         <activity android:name=".registration.register.SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

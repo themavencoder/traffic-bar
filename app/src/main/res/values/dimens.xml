@@ -22,4 +22,8 @@
     <dimen name="sixteen_dp">16dp</dimen>
     <dimen name="thirty_two_dp">32dp</dimen>
     <dimen name="twenty_four_dp">24dp</dimen>
+    <dimen name="eight_dp">8dp</dimen>
+    <dimen name="four_dp">4dp</dimen>
+    <dimen name="two_dp">2dp</dimen>
+    <dimen name="thirty_four_sp">34sp</dimen>
 </resources>

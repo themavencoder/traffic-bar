@@ -1,0 +1,26 @@
+<!--
+  ~ /**
+  ~ *Creator: Tobiloba Adejumo on 3/2/19 9:13 PM Last modified: 3/2/19 9:13 PM Copyright: All rights reserved Ⓒ 2019
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~   you may not use this file except in compliance with the License.
+  ~   You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+  ~    Unless required by applicable law or agreed to in writing, software distributed under
+  ~    the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+  ~    OF ANY KIND, either express or implied. See the License for the specific language governing
+  ~    permissions and limitations under the License.
+  ~ */
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+  <path
+      android:pathData="M24,22m-16,0a16,16 0,1 1,32 0a16,16 0,1 1,-32 0"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M32.9702,18.9905C32.7075,16.0985 30.6606,14.0003 28.0989,14.0003C26.3922,14.0003 24.8296,14.9188 23.9503,16.3907C23.079,14.8997 21.5804,14 19.9011,14C17.3397,14 15.2924,16.0982 15.03,18.9901C15.0093,19.1179 14.9241,19.7901 15.183,20.8865C15.5562,22.4678 16.4182,23.9062 17.6752,25.0451L23.9461,30.7359L30.3248,25.0454C31.5817,23.9062 32.4437,22.4682 32.8169,20.8865C33.0758,19.7905 32.9907,19.1182 32.9702,18.9905Z"
+      android:fillColor="#F52D56"/>
+</vector>

@@ -49,4 +49,6 @@
     <string name="cart">My Cart</string>
     <string name="traffic">Traffic</string>
     <string name="bar">bar</string>
+    <string name="mixed_grill">Mixed Grill</string>
+    <string name="traffic_breakfast">Traffic Breakfast</string>
 </resources>

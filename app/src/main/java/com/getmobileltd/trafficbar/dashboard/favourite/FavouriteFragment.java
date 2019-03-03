@@ -15,18 +15,37 @@
 package com.getmobileltd.trafficbar.dashboard.favourite;
 
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.dashboard.discover.SampleContent;
+import com.getmobileltd.trafficbar.dashboard.discover.adapter.DiscoveryAdapter;
+import com.getmobileltd.trafficbar.dashboard.discover.model.DiscoveryModel;
+import com.getmobileltd.trafficbar.dashboard.favourite.adapter.FavouriteAdapter;
+import com.getmobileltd.trafficbar.dashboard.favourite.model.FavouriteModel;
+import com.getmobileltd.trafficbar.dashboard.favourite.utils.GridSpacingItemDecoration;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FavouriteFragment extends Fragment {
+    private View v;
+    private RecyclerView mRecyclerView;
+    private FavouriteAdapter mAdapter;
+    private List<FavouriteModel> discoveryList = SampleContent.FAVOURITES;
+
 
 
     public FavouriteFragment() {
@@ -38,7 +57,22 @@ public class FavouriteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favourite, container, false);
-    }
 
+        v =  inflater.inflate(R.layout.fragment_favourite, container, false);
+        mRecyclerView = v.findViewById(R.id.recycler_view);
+     mAdapter = new FavouriteAdapter(getContext(),discoveryList);
+     mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(2,dpToPx(8),true));
+     mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2,LinearLayoutManager.VERTICAL,false));
+        mRecyclerView.setAdapter(mAdapter);
+
+        return v;
+    }
+    /**
+     * Converting dp to pixel
+     */
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
 }
