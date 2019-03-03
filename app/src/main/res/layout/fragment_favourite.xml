@@ -25,34 +25,29 @@
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_weight="1.5"
+       android:background="#DADADA"
        android:orientation="vertical"
        android:layout_height="0dp">
 
 
        <TextView
            android:id="@+id/textView3"
+
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:layout_marginStart="16dp"
            android:layout_marginLeft="16dp"
-           android:layout_marginTop="64dp"
+           android:layout_marginTop="54dp"
            android:text="My Favourites"
            android:textColor="@color/black"
            android:textSize="@dimen/thirty_four_sp"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintTop_toTopOf="parent" />
-       <View
-           android:id="@+id/view"
-           android:layout_width="match_parent"
-           android:layout_height="4dp"
-           android:layout_marginTop="8dp"
-           android:background="@color/colorAccent"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.226"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+
    </LinearLayout>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_weight="8.5"
