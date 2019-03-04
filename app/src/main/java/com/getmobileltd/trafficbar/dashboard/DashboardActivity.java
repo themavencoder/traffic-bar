@@ -44,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        UiSettings.fullScreen(this);
+
         mFrameLayout = findViewById(R.id.frame_layout);
         mBottomNavigationView = findViewById(R.id.bottom_navigation_view);
         homeFragment = new HomeFragment();

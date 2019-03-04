@@ -18,6 +18,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.view.View;
+import android.view.Window;
+
+import com.getmobileltd.trafficbar.R;
 
 /**
  * Created by themavencoder on 26,February,2019
@@ -32,6 +35,13 @@ public final class UiSettings {
         // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
         decorView.setSystemUiVisibility(uiOptions);*/
+        }
+    }
+    public static void colorStatusbar(Activity activity, int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = activity.getWindow();
+            //  window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(activity.getResources().getColor(color));
         }
     }
 }
