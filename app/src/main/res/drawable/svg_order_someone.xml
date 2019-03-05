@@ -1,0 +1,47 @@
+<!--
+  ~ /**
+  ~ *Creator: Tobiloba Adejumo on 3/5/19 1:41 PM Last modified: 3/5/19 1:41 PM Copyright: All rights reserved Ⓒ 2019
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~   you may not use this file except in compliance with the License.
+  ~   You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+  ~    Unless required by applicable law or agreed to in writing, software distributed under
+  ~    the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+  ~    OF ANY KIND, either express or implied. See the License for the specific language governing
+  ~    permissions and limitations under the License.
+  ~ */
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="28dp"
+    android:viewportWidth="32"
+    android:viewportHeight="28">
+  <path
+      android:pathData="M16,11.688C9.176,11.688 3.625,17.239 3.625,24.062C3.625,24.442 3.933,24.75 4.312,24.75H27.688C28.067,24.75 28.375,24.442 28.375,24.062C28.375,17.239 22.824,11.688 16,11.688Z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M5.688,24.062C5.688,17.586 10.688,12.257 17.031,11.731C16.691,11.703 16.347,11.688 16,11.688C9.176,11.688 3.625,17.239 3.625,24.062C3.625,24.442 3.933,24.75 4.312,24.75H6.375C5.995,24.75 5.688,24.442 5.688,24.062Z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M30.438,23.375H1.562C1.183,23.375 0.875,23.683 0.875,24.062V26.812C0.875,27.192 1.183,27.5 1.562,27.5H30.438C30.817,27.5 31.125,27.192 31.125,26.812V24.062C31.125,23.683 30.817,23.375 30.438,23.375Z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M2.938,26.812V24.062C2.938,23.683 3.245,23.375 3.625,23.375H1.562C1.183,23.375 0.875,23.683 0.875,24.062V26.812C0.875,27.192 1.183,27.5 1.562,27.5H3.625C3.245,27.5 2.938,27.192 2.938,26.812Z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M16,7.562C14.863,7.562 13.938,8.488 13.938,9.625C13.938,10.762 14.863,11.688 16,11.688C17.137,11.688 18.062,10.762 18.062,9.625C18.062,8.488 17.137,7.562 16,7.562Z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M17.375,11C16.238,11 15.313,10.075 15.313,8.938C15.313,8.413 15.509,7.934 15.833,7.57C14.774,7.655 13.938,8.544 13.938,9.625C13.938,10.762 14.863,11.688 16,11.688C16.613,11.688 17.164,11.419 17.542,10.993C17.487,10.997 17.431,11 17.375,11Z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M16,6.187C15.824,6.187 15.648,6.12 15.514,5.986C14.243,4.715 15.022,3.624 15.441,3.038C15.887,2.412 15.949,2.296 15.514,1.861C15.245,1.593 15.245,1.157 15.514,0.889C15.782,0.62 16.218,0.62 16.486,0.889C17.757,2.16 16.978,3.251 16.559,3.837C16.113,4.463 16.051,4.579 16.486,5.014C16.909,5.437 16.601,6.187 16,6.187Z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M21.309,6.187C21.133,6.187 20.957,6.12 20.822,5.986C19.551,4.715 20.331,3.624 20.749,3.038C21.196,2.412 21.258,2.296 20.822,1.861C20.554,1.593 20.554,1.157 20.822,0.889C21.091,0.62 21.5261,0.62 21.7951,0.889C23.0661,2.16 22.2871,3.251 21.8681,3.837C21.4211,4.463 21.3601,4.579 21.7951,5.014C22.2181,5.437 21.91,6.187 21.309,6.187Z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M10.3091,6.188C10.1331,6.188 9.9571,6.121 9.8221,5.986C8.5511,4.715 9.3301,3.624 9.7491,3.038C10.1961,2.413 10.2581,2.297 9.8221,1.861C9.5541,1.593 9.5541,1.158 9.8221,0.889C10.0911,0.621 10.5261,0.621 10.7951,0.889C12.0661,2.16 11.2871,3.251 10.8681,3.837C10.4211,4.463 10.3591,4.579 10.7951,5.014C11.2181,5.437 10.9101,6.188 10.3091,6.188Z"
+      android:fillColor="#ffffff"/>
+</vector>

@@ -16,6 +16,7 @@ package com.getmobileltd.trafficbar.dashboard.discover;
 
 import com.getmobileltd.trafficbar.dashboard.discover.model.DiscoveryModel;
 import com.getmobileltd.trafficbar.dashboard.favourite.model.FavouriteModel;
+import com.getmobileltd.trafficbar.dashboard.home.trend.TrendModel;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class SampleContent {
     public static List<DiscoveryModel> RESTAURANT = new ArrayList<>();
     public static List<FavouriteModel> FAVOURITES = new ArrayList<>();
     public static List<MyCartModel> MYCART = new ArrayList<>();
+    public static List<TrendModel> MYTRENDS = new ArrayList<>();
 
     static {
         DiscoveryModel model1 = new DiscoveryModel("15 Montgomerry Road,", "Igando, Lagos","4.1");
@@ -67,5 +69,20 @@ public class SampleContent {
         MYCART.add(cartTwo);
         MYCART.add(cartone);
         MYCART.add(cartTwo);
+
+        TrendModel trendModel1 = new TrendModel("40,000");
+        TrendModel trendModel2 = new TrendModel("50,000");
+        TrendModel trendModel3 = new TrendModel("60,000");
+        TrendModel trendModel4 = new TrendModel("70,000");
+        MYTRENDS.add(trendModel1);
+        MYTRENDS.add(trendModel2);
+        MYTRENDS.add(trendModel3);
+        MYTRENDS.add(trendModel4);
+        MYTRENDS.add(trendModel1);
+        MYTRENDS.add(trendModel2);
+        MYTRENDS.add(trendModel3);
+        MYTRENDS.add(trendModel4);
+
+
     }
 }

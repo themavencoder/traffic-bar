@@ -53,4 +53,8 @@
     <string name="profile">Profile</string>
     <string name="view_profile">View profile</string>
     <string name="ceaser_salad">Ceaser Salad</string>
+    <string name="browse">Browse</string>
+    <string name="search_for_food_and_drinks">Search for food and drinks</string>
+    <string name="change">Change</string>
+    <string name="order_for_someone">Order For Someone</string>
 </resources>
