@@ -172,7 +172,7 @@
                 android:background="@color/colorAccent"
                 android:text="@string/log_in"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />
+                android:textColor="@color/white" />git
 
             <LinearLayout
                 android:layout_width="wrap_content"
