@@ -16,6 +16,7 @@ package com.getmobileltd.trafficbar.dashboard.discover;
 
 import com.getmobileltd.trafficbar.dashboard.discover.model.DiscoveryModel;
 import com.getmobileltd.trafficbar.dashboard.favourite.model.FavouriteModel;
+import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class SampleContent {
 
     public static List<DiscoveryModel> RESTAURANT = new ArrayList<>();
     public static List<FavouriteModel> FAVOURITES = new ArrayList<>();
+    public static List<MyCartModel> MYCART = new ArrayList<>();
 
     static {
         DiscoveryModel model1 = new DiscoveryModel("15 Montgomerry Road,", "Igando, Lagos","4.1");
@@ -51,5 +53,19 @@ public class SampleContent {
         FAVOURITES.add(model);
         FAVOURITES.add(model);
 
+        MyCartModel cartone = new MyCartModel("Mushedroom tomatoes");
+        MyCartModel cartTwo = new MyCartModel("Beans and Bread");
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
     }
 }
