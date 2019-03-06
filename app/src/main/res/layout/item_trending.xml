@@ -16,13 +16,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/CardView.Light"
-    android:layout_width="match_parent"
+    app:cardUseCompatPadding="true"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginStart="8dp"
-    android:layout_marginEnd="8dp">
+    android:layout_marginTop="8dp">
 <android.support.constraint.ConstraintLayout
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <ImageView
@@ -36,7 +35,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
@@ -51,16 +50,14 @@
 
         <ImageView
             android:id="@+id/media_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
             android:src="@drawable/sample_favourite"
             app:layout_constraintBottom_toTopOf="@+id/textview_header_one"
-            app:layout_constraintDimensionRatio="W,16:9"
+
             app:layout_constraintEnd_toEndOf="parent"
 
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.86"
             app:layout_constraintVertical_chainStyle="packed" />
@@ -71,8 +68,8 @@
             android:id="@+id/textview_header_one"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+
+
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
@@ -89,8 +86,7 @@
             android:id="@+id/textview_header_two"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
+
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
@@ -106,9 +102,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
 
-            android:layout_marginLeft="6dp"
             android:layout_marginTop="@dimen/eight_dp"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal"
@@ -116,19 +110,19 @@
             app:layout_constraintTop_toBottomOf="@+id/textview_header_two">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="top"
                 android:src="@drawable/ic_star_black_24dp" />
 
             <TextView
                 android:id="@+id/textview_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="@dimen/two_dp"
                 android:layout_marginTop="@dimen/two_dp"
-                android:gravity="center_horizontal"
+                android:textSize="12sp"
                 android:text="4.5"
                 android:textColor="@color/black_text" />
 
@@ -137,7 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="@dimen/eight_dp"
+
                 android:gravity="end"
                 android:text="N5,000"
                 android:textColor="@color/colorAccent"

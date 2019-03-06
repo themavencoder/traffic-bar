@@ -29,6 +29,10 @@ import android.view.ViewGroup;
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.dashboard.discover.SampleContent;
 import com.getmobileltd.trafficbar.dashboard.favourite.utils.GridSpacingItemDecoration;
+import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinksAdapter;
+import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinksModel;
+import com.getmobileltd.trafficbar.dashboard.home.food.FoodAdapter;
+import com.getmobileltd.trafficbar.dashboard.home.food.FoodModel;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendAdapter;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendModel;
 
@@ -38,9 +42,13 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class HomeFragment extends Fragment {
-    private RecyclerView recyclerView;
+    private RecyclerView recyclerViewTrend, recyclerViewFood, recyclerViewDrink;
     private List<TrendModel> modelList = SampleContent.MYTRENDS;
-    private TrendAdapter adapter;
+    private List<FoodModel> modelListFood = SampleContent.MYFOOD;
+    private List<DrinksModel> modelListDrinks = SampleContent.MYDRINKS;
+    private TrendAdapter adapterTrend;
+    private FoodAdapter adapterFood;
+    private DrinksAdapter adapterDrink;
     private View v;
 
 
@@ -55,12 +63,24 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
 
         v =  inflater.inflate(R.layout.fragment_home, container, false);
-        recyclerView = v.findViewById(R.id.recycler_view_trending);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(2,dpToPx(8),true));
-        adapter = new TrendAdapter(getActivity(),modelList);
+        recyclerViewTrend = v.findViewById(R.id.recycler_view_trending);
+        recyclerViewFood = v.findViewById(R.id.recycler_view_food);
+        recyclerViewDrink = v.findViewById(R.id.recycler_view_drinks);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),3, LinearLayoutManager.HORIZONTAL,false));
-        recyclerView.setAdapter(adapter);
+        adapterTrend = new TrendAdapter(getActivity(),modelList);
+        adapterFood = new FoodAdapter(getActivity(),modelListFood);
+        adapterDrink = new DrinksAdapter(getActivity(),modelListDrinks);
+
+
+
+        recyclerViewTrend.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));
+        recyclerViewTrend.setAdapter(adapterTrend);
+
+        recyclerViewFood.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));
+        recyclerViewFood.setAdapter(adapterFood);
+
+        recyclerViewDrink.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));
+        recyclerViewDrink.setAdapter(adapterDrink);
 
         return v;
     }

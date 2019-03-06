@@ -16,6 +16,8 @@ package com.getmobileltd.trafficbar.dashboard.discover;
 
 import com.getmobileltd.trafficbar.dashboard.discover.model.DiscoveryModel;
 import com.getmobileltd.trafficbar.dashboard.favourite.model.FavouriteModel;
+import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinksModel;
+import com.getmobileltd.trafficbar.dashboard.home.food.FoodModel;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendModel;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
 
@@ -31,6 +33,8 @@ public class SampleContent {
     public static List<FavouriteModel> FAVOURITES = new ArrayList<>();
     public static List<MyCartModel> MYCART = new ArrayList<>();
     public static List<TrendModel> MYTRENDS = new ArrayList<>();
+    public static List<FoodModel> MYFOOD = new ArrayList<>();
+    public static List<DrinksModel> MYDRINKS = new ArrayList<>();
 
     static {
         DiscoveryModel model1 = new DiscoveryModel("15 Montgomerry Road,", "Igando, Lagos","4.1");
@@ -82,7 +86,36 @@ public class SampleContent {
         MYTRENDS.add(trendModel2);
         MYTRENDS.add(trendModel3);
         MYTRENDS.add(trendModel4);
+        MYTRENDS.add(trendModel1);
+        MYTRENDS.add(trendModel2);
+        MYTRENDS.add(trendModel3);
+        MYTRENDS.add(trendModel4);
 
+        FoodModel foodModel1 = new FoodModel("10,000");
+        FoodModel foodModel2 = new FoodModel("10,000");
+        FoodModel foodModel3 = new FoodModel("10,000");
+        FoodModel foodModel4 = new FoodModel("10,000");
+        FoodModel foodModel5 = new FoodModel("10,000");
+        FoodModel foodModel6 = new FoodModel("10,000");
+        MYFOOD.add(foodModel1);
+        MYFOOD.add(foodModel2);
+        MYFOOD.add(foodModel3);
+        MYFOOD.add(foodModel4);
+        MYFOOD.add(foodModel5);
+        MYFOOD.add(foodModel6);
+
+        DrinksModel drinkModel1 = new DrinksModel("20,000");
+        DrinksModel drinksModel2 = new DrinksModel("30,000");
+        MYDRINKS.add(drinkModel1);
+        MYDRINKS.add(drinksModel2);
+        MYDRINKS.add(drinkModel1);
+        MYDRINKS.add(drinksModel2);
+        MYDRINKS.add(drinkModel1);
+        MYDRINKS.add(drinksModel2);
+        MYDRINKS.add(drinkModel1);
+        MYDRINKS.add(drinksModel2);
+        MYDRINKS.add(drinkModel1);
+        MYDRINKS.add(drinksModel2);
 
     }
 }
