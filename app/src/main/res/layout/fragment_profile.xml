@@ -103,7 +103,7 @@ tools:context=".dashboard.profile.ProfileFragment">
             android:layout_marginTop="16dp"
             android:layout_marginLeft="16dp"
             android:layout_below="@id/textview_account_details"
-            android:background="#a9a9a9"/>
+            android:background="@color/view_color"/>
 
 
         <TextView

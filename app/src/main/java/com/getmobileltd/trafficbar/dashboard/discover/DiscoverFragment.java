@@ -15,7 +15,6 @@
 package com.getmobileltd.trafficbar.dashboard.discover;
 
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,9 +22,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.application.SampleContent;
 import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.dashboard.discover.adapter.DiscoveryAdapter;
 import com.getmobileltd.trafficbar.dashboard.discover.model.DiscoveryModel;

@@ -19,4 +19,5 @@
     <color name="black">#000</color>
     <color name="grey">#a9a9a9</color>
     <color name="deep_ash">#DADADA</color>
+    <color name="view_color">#a9a9a9</color>
 </resources>

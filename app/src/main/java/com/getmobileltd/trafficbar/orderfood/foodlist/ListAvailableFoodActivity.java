@@ -16,11 +16,24 @@ package com.getmobileltd.trafficbar.orderfood.foodlist;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.application.SampleContent;
+import com.getmobileltd.trafficbar.orderfood.foodlist.adapter.MenuAdapter;
+import com.getmobileltd.trafficbar.orderfood.foodlist.menulistener.MenuOnClickListener;
+import com.getmobileltd.trafficbar.orderfood.foodlist.model.MenuModel;
 
-public class ListAvailableFoodActivity extends AppCompatActivity {
+import java.util.List;
+
+public class ListAvailableFoodActivity extends AppCompatActivity implements MenuOnClickListener {
+    private RecyclerView recyclerView;
+    private MenuAdapter adapter;
+    private List<MenuModel> modelList = SampleContent.MYMENU;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,5 +42,15 @@ public class ListAvailableFoodActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Menu");
+        recyclerView = findViewById(R.id.recycler_view_menu);
+        adapter = new MenuAdapter(modelList,this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(MenuModel model) {
+        Toast.makeText(this, "You clicked on" + model.getName(), Toast.LENGTH_SHORT).show();
+
     }
 }

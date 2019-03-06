@@ -25,7 +25,7 @@ import android.view.ViewGroup;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.UiSettings;
-import com.getmobileltd.trafficbar.dashboard.discover.SampleContent;
+import com.getmobileltd.trafficbar.application.SampleContent;
 import com.getmobileltd.trafficbar.dashboard.mycart.adapter.MyCartAdapter;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
 
