@@ -16,4 +16,7 @@
     <color name="black_text">#32363F</color>
     <color name="ash">#bdbdbd</color>
     <color name="color_cream">#F7E9E3</color>
+    <color name="black">#000</color>
+    <color name="grey">#a9a9a9</color>
+    <color name="deep_ash">#DADADA</color>
 </resources>

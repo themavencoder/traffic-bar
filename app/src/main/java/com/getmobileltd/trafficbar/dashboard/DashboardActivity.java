@@ -25,9 +25,11 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.dashboard.discover.DiscoverFragment;
 import com.getmobileltd.trafficbar.dashboard.favourite.FavouriteFragment;
 import com.getmobileltd.trafficbar.dashboard.home.HomeFragment;
+import com.getmobileltd.trafficbar.dashboard.mycart.MyCartFragment;
 import com.getmobileltd.trafficbar.dashboard.profile.ProfileFragment;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -37,6 +39,7 @@ public class DashboardActivity extends AppCompatActivity {
   private DiscoverFragment discoverFragment;
   private FavouriteFragment favouriteFragment;
   private ProfileFragment profileFragment;
+  private MyCartFragment cartFragment;
 
 
     @Override
@@ -50,6 +53,7 @@ public class DashboardActivity extends AppCompatActivity {
         discoverFragment = new DiscoverFragment();
         favouriteFragment = new FavouriteFragment();
         profileFragment = new ProfileFragment();
+        cartFragment = new MyCartFragment();
 
         navListener();
 
@@ -68,7 +72,7 @@ public class DashboardActivity extends AppCompatActivity {
                         setFragment(discoverFragment);
                         return true;
                     case R.id.nav_cart:
-                        setFragment(homeFragment);
+                        setFragment(cartFragment);
                         return true;
                     case R.id.nav_favourites:
                         setFragment(favouriteFragment);

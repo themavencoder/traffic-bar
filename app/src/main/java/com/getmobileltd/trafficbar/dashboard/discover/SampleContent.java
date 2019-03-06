@@ -15,6 +15,11 @@
 package com.getmobileltd.trafficbar.dashboard.discover;
 
 import com.getmobileltd.trafficbar.dashboard.discover.model.DiscoveryModel;
+import com.getmobileltd.trafficbar.dashboard.favourite.model.FavouriteModel;
+import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinksModel;
+import com.getmobileltd.trafficbar.dashboard.home.food.FoodModel;
+import com.getmobileltd.trafficbar.dashboard.home.trend.TrendModel;
+import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +30,11 @@ import java.util.List;
 public class SampleContent {
 
     public static List<DiscoveryModel> RESTAURANT = new ArrayList<>();
+    public static List<FavouriteModel> FAVOURITES = new ArrayList<>();
+    public static List<MyCartModel> MYCART = new ArrayList<>();
+    public static List<TrendModel> MYTRENDS = new ArrayList<>();
+    public static List<FoodModel> MYFOOD = new ArrayList<>();
+    public static List<DrinksModel> MYDRINKS = new ArrayList<>();
 
     static {
         DiscoveryModel model1 = new DiscoveryModel("15 Montgomerry Road,", "Igando, Lagos","4.1");
@@ -36,5 +46,76 @@ public class SampleContent {
         RESTAURANT.add(model1);
         RESTAURANT.add(model2);
         RESTAURANT.add(model3);
+
+        FavouriteModel model = new FavouriteModel("Mashed potatoes","Sliced yam and beans","4.8","N36,000");
+            FAVOURITES.add(model);
+        FAVOURITES.add(model);
+        FAVOURITES.add(model);
+        FAVOURITES.add(model);
+        FAVOURITES.add(model);
+        FAVOURITES.add(model);
+        FAVOURITES.add(model);
+        FAVOURITES.add(model);
+        FAVOURITES.add(model);
+        FAVOURITES.add(model);
+
+        MyCartModel cartone = new MyCartModel("Mushedroom tomatoes");
+        MyCartModel cartTwo = new MyCartModel("Beans and Bread");
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
+        MYCART.add(cartone);
+        MYCART.add(cartTwo);
+
+        TrendModel trendModel1 = new TrendModel("40,000");
+        TrendModel trendModel2 = new TrendModel("50,000");
+        TrendModel trendModel3 = new TrendModel("60,000");
+        TrendModel trendModel4 = new TrendModel("70,000");
+        MYTRENDS.add(trendModel1);
+        MYTRENDS.add(trendModel2);
+        MYTRENDS.add(trendModel3);
+        MYTRENDS.add(trendModel4);
+        MYTRENDS.add(trendModel1);
+        MYTRENDS.add(trendModel2);
+        MYTRENDS.add(trendModel3);
+        MYTRENDS.add(trendModel4);
+        MYTRENDS.add(trendModel1);
+        MYTRENDS.add(trendModel2);
+        MYTRENDS.add(trendModel3);
+        MYTRENDS.add(trendModel4);
+
+        FoodModel foodModel1 = new FoodModel("10,000");
+        FoodModel foodModel2 = new FoodModel("10,000");
+        FoodModel foodModel3 = new FoodModel("10,000");
+        FoodModel foodModel4 = new FoodModel("10,000");
+        FoodModel foodModel5 = new FoodModel("10,000");
+        FoodModel foodModel6 = new FoodModel("10,000");
+        MYFOOD.add(foodModel1);
+        MYFOOD.add(foodModel2);
+        MYFOOD.add(foodModel3);
+        MYFOOD.add(foodModel4);
+        MYFOOD.add(foodModel5);
+        MYFOOD.add(foodModel6);
+
+        DrinksModel drinkModel1 = new DrinksModel("20,000");
+        DrinksModel drinksModel2 = new DrinksModel("30,000");
+        MYDRINKS.add(drinkModel1);
+        MYDRINKS.add(drinksModel2);
+        MYDRINKS.add(drinkModel1);
+        MYDRINKS.add(drinksModel2);
+        MYDRINKS.add(drinkModel1);
+        MYDRINKS.add(drinksModel2);
+        MYDRINKS.add(drinkModel1);
+        MYDRINKS.add(drinksModel2);
+        MYDRINKS.add(drinkModel1);
+        MYDRINKS.add(drinksModel2);
+
     }
 }
