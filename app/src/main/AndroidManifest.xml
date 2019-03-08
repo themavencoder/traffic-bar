@@ -12,6 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".dashboard.profile.editprofile.EditProfileActivity"></activity>
+        <activity android:name=".registration.login.mvp.LoginActivity"></activity>
+        <activity android:name=".registration.register.confirmregister.ConfirmRegisterActivity"></activity>
+        <activity
+            android:name=".dashboard.DashboardActivity"
+            android:hardwareAccelerated="true"></activity>
         <activity android:name=".orderfood.menudetails.MenuDetailsActivity"></activity>
         <activity android:name=".orderfood.menulist.ListAvailableFoodActivity" />
         <activity android:name=".registration.login.mvp.LoginActivity" />
@@ -27,6 +33,7 @@
 
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
+
         </activity>
         <activity android:name=".intro.IntroActivity" />
         <activity android:name=".MainActivity" />

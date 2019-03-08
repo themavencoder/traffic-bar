@@ -15,6 +15,7 @@
 package com.getmobileltd.trafficbar.dashboard.profile;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
@@ -25,11 +26,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.UiSettings;
+import com.getmobileltd.trafficbar.dashboard.profile.editprofile.EditProfileActivity;
 
 public class ProfileFragment extends Fragment {
+    private TextView viewProfile;
+    private View v;
 
 
 
@@ -39,6 +44,24 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         UiSettings.colorStatusbar(getActivity(),R.color.colorAccent);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+
+
+        v =  inflater.inflate(R.layout.fragment_profile, container, false);
+
+init();
+        return v;
+
+
+    }
+
+    private void init()  {
+        viewProfile = v.findViewById(R.id.textview_view_profile);
+        viewProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(v.getContext(), EditProfileActivity.class));
+            }
+        });
     }
 }
+

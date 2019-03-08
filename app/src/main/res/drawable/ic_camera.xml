@@ -1,0 +1,31 @@
+<!--
+  ~ /**
+  ~ *Creator: Tobiloba Adejumo on 3/8/19 1:15 PM Last modified: 3/8/19 1:15 PM Copyright: All rights reserved Ⓒ 2019
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~   you may not use this file except in compliance with the License.
+  ~   You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+  ~    Unless required by applicable law or agreed to in writing, software distributed under
+  ~    the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+  ~    OF ANY KIND, either express or implied. See the License for the specific language governing
+  ~    permissions and limitations under the License.
+  ~ */
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:pathData="M12,12m-11,0a11,11 0,1 1,22 0a11,11 0,1 1,-22 0"
+      android:strokeWidth="2"
+      android:fillColor="#D7100F"
+      android:strokeColor="#ffffff"/>
+  <path
+      android:pathData="M12,14.1334C13.1782,14.1334 14.1334,13.1782 14.1334,12C14.1334,10.8218 13.1782,9.8667 12,9.8667C10.8218,9.8667 9.8667,10.8218 9.8667,12C9.8667,13.1782 10.8218,14.1334 12,14.1334Z"
+      android:fillColor="#ffffff"/>
+  <path
+      android:pathData="M10.0002,5.3334L8.7802,6.6668H6.6668C5.9335,6.6668 5.3335,7.2668 5.3335,8.0001V16.0001C5.3335,16.7334 5.9335,17.3334 6.6668,17.3334H17.3335C18.0668,17.3334 18.6668,16.7334 18.6668,16.0001V8.0001C18.6668,7.2668 18.0668,6.6668 17.3335,6.6668H15.2202L14.0002,5.3334H10.0002ZM12.0002,15.3334C10.1602,15.3334 8.6668,13.8401 8.6668,12.0001C8.6668,10.1601 10.1602,8.6668 12.0002,8.6668C13.8402,8.6668 15.3335,10.1601 15.3335,12.0001C15.3335,13.8401 13.8402,15.3334 12.0002,15.3334Z"
+      android:fillColor="#ffffff"/>
+</vector>

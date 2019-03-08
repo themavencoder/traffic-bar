@@ -64,7 +64,9 @@ tools:context=".dashboard.profile.ProfileFragment">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:id="@+id/textview_view_profile"
             android:layout_marginTop="4dp"
+
             android:text="@string/view_profile"
             android:textColor="@color/grey"
             android:textSize="@dimen/sixteen_sp" />
