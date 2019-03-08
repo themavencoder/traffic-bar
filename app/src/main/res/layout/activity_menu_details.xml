@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ /**
-  ~ *Creator: Tobiloba Adejumo on 3/6/19 1:34 PM Last modified: 3/6/19 1:34 PM Copyright: All rights reserved Ⓒ 2019
+  ~ *Creator: Tobiloba Adejumo on 3/6/19 3:44 PM Last modified: 3/6/19 3:44 PM Copyright: All rights reserved Ⓒ 2019
   ~
   ~  Licensed under the Apache License, Version 2.0 (the "License");
   ~   you may not use this file except in compliance with the License.
@@ -17,30 +17,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
-    tools:context=".orderfood.menulist.ListAvailableFoodActivity">
+    tools:context=".orderfood.menudetails.MenuDetailsActivity">
 
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@color/deep_ash"
+        android:id="@+id/include1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+           >
 
-    </android.support.v7.widget.Toolbar>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+
+
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_menu"
+        android:id="@+id/recycler_view_menu_details"
         android:layout_width="match_parent"
         android:layout_height="587dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/include1">
 
     </android.support.v7.widget.RecyclerView>
 </android.support.constraint.ConstraintLayout>

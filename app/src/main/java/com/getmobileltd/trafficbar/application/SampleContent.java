@@ -20,7 +20,8 @@ import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinksModel;
 import com.getmobileltd.trafficbar.dashboard.home.food.FoodModel;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendModel;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
-import com.getmobileltd.trafficbar.orderfood.foodlist.model.MenuModel;
+import com.getmobileltd.trafficbar.orderfood.menudetails.model.MenuDetailsModel;
+import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class SampleContent {
     public static List<FoodModel> MYFOOD = new ArrayList<>();
     public static List<DrinksModel> MYDRINKS = new ArrayList<>();
     public static List<MenuModel> MYMENU = new ArrayList<>();
+    public static List<MenuDetailsModel> MYMENUDETAILS = new ArrayList<>();
 
     static {
         DiscoveryModel model1 = new DiscoveryModel("15 Montgomerry Road,", "Igando, Lagos", "4.1");
@@ -143,6 +145,19 @@ public class SampleContent {
         MYMENU.add(menuModel10);
         MYMENU.add(menuModel11);
         MYMENU.add(menuModel12);
+
+        MenuDetailsModel menuDetailsModel1 = new MenuDetailsModel("Beans and Plantain", "N3,500");
+        MYMENUDETAILS.add(menuDetailsModel1);
+        MYMENUDETAILS.add(menuDetailsModel1);
+        MYMENUDETAILS.add(menuDetailsModel1);
+        MYMENUDETAILS.add(menuDetailsModel1);
+        MYMENUDETAILS.add(menuDetailsModel1);
+        MYMENUDETAILS.add(menuDetailsModel1);
+        MYMENUDETAILS.add(menuDetailsModel1);
+        MYMENUDETAILS.add(menuDetailsModel1);
+        MYMENUDETAILS.add(menuDetailsModel1);
+        MYMENUDETAILS.add(menuDetailsModel1);
+        MYMENUDETAILS.add(menuDetailsModel1);
 
 
     }

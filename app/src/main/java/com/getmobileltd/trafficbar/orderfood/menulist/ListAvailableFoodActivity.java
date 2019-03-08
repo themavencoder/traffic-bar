@@ -12,8 +12,9 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.orderfood.foodlist;
+package com.getmobileltd.trafficbar.orderfood.menulist;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,9 +24,10 @@ import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.SampleContent;
-import com.getmobileltd.trafficbar.orderfood.foodlist.adapter.MenuAdapter;
-import com.getmobileltd.trafficbar.orderfood.foodlist.menulistener.MenuOnClickListener;
-import com.getmobileltd.trafficbar.orderfood.foodlist.model.MenuModel;
+import com.getmobileltd.trafficbar.orderfood.menudetails.MenuDetailsActivity;
+import com.getmobileltd.trafficbar.orderfood.menulist.adapter.MenuAdapter;
+import com.getmobileltd.trafficbar.orderfood.menulist.menulistener.MenuOnClickListener;
+import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuModel;
 
 import java.util.List;
 
@@ -51,6 +53,7 @@ public class ListAvailableFoodActivity extends AppCompatActivity implements Menu
     @Override
     public void onClick(MenuModel model) {
         Toast.makeText(this, "You clicked on" + model.getName(), Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, MenuDetailsActivity.class));
 
     }
 }

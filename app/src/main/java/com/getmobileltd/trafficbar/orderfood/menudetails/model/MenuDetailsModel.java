@@ -1,6 +1,6 @@
 /*
  * *
- * Creator: Tobiloba Adejumo on 3/6/19 2:39 PM Last modified: 3/6/19 2:39 PM Copyright: All rights reserved Ⓒ 2019
+ * Creator: Tobiloba Adejumo on 3/6/19 3:47 PM Last modified: 3/6/19 3:47 PM Copyright: All rights reserved Ⓒ 2019
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,33 +12,33 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.orderfood.foodlist.model;
+package com.getmobileltd.trafficbar.orderfood.menudetails.model;
 
 /**
  * Created by themavencoder on 06,March,2019
  */
-public class MenuModel {
+public class MenuDetailsModel {
     private String name;
-    private String number;
+    private String price;
 
-    public MenuModel(String name, String number) {
+    public MenuDetailsModel(String name, String price) {
         this.name = name;
-        this.number = number;
+        this.price = price;
     }
 
     public String getName() {
         return name;
     }
 
+    public String getPrice() {
+        return price;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

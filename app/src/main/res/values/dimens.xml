@@ -27,4 +27,5 @@
     <dimen name="two_dp">2dp</dimen>
     <dimen name="thirty_four_sp">34sp</dimen>
     <dimen name="twelve_dp">12dp</dimen>
+    <dimen name="thirteen_sp">13sp</dimen>
 </resources>

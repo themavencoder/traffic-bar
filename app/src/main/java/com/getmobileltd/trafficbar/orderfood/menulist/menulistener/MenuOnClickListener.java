@@ -12,9 +12,9 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.orderfood.foodlist.menulistener;
+package com.getmobileltd.trafficbar.orderfood.menulist.menulistener;
 
-import com.getmobileltd.trafficbar.orderfood.foodlist.model.MenuModel;
+import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuModel;
 
 /**
  * Created by themavencoder on 06,March,2019

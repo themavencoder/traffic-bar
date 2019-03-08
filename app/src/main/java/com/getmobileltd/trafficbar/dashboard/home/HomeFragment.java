@@ -35,7 +35,7 @@ import com.getmobileltd.trafficbar.dashboard.home.food.FoodAdapter;
 import com.getmobileltd.trafficbar.dashboard.home.food.FoodModel;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendAdapter;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendModel;
-import com.getmobileltd.trafficbar.orderfood.foodlist.ListAvailableFoodActivity;
+import com.getmobileltd.trafficbar.orderfood.menulist.ListAvailableFoodActivity;
 
 import java.util.List;
 

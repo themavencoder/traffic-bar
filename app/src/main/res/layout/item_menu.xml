@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_weight="8"
-            android:textStyle="boldgit"
+            android:textStyle="bold"
             android:id="@+id/textview_menu_name"
             android:layout_height="wrap_content"
             android:paddingRight="6dp"

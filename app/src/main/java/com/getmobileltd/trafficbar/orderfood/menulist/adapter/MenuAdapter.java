@@ -12,7 +12,7 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.orderfood.foodlist.adapter;
+package com.getmobileltd.trafficbar.orderfood.menulist.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -22,8 +22,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.getmobileltd.trafficbar.R;
-import com.getmobileltd.trafficbar.orderfood.foodlist.menulistener.MenuOnClickListener;
-import com.getmobileltd.trafficbar.orderfood.foodlist.model.MenuModel;
+import com.getmobileltd.trafficbar.orderfood.menulist.menulistener.MenuOnClickListener;
+import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuModel;
 
 import java.util.List;
 
