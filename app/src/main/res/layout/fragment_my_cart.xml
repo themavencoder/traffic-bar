@@ -62,12 +62,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
         app:layout_constraintVertical_bias="0.3"
-        android:layout_marginStart="54dp"
+        android:layout_marginStart="32dp"
         app:cardCornerRadius="@dimen/eight_dp"
-        android:layout_marginLeft="54dp"
+        android:layout_marginLeft="32dp"
         app:cardUseCompatPadding="true"
-        android:layout_marginEnd="54dp"
-        android:layout_marginRight="54dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
         android:background="@color/white"
         android:layout_width="match_parent"
 
@@ -169,13 +169,31 @@
                     android:text="250" />
 
 
+
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearlayoutView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/linearLayout_delivery"
+                >
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/sixteen_dp"
+                    android:background="@color/grey"/>
+
+            </LinearLayout>
+
+
 
             <LinearLayout
                 android:id="@+id/linearLayout_total"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/linearLayout_delivery"
+                android:layout_below="@id/linearlayoutView"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="28dp"
                 android:layout_marginBottom="16dp"
@@ -218,22 +236,24 @@
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout2"
         tools:layout_editor_absoluteX="16dp" />
 
-    <Button
-        android:id="@+id/button_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/linearLayout"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@color/colorAccent"
-        android:text="Checkout"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/linearLayout"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/colorAccent"
+            android:text="Checkout"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

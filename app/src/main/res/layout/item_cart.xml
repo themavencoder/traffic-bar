@@ -28,7 +28,9 @@
         android:layout_height="101dp"
         android:scaleType="fitXY"
         android:src="@drawable/sample_favourite"
-        app:layout_constraintDimensionRatio="" />
+        app:layout_constraintDimensionRatio=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
