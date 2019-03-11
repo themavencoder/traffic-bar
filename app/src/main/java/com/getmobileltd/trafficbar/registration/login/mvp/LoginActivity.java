@@ -15,11 +15,16 @@
 package com.getmobileltd.trafficbar.registration.login.mvp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.MainActivity;
@@ -31,6 +36,7 @@ import com.getmobileltd.trafficbar.registration.login.dialog.LoginDialog;
 import com.getmobileltd.trafficbar.registration.login.networkresponse.LogInResponse;
 import com.getmobileltd.trafficbar.registration.register.model.User;
 
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,6 +49,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private LoginContract.Presenter presenter;
     private User user;
     private LoginDialog mLoginDialog;
+    private SmoothProgressBar mProgressBar;
+    private FrameLayout frameLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     private void init() {
         mEditEmail = findViewById(R.id.edit_text_email_address);
         mEditPassword = findViewById(R.id.edit_text_password);
@@ -61,6 +70,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         mButtonLogin.setOnClickListener(this);
         presenter = new LoginPresenter(this);
         mLoginDialog = new LoginDialog();
+       // mProgressBar = findViewById(R.id.progress_view);
+        frameLayout = findViewById(R.id.progress_view);
+
+      //  frameLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
     }
 
@@ -93,8 +106,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             String password = mEditPassword.getText().toString();
             presenter.saveLoginCredentials(email,password);
             if (presenter.checkParameters()) {
-                mLoginDialog.setCancelable(false);
-                mLoginDialog.show(getSupportFragmentManager(),"my_dialog");
+              /*  mLoginDialog.setCancelable(false);
+                mLoginDialog.show(getSupportFragmentManager(),"my_dialog");*/
+            frameLayout.setVisibility(View.VISIBLE);
                 user = new User(email,password);
                 loginUser(user);
             }
@@ -107,17 +121,20 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             @Override
             public void onResponse(Call<LogInResponse> call, Response<LogInResponse> response) {
                 if (response.code() == 200) {
-                            mLoginDialog.dismiss();
+                           // mLoginDialog.dismiss();
+                    frameLayout.setVisibility(View.GONE);
                         presenter.navigateToNextActivity();
                 } else {
-                    mLoginDialog.dismiss();
+                  //  mLoginDialog.dismiss();
+                    frameLayout.setVisibility(View.GONE);
                     presenter.setError();
                 }
             }
 
             @Override
             public void onFailure(Call<LogInResponse> call, Throwable t) {
-                mLoginDialog.dismiss();
+             //   mLoginDialog.dismiss();
+                frameLayout.setVisibility(View.GONE);
                 Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
