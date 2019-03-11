@@ -87,11 +87,18 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
         if (frameLayout.getVisibility() == View.VISIBLE) {
             loginCall.cancel();
+            frameLayout.setVisibility(View.GONE);
+            return;
         }
-        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+        if (frameLayout.getVisibility() == View.INVISIBLE) {
+            super.onBackPressed();
+            overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+
+        }
+
 
     }
 
