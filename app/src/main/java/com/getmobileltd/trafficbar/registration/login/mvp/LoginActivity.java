@@ -19,12 +19,16 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.MainActivity;
@@ -42,6 +46,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View, View.OnClickListener {
+    public static final String TAG = LoginActivity.class.getSimpleName();
     private EditText mEditEmail, mEditPassword;
     private Button mButtonLogin;
     private TrafficBarService trafficBarService;
@@ -51,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private LoginDialog mLoginDialog;
     private SmoothProgressBar mProgressBar;
     private FrameLayout frameLayout;
+    private CoordinatorLayout mCoordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+
     private void init() {
         mEditEmail = findViewById(R.id.edit_text_email_address);
         mEditPassword = findViewById(R.id.edit_text_password);
@@ -72,6 +78,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         mLoginDialog = new LoginDialog();
        // mProgressBar = findViewById(R.id.progress_view);
         frameLayout = findViewById(R.id.progress_view);
+        mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
 
       //  frameLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
@@ -81,8 +88,17 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if (frameLayout.getVisibility() == View.VISIBLE) {
+            loginCall.cancel();
+        }
         overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        loginCall.cancel();
     }
 
     @Override
@@ -111,6 +127,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             frameLayout.setVisibility(View.VISIBLE);
                 user = new User(email,password);
                 loginUser(user);
+            } else {
+                if (email.isEmpty()) {
+                    errorLocation("Email field is empty");
+                    return;
+                }
+                errorLocation("Password should be more than five characters");
             }
 
     }
@@ -127,7 +149,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 } else {
                   //  mLoginDialog.dismiss();
                     frameLayout.setVisibility(View.GONE);
-                    presenter.setError();
+                  //  presenter.setError();
+                    errorLocation("Password and Email do not match. Try again");
                 }
             }
 
@@ -135,9 +158,24 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             public void onFailure(Call<LogInResponse> call, Throwable t) {
              //   mLoginDialog.dismiss();
                 frameLayout.setVisibility(View.GONE);
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.i(TAG,t.getMessage());
+                errorLocation("Unable to process your request. Please try again");
+             //  Toast.makeText(LoginActivity.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
     }
+
+    private void errorLocation(String s) {
+        Snackbar snackbar = Snackbar.make(mCoordinatorLayout, s, Snackbar.LENGTH_LONG);
+
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        snackbar.show();
+
+    }
+
+
 }

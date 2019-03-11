@@ -30,7 +30,8 @@ public class LoginPresenter implements LoginContract.Presenter {
     public boolean checkParameters() {
         String email = user.getEmailAddress();
         String password = user.getPassword();
-        return !email.isEmpty() && !password.isEmpty();
+
+        return !email.isEmpty() && password.trim().length() > 5;
     }
 
     @Override

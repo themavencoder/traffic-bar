@@ -20,6 +20,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="#a7ffffff"
+
     android:id="@+id/progress_view"
     android:visibility="gone"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
