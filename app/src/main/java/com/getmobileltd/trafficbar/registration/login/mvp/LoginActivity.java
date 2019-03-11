@@ -91,9 +91,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         if (frameLayout.getVisibility() == View.VISIBLE) {
             loginCall.cancel();
             frameLayout.setVisibility(View.GONE);
-            return;
-        }
-        if (frameLayout.getVisibility() == View.INVISIBLE) {
+
+        } else if (frameLayout.getVisibility() == View.GONE) {
             super.onBackPressed();
             overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 
@@ -157,7 +156,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                   //  mLoginDialog.dismiss();
                     frameLayout.setVisibility(View.GONE);
                   //  presenter.setError();
-                    errorLocation("Password and Email do not match. Try again");
+                    errorLocation("Password and email do not match. Try again");
                 }
             }
 
