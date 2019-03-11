@@ -15,27 +15,37 @@
 package com.getmobileltd.trafficbar.registration.login.mvp;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.MainActivity;
 import com.getmobileltd.trafficbar.R;
-import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
 import com.getmobileltd.trafficbar.registration.login.dialog.LoginDialog;
 import com.getmobileltd.trafficbar.registration.login.networkresponse.LogInResponse;
 import com.getmobileltd.trafficbar.registration.register.model.User;
-import com.getmobileltd.trafficbar.dashboard.DashboardActivity;
+
+import fr.castorflex.android.smoothprogressbar.SmoothProgressBar;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements LoginContract.View, View.OnClickListener {
+    public static final String TAG = LoginActivity.class.getSimpleName();
     private EditText mEditEmail, mEditPassword;
     private Button mButtonLogin;
     private TrafficBarService trafficBarService;
@@ -43,6 +53,9 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private LoginContract.Presenter presenter;
     private User user;
     private LoginDialog mLoginDialog;
+    private SmoothProgressBar mProgressBar;
+    private FrameLayout frameLayout;
+    private CoordinatorLayout mCoordinatorLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     }
 
+
     private void init() {
         mEditEmail = findViewById(R.id.edit_text_email_address);
         mEditPassword = findViewById(R.id.edit_text_password);
@@ -61,6 +75,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         mButtonLogin.setOnClickListener(this);
         presenter = new LoginPresenter(this);
         mLoginDialog = new LoginDialog();
+       // mProgressBar = findViewById(R.id.progress_view);
+        frameLayout = findViewById(R.id.progress_view);
+        mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
+
+      //  frameLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
     }
 
@@ -68,8 +87,17 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if (frameLayout.getVisibility() == View.VISIBLE) {
+            loginCall.cancel();
+        }
         overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        loginCall.cancel();
     }
 
     @Override
@@ -93,10 +121,17 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             String password = mEditPassword.getText().toString();
             presenter.saveLoginCredentials(email,password);
             if (presenter.checkParameters()) {
-                mLoginDialog.setCancelable(false);
-                mLoginDialog.show(getSupportFragmentManager(),"my_dialog");
+              /*  mLoginDialog.setCancelable(false);
+                mLoginDialog.show(getSupportFragmentManager(),"my_dialog");*/
+            frameLayout.setVisibility(View.VISIBLE);
                 user = new User(email,password);
                 loginUser(user);
+            } else {
+                if (email.isEmpty()) {
+                    errorLocation("Email field is empty");
+                    return;
+                }
+                errorLocation("Password should be more than five characters");
             }
 
     }
@@ -107,20 +142,39 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             @Override
             public void onResponse(Call<LogInResponse> call, Response<LogInResponse> response) {
                 if (response.code() == 200) {
-                            mLoginDialog.dismiss();
+                           // mLoginDialog.dismiss();
+                    frameLayout.setVisibility(View.GONE);
                         presenter.navigateToNextActivity();
                 } else {
-                    mLoginDialog.dismiss();
-                    presenter.setError();
+                  //  mLoginDialog.dismiss();
+                    frameLayout.setVisibility(View.GONE);
+                  //  presenter.setError();
+                    errorLocation("Password and Email do not match. Try again");
                 }
             }
 
             @Override
             public void onFailure(Call<LogInResponse> call, Throwable t) {
-                mLoginDialog.dismiss();
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+             //   mLoginDialog.dismiss();
+                frameLayout.setVisibility(View.GONE);
+                Log.i(TAG,t.getMessage());
+                errorLocation("Unable to process your request. Please try again");
+             //  Toast.makeText(LoginActivity.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
     }
+
+    private void errorLocation(String s) {
+        Snackbar snackbar = Snackbar.make(mCoordinatorLayout, s, Snackbar.LENGTH_LONG);
+
+        View sbView = snackbar.getView();
+        sbView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(getResources().getColor(R.color.white));
+        snackbar.show();
+
+    }
+
+
 }

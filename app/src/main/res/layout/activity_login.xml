@@ -11,15 +11,37 @@
   ~    permissions and limitations under the License.
   ~ */
   -->
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/coordinatorLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    >
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical"
     android:weightSum="10"
+
     tools:context=".registration.register.SignUpActivity">
+
+    <!--<fr.castorflex.android.smoothprogressbar.SmoothProgressBar
+        android:layout_width="match_parent"
+        app:spb_sections_count="2"
+        android:id="@+id/progress_view"
+        app:spb_color="@color/colorAccent"
+        android:indeterminate="true"
+        android:layout_height="2dp"
+        android:visibility="gone"
+        app:layout_collapseMode="pin" />-->
 
 
     <LinearLayout
@@ -207,3 +229,9 @@
 
     </LinearLayout>
 </LinearLayout>
+
+
+    <include layout="@layout/progress_view_overlay"/>
+
+
+</android.support.design.widget.CoordinatorLayout>
