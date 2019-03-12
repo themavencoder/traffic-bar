@@ -15,6 +15,7 @@
 package com.getmobileltd.trafficbar.registration.register;
 
 import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +39,7 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
     private Button mButtonContinue;
     private EditText mFirstName, mLastName;
     private String firstName, lastName;
+    private CoordinatorLayout mCoordinatorLayout;
     public static final String INTENT_FIRSTNAME = "FIRST_NAME";
     public static final String INTENT_LASTNAME = "LAST_NAME";
 
@@ -59,6 +61,7 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
         mFirstName = findViewById(R.id.edit_text_first_name);
         mLastName = findViewById(R.id.edit_text_last_name);
         findViewById(R.id.textview_log_in).setOnClickListener(this);
+        mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
     }
 
     @Override
@@ -90,7 +93,16 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
             if(presenter.checkParameters()) {
                 presenter.navigateToNextActivity();
             } else {
-                presenter.setError();
+                if(firstName.isEmpty()) {
+                    LoginActivity.errorMessage("First name is empty!",mCoordinatorLayout,getApplicationContext());
+                } else if (lastName.isEmpty()) {
+                    LoginActivity.errorMessage("Last name is empty!",mCoordinatorLayout,getApplicationContext());
+                }
+                else {
+                    LoginActivity.errorMessage("Both fields cannot be empty!",mCoordinatorLayout,getApplicationContext());
+
+                }
+
             }
 
         }

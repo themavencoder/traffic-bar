@@ -1,5 +1,6 @@
 package com.getmobileltd.trafficbar.registration.register.confirmregister.mvp;
 
+import com.getmobileltd.trafficbar.application.EmailValidator;
 import com.getmobileltd.trafficbar.registration.register.model.User;
 
 /**
@@ -16,7 +17,7 @@ public class ConfirmRegisterPresenter implements ConfirmRegisterContract.Present
     public boolean checkParameters() {
         String emailAddress = user.getEmailAddress();
         String password = user.getPassword();
-        return !emailAddress.trim().isEmpty() && !password.trim().isEmpty();
+        return EmailValidator.isValidEmail(emailAddress) && password.length() > 5;
     }
 
     @Override
