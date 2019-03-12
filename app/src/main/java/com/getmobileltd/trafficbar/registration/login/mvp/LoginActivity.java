@@ -14,11 +14,8 @@
 
 package com.getmobileltd.trafficbar.registration.login.mvp;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -88,18 +85,29 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
         if (frameLayout.getVisibility() == View.VISIBLE) {
-            loginCall.cancel();
+            if (loginCall != null){
+                loginCall.cancel();
+            }
+            frameLayout.setVisibility(View.GONE);
+
+        } else if (frameLayout.getVisibility() == View.GONE) {
+            super.onBackPressed();
+            overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+
         }
-        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        loginCall.cancel();
+        if (loginCall != null) {
+            loginCall.cancel();
+        }
+
     }
 
     @Override
@@ -130,10 +138,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 loginUser(user);
             } else {
                 if (email.isEmpty()) {
-                    errorLocation("Email field is empty");
+                    errorMessage("Email field is empty",mCoordinatorLayout,getApplication());
                     return;
                 }
-                errorLocation("Password should be more than five characters");
+                errorMessage("Password should be more than five characters",mCoordinatorLayout,getApplicationContext());
             }
 
     }
@@ -151,7 +159,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                   //  mLoginDialog.dismiss();
                     frameLayout.setVisibility(View.GONE);
                   //  presenter.setError();
-                    errorLocation("Password and Email do not match. Try again");
+                    errorMessage("Password and email do not match. Try again",mCoordinatorLayout,getApplicationContext());
                 }
             }
 
@@ -160,20 +168,20 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
              //   mLoginDialog.dismiss();
                 frameLayout.setVisibility(View.GONE);
                 Log.i(TAG,t.getMessage());
-                errorLocation("Unable to process your request. Please try again");
+                errorMessage("Unable to process your request. Please try again",mCoordinatorLayout,getApplicationContext());
              //  Toast.makeText(LoginActivity.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });
     }
 
-    private void errorLocation(String s) {
+    public static void errorMessage(String s, CoordinatorLayout mCoordinatorLayout, Context activiy) {
         Snackbar snackbar = Snackbar.make(mCoordinatorLayout, s, Snackbar.LENGTH_LONG);
 
         View sbView = snackbar.getView();
-        sbView.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+        sbView.setBackgroundColor(activiy.getResources().getColor(R.color.colorAccent));
         TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
-        textView.setTextColor(getResources().getColor(R.color.white));
+        textView.setTextColor(activiy.getResources().getColor(R.color.white));
         snackbar.show();
 
     }

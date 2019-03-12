@@ -16,15 +16,18 @@ package com.getmobileltd.trafficbar.registration.register.confirmregister;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.application.EmailValidator;
 import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
 import com.getmobileltd.trafficbar.application.UiSettings;
@@ -55,6 +58,8 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
     private TrafficBarService trafficBarService;
     private boolean checkAgree = false;
     private Drawable drawableChecked, drawableUnChecked;
+    private CoordinatorLayout mCoordinatorLayout;
+    private FrameLayout frameLayout;
 
 
     @Override
@@ -62,7 +67,7 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_register);
         UiSettings.fullScreen(this);
-        trafficBarService  = TrafficBarApplication.get(this).getTrafficBarService();
+        trafficBarService = TrafficBarApplication.get(this).getTrafficBarService();
         passedDataFromSignUp();
         init();
         setDrawable();
@@ -72,14 +77,14 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
             @Override
             public void onClick(View v) {
                 if (!checkAgree) {
-                        mButtonAgree.setCompoundDrawables(drawableChecked,null,null,null);
+                    mButtonAgree.setCompoundDrawables(drawableChecked, null, null, null);
                     checkAgree = true;
-                        return;
+                    return;
 
 
                 }
                 if (checkAgree) {
-                    mButtonAgree.setCompoundDrawables(drawableUnChecked,null,null,null);
+                    mButtonAgree.setCompoundDrawables(drawableUnChecked, null, null, null);
                     checkAgree = false;
                     return;
 
@@ -91,13 +96,13 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
 
     private void setDrawable() {
         drawableChecked = ContextCompat.getDrawable(
-               this,
-               R.drawable.checked
-       );
+                this,
+                R.drawable.checked
+        );
         drawableUnChecked = ContextCompat.getDrawable(
-               this,
-               R.drawable.unchecked
-       );
+                this,
+                R.drawable.unchecked
+        );
         drawableChecked.setBounds(
                 0, // left
                 0, // top
@@ -120,6 +125,8 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
         mButtonSignUp.setOnClickListener(this);
         mConfirmSignUpDialog = new ConfirmSignUpDialog();
         mButtonAgree = findViewById(R.id.button_agree);
+        mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
+        frameLayout = findViewById(R.id.progress_view);
 
     }
 
@@ -131,65 +138,79 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
     @Override
     public void buttonClick() {
         startActivity(new Intent(this, LoginActivity.class));
-        overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
     }
 
     private void passedDataFromSignUp() {
         Intent intent = getIntent();
-         firstName =  intent.getStringExtra(INTENT_FIRSTNAME);
-        lastName =  intent.getStringExtra(INTENT_LASTNAME);
-        Toast.makeText(this, "Your first name is" + firstName + "your last name is " + lastName, Toast.LENGTH_SHORT).show();
+        firstName = intent.getStringExtra(INTENT_FIRSTNAME);
+        lastName = intent.getStringExtra(INTENT_LASTNAME);
+        //    Toast.makeText(this, "Your first name is" + firstName + "your last name is " + lastName, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(View v) {
 
-    String emailAddress = mEditEmailAddress.getText().toString();
-    String password = mEditPassword.getText().toString();
-    presenter.saveName(emailAddress,password);
-    if (presenter.checkParameters()) {
-        if (!checkAgree) {
-            Toast.makeText(this, "Please agree to receive newsletter and update", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        mConfirmSignUpDialog.setCancelable(false);
-        mConfirmSignUpDialog.show(getSupportFragmentManager(),"my_dialog");
-        user = new User(firstName,lastName,emailAddress,password);
-        insertUser(user);        
-    } else {
-        presenter.setError();
+        String emailAddress = mEditEmailAddress.getText().toString();
+        String password = mEditPassword.getText().toString();
+        presenter.saveName(emailAddress, password);
+        if (presenter.checkParameters()) {
+            if (!checkAgree) {
+                LoginActivity.errorMessage("Please agree to receive newsletter and updates!", mCoordinatorLayout, this);
+                //Toast.makeText(this, "Please agree to receive newsletter and update", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            frameLayout.setVisibility(View.VISIBLE);
+            //  mConfirmSignUpDialog.setCancelable(false);
+            // mConfirmSignUpDialog.show(getSupportFragmentManager(),"my_dialog");
+            user = new User(firstName, lastName, emailAddress, password);
+            insertUser(user);
+        } else {
 
-    }
+            if (!EmailValidator.isValidEmail(emailAddress)) {
+                LoginActivity.errorMessage("Enter a valid email address", mCoordinatorLayout, this);
+
+            } else if (password.length() <= 5) {
+                LoginActivity.errorMessage("Password should be more than 5 characters", mCoordinatorLayout, this);
+            }
+
+        }
 
 
     }
 
     private void insertUser(User user) {
-    signUpCall = trafficBarService.createUser(user);
-    signUpCall.enqueue(new Callback<SignUpResponse>() {
-        @Override
-        public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-            assert response.body() != null;
+        signUpCall = trafficBarService.createUser(user);
+        signUpCall.enqueue(new Callback<SignUpResponse>() {
+            @Override
+            public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
+                assert response.body() != null;
 
-            if (response.code() == 200) {
-                mConfirmSignUpDialog.dismiss();
-                Toast.makeText(ConfirmRegisterActivity.this, "Successful login", Toast.LENGTH_SHORT).show();
-                presenter.navigateToNextActivity();
+                if (response.code() == 200) {
+                    // mConfirmSignUpDialog.dismiss();
+                    frameLayout.setVisibility(View.GONE);
+                    LoginActivity.errorMessage("Account created successfully",mCoordinatorLayout,getApplicationContext());
+                 //   Toast.makeText(ConfirmRegisterActivity.this, "Successful login", Toast.LENGTH_SHORT).show();
+                    presenter.navigateToNextActivity();
+                } else if (response.code() == 409) {
+                    frameLayout.setVisibility(View.GONE);
+                    LoginActivity.errorMessage("A user with this email already exist. Try a different one", mCoordinatorLayout, getApplicationContext());
+                    // Toast.makeText(ConfirmRegisterActivity.this, "Problem occured, try again!" + response.code(), Toast.LENGTH_SHORT).show();
+                } else {
+                    frameLayout.setVisibility(View.GONE);
+                    LoginActivity.errorMessage("Problem creating an account. Try again", mCoordinatorLayout, getApplicationContext());
+
+                }
             }
-            else {
-                mConfirmSignUpDialog.dismiss();
-                Toast.makeText(ConfirmRegisterActivity.this, "Problem occured, try again!" + response.code(), Toast.LENGTH_SHORT).show();
+
+            @Override
+            public void onFailure(Call<SignUpResponse> call, Throwable t) {
+                frameLayout.setVisibility(View.GONE);
+                Toast.makeText(ConfirmRegisterActivity.this, "Unable to connect to the internet " + t.getMessage(), Toast.LENGTH_SHORT).show();
+
             }
-        }
-
-        @Override
-        public void onFailure(Call<SignUpResponse> call, Throwable t) {
-            mConfirmSignUpDialog.dismiss();
-            Toast.makeText(ConfirmRegisterActivity.this, "Unable to connect to the internet " + t.getMessage(), Toast.LENGTH_SHORT).show();
-
-        }
-    });
+        });
     }
 
     @Override
@@ -202,7 +223,19 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        if (frameLayout.getVisibility() == View.VISIBLE) {
+            if (signUpCall != null){
+                signUpCall.cancel();
+            }
+            frameLayout.setVisibility(View.GONE);
+
+        } else if (frameLayout.getVisibility() == View.GONE) {
+            super.onBackPressed();
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
+        }
+
     }
 }
 
