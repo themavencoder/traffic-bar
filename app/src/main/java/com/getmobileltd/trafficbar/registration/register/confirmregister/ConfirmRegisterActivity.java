@@ -66,7 +66,7 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_register);
-        UiSettings.fullScreen(this);
+        UiSettings.colorStatusbar(this,R.color.app_background);
         trafficBarService = TrafficBarApplication.get(this).getTrafficBarService();
         passedDataFromSignUp();
         init();

@@ -48,7 +48,7 @@ public class SignUpActivity extends AppCompatActivity implements RegisterContrac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        UiSettings.fullScreen(this);
+        UiSettings.colorStatusbar(this,R.color.app_background);
         init();
 
     }
