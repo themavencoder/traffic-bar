@@ -207,8 +207,8 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
             @Override
             public void onFailure(Call<SignUpResponse> call, Throwable t) {
                 frameLayout.setVisibility(View.GONE);
-                Toast.makeText(ConfirmRegisterActivity.this, "Unable to connect to the internet " + t.getMessage(), Toast.LENGTH_SHORT).show();
-
+          //      Toast.makeText(ConfirmRegisterActivity.this, "Unable to connect to the internet " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                LoginActivity.errorMessage("A problem occured during registration. Please try again",mCoordinatorLayout,getApplicationContext());
             }
         });
     }

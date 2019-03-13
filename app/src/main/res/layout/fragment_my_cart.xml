@@ -239,7 +239,7 @@
         <Button
             android:id="@+id/button_login"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/linearLayout"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
@@ -247,7 +247,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@color/colorAccent"
+            android:background="@drawable/red_button"
             android:text="Checkout"
             android:textAllCaps="false"
             android:textColor="@color/white"

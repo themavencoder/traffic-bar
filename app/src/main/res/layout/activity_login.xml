@@ -190,10 +190,10 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginRight="40dp"
                 android:layout_marginBottom="24dp"
-                android:background="@color/colorAccent"
+                android:background="@drawable/red_button"
                 android:text="@string/log_in"
                 android:textAllCaps="false"
-                android:textColor="@color/white" />gitgit status
+                android:textColor="@color/white" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

@@ -88,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-
+android:paddingBottom="@dimen/four_dp"
             android:layout_marginStart="6dp"
             android:layout_marginLeft="6dp"
             android:layout_marginTop="@dimen/eight_dp"
@@ -97,9 +97,9 @@
             app:layout_constraintTop_toBottomOf="@+id/textview_header_two">
 
             <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center_horizontal"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="bottom"
                 android:src="@drawable/ic_star_black_24dp" />
 
             <TextView

@@ -13,6 +13,7 @@
     <color name="colorAccent">#F52D56</color>
     <color name="app_background">#32363F</color>
     <color name="white">#fff</color>
+    <color name="colorAccentTransparent">#EE860723</color>
     <color name="black_text">#32363F</color>
     <color name="ash">#bdbdbd</color>
     <color name="color_cream">#F7E9E3</color>
