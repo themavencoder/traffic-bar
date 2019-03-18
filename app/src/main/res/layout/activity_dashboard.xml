@@ -25,9 +25,16 @@
         android:layout_height="match_parent">
 
 
+        <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+            android:id="@+id/bottom_navigation_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            />
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+
+   <!-- <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         app:menu="@menu/navigation"
         app:labelVisibilityMode="labeled"
@@ -43,7 +50,7 @@
         app:itemTextColor="@color/nav_item_colors"
         android:layout_alignParentLeft="true">
 
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
+    </com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
     <FrameLayout
         android:id="@+id/frame_layout"

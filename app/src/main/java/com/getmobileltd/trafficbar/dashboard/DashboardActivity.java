@@ -15,13 +15,19 @@
 package com.getmobileltd.trafficbar.dashboard;
 
 import androidx.annotation.NonNull;
+
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationMenu;
+import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.getmobileltd.trafficbar.R;
@@ -31,6 +37,8 @@ import com.getmobileltd.trafficbar.dashboard.home.HomeFragment;
 import com.getmobileltd.trafficbar.dashboard.mycart.MyCartFragment;
 import com.getmobileltd.trafficbar.dashboard.profile.ProfileFragment;
 
+import static android.view.View.VISIBLE;
+
 public class DashboardActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNavigationView;
     private FrameLayout mFrameLayout;
@@ -39,13 +47,15 @@ public class DashboardActivity extends AppCompatActivity {
   private FavouriteFragment favouriteFragment;
   private ProfileFragment profileFragment;
   private MyCartFragment cartFragment;
+  private BottomNavigationMenuView menuView;
+  private BottomNavigationItemView itemView;
+  private View notificationBadge;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
         mFrameLayout = findViewById(R.id.frame_layout);
         mBottomNavigationView = findViewById(R.id.bottom_navigation_view);
         homeFragment = new HomeFragment();
@@ -53,9 +63,19 @@ public class DashboardActivity extends AppCompatActivity {
         favouriteFragment = new FavouriteFragment();
         profileFragment = new ProfileFragment();
         cartFragment = new MyCartFragment();
-
+        addBadgeView();
         navListener();
 
+
+    }
+
+    private void addBadgeView() {
+        if (menuView != null) {
+             menuView = (BottomNavigationMenuView) mBottomNavigationView.getChildAt(2);
+            itemView = (BottomNavigationItemView) menuView.getChildAt(2);
+            notificationBadge = LayoutInflater.from(this).inflate(R.layout.view_notification_badge, menuView, false);
+            itemView.addView(notificationBadge);
+        }
 
     }
 
