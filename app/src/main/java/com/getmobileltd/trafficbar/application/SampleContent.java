@@ -19,6 +19,7 @@ import com.getmobileltd.trafficbar.dashboard.favourite.model.FavouriteModel;
 import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinksModel;
 import com.getmobileltd.trafficbar.dashboard.home.food.FoodModel;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendModel;
+import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.model.AddToCartModel;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
 import com.getmobileltd.trafficbar.orderfood.menudetails.model.MenuDetailsModel;
 import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuModel;
@@ -39,6 +40,7 @@ public class SampleContent {
     public static List<DrinksModel> MYDRINKS = new ArrayList<>();
     public static List<MenuModel> MYMENU = new ArrayList<>();
     public static List<MenuDetailsModel> MYMENUDETAILS = new ArrayList<>();
+    public static List<AddToCartModel> MYEXTRAS = new ArrayList<>();
 
     static {
         DiscoveryModel model1 = new DiscoveryModel("15 Montgomerry Road,", "Igando, Lagos", "4.1");
@@ -159,6 +161,18 @@ public class SampleContent {
         MYMENUDETAILS.add(menuDetailsModel1);
         MYMENUDETAILS.add(menuDetailsModel1);
 
+        AddToCartModel cartmodel1 = new AddToCartModel("Coke","500");
+        AddToCartModel cartModel2 = new AddToCartModel("Malt","200");
+        AddToCartModel cartModel3 = new AddToCartModel("Beer", "1500");
+        MYEXTRAS.add(cartmodel1);
+        MYEXTRAS.add(cartModel2);
+        MYEXTRAS.add(cartModel3);
+        MYEXTRAS.add(cartmodel1);
+        MYEXTRAS.add(cartModel2);
+        MYEXTRAS.add(cartModel3);
+        MYEXTRAS.add(cartmodel1);
+        MYEXTRAS.add(cartModel2);
+        MYEXTRAS.add(cartModel3);
 
     }
 }

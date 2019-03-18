@@ -14,11 +14,10 @@
 
 package com.getmobileltd.trafficbar.registration.register.model;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-import android.databinding.ObservableField;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.databinding.ObservableField;
 
-import com.getmobileltd.trafficbar.BR;
 import com.google.gson.annotations.SerializedName;
 
 /**

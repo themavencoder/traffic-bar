@@ -15,8 +15,8 @@
 package com.getmobileltd.trafficbar.dashboard.mycart.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +25,6 @@ import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.dashboard.mycart.listener.CartOnClickListener;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

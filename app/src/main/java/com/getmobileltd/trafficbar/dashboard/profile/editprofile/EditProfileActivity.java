@@ -14,7 +14,7 @@
 
 package com.getmobileltd.trafficbar.dashboard.profile.editprofile;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.getmobileltd.trafficbar.R;

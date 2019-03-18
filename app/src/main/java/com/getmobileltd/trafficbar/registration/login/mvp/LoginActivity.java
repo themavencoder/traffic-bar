@@ -16,9 +16,9 @@ package com.getmobileltd.trafficbar.registration.login.mvp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +28,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.getmobileltd.trafficbar.MainActivity;
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
@@ -180,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         View sbView = snackbar.getView();
         sbView.setBackgroundColor(activiy.getResources().getColor(R.color.colorAccent));
-        TextView textView = (TextView) sbView.findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = (TextView) sbView.findViewById(R.id.snackbar_text);
         textView.setTextColor(activiy.getResources().getColor(R.color.white));
         snackbar.show();
 

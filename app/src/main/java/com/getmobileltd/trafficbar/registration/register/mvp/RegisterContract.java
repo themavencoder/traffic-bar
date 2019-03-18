@@ -14,7 +14,7 @@
 
 package com.getmobileltd.trafficbar.registration.register.mvp;
 
-import android.databinding.ObservableField;
+import androidx.databinding.ObservableField;
 
 /**
  * Created by themavencoder on 25,February,2019

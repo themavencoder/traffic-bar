@@ -15,9 +15,9 @@
 package com.getmobileltd.trafficbar.dashboard.favourite.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.text.Layout;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +27,6 @@ import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.dashboard.favourite.listener.FavouriteClickListener;
 import com.getmobileltd.trafficbar.dashboard.favourite.model.FavouriteModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

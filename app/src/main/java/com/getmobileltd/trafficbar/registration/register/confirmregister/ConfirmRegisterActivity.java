@@ -16,9 +16,9 @@ package com.getmobileltd.trafficbar.registration.register.confirmregister;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
