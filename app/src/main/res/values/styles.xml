@@ -22,11 +22,13 @@
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+
     </style>
 
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
         />
-
+    <item name="dimen_half_one" format="float" type="dimen">0.5</item>
 </resources>

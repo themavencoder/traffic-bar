@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".dashboard.mycart.addtocart.AddToCartActivity"></activity>
+        <activity android:name=".checkout.CheckoutActivity"></activity>
+        <activity android:name=".dashboard.mycart.addtocart.AddToCartActivity" />
         <activity android:name=".dashboard.profile.editprofile.EditProfileActivity" />
         <activity android:name=".registration.login.mvp.LoginActivity" />
         <activity android:name=".registration.register.confirmregister.ConfirmRegisterActivity" />

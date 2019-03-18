@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ /**
+  ~ *Creator: Tobiloba Adejumo on 3/18/19 9:56 AM Last modified: 3/18/19 9:56 AM Copyright: All rights reserved Ⓒ 2019
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~   you may not use this file except in compliance with the License.
+  ~   You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+  ~    Unless required by applicable law or agreed to in writing, software distributed under
+  ~    the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+  ~    OF ANY KIND, either express or implied. See the License for the specific language governing
+  ~    permissions and limitations under the License.
+  ~ */
+  -->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="@dimen/thirty_two_dp"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".dashboard.mycart.MyCartFragment">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="2dp"
+            android:text="Checkout"
+            android:textColor="@color/white"
+            android:textSize="@dimen/twenty_four_sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/profile_vector"
+            app:layout_constraintDimensionRatio="H,16:9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/white"
+            app:cardCornerRadius="@dimen/eight_dp"
+            app:cardUseCompatPadding="true"
+           android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@id/imageView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3"
+            app:layout_constraintVertical_bias="0.15">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="48dp"
+                app:layout_constraintBottom_toTopOf="@id/imageView3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                app:layout_constraintVertical_bias="0.8">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/sixteen_dp"
+                    android:layout_marginTop="@dimen/six_dp"
+                    android:text="@string/payment_information"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/fourteen_sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/sixteen_dp"
+                    android:layout_marginTop="@dimen/sixteen_dp"
+                    android:text="@string/card_number"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/twelve_sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/sixteen_dp"
+                    android:layout_marginTop="@dimen/eight_dp"
+                    android:layout_marginRight="@dimen/sixteen_dp"
+                    android:background="@drawable/edit_background"
+                    android:hint="**** **** **** 1234"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/twelve_sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/sixteen_dp"
+                    android:layout_marginTop="@dimen/sixteen_dp"
+                    android:text="Card Holder"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/twelve_sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/sixteen_dp"
+                    android:layout_marginTop="@dimen/eight_dp"
+                    android:layout_marginRight="@dimen/sixteen_dp"
+                    android:background="@drawable/edit_background"
+                    android:hint="Adeboye Salami"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/twelve_sp" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout_tax_and_fee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearLayout_subtotal"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="Expiration Date"
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/edit_background"
+                            android:hint="MM/YY"
+                            android:paddingLeft="8dp"
+
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="CVV"
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/edit_background"
+                            android:hint="000"
+                            android:paddingLeft="8dp"
+
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearlayoutView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearLayout_delivery"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/thirty_two_dp"
+                        android:background="@color/grey" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/sixteen_dp"
+                    android:layout_marginTop="@dimen/sixteen_dp"
+                    android:text="DELIVERY INFORMATION"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/fourteen_sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearLayout_subtotal"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="First Name"
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/edit_background"
+                            android:hint="Adebayo"
+                            android:paddingLeft="8dp"
+
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="Last Name"
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/edit_background"
+                            android:hint="Samson"
+                            android:paddingLeft="8dp"
+
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/linearLayout_subtotal"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="4dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="Phone Number"
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/edit_background"
+                            android:hint="07035184047"
+                            android:paddingLeft="8dp"
+
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="Email Address"
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp"
+                            android:textStyle="bold" />
+
+                        <EditText
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/edit_background"
+                            android:hint="eniolaplus08@gmail.com"
+                            android:paddingLeft="8dp"
+
+                            android:paddingTop="8dp"
+                            android:paddingBottom="8dp"
+
+                            android:textColor="@color/black_text"
+                            android:textSize="@dimen/twelve_sp" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/sixteen_dp"
+                    android:layout_marginTop="@dimen/sixteen_dp"
+                    android:text="Delivery Address"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/twelve_sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/sixteen_dp"
+                    android:layout_marginTop="@dimen/eight_dp"
+                    android:layout_marginRight="@dimen/sixteen_dp"
+                    android:background="@drawable/edit_background"
+                    android:hint="Your detail address for delivery"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/twelve_sp" />
+
+
+                <Button
+                    android:id="@+id/button_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="@dimen/twenty_four_dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:background="@drawable/red_button"
+                    android:text= "Pay N27,000"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+
