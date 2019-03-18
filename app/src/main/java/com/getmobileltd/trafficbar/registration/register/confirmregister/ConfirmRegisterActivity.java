@@ -24,6 +24,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
@@ -60,6 +61,7 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
     private Drawable drawableChecked, drawableUnChecked;
     private CoordinatorLayout mCoordinatorLayout;
     private FrameLayout frameLayout;
+    private TextView textViewLogin;
 
 
     @Override
@@ -127,6 +129,8 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
         mButtonAgree = findViewById(R.id.button_agree);
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
         frameLayout = findViewById(R.id.progress_view);
+        textViewLogin  = findViewById(R.id.textview_log_in);
+        textViewLogin.setOnClickListener(this);
 
     }
 
@@ -151,31 +155,37 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
 
     @Override
     public void onClick(View v) {
-
-        String emailAddress = mEditEmailAddress.getText().toString();
-        String password = mEditPassword.getText().toString();
-        presenter.saveName(emailAddress, password);
-        if (presenter.checkParameters()) {
-            if (!checkAgree) {
-                LoginActivity.errorMessage("Please agree to receive newsletter and updates!", mCoordinatorLayout, this);
-                //Toast.makeText(this, "Please agree to receive newsletter and update", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            frameLayout.setVisibility(View.VISIBLE);
-            //  mConfirmSignUpDialog.setCancelable(false);
-            // mConfirmSignUpDialog.show(getSupportFragmentManager(),"my_dialog");
-            user = new User(firstName, lastName, emailAddress, password);
-            insertUser(user);
+        if (v.getId() == R.id.textview_log_in) {
+            startActivity(new Intent(this, LoginActivity.class));
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
         } else {
+            String emailAddress = mEditEmailAddress.getText().toString();
+            String password = mEditPassword.getText().toString();
+            presenter.saveName(emailAddress, password);
+            if (presenter.checkParameters()) {
+                if (!checkAgree) {
+                    LoginActivity.errorMessage("Please agree to receive newsletter and updates!", mCoordinatorLayout, this);
+                    //Toast.makeText(this, "Please agree to receive newsletter and update", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                frameLayout.setVisibility(View.VISIBLE);
+                //  mConfirmSignUpDialog.setCancelable(false);
+                // mConfirmSignUpDialog.show(getSupportFragmentManager(),"my_dialog");
+                user = new User(firstName, lastName, emailAddress, password);
+                insertUser(user);
+            } else {
 
-            if (!EmailValidator.isValidEmail(emailAddress)) {
-                LoginActivity.errorMessage("Enter a valid email address", mCoordinatorLayout, this);
+                if (!EmailValidator.isValidEmail(emailAddress)) {
+                    LoginActivity.errorMessage("Enter a valid email address", mCoordinatorLayout, this);
 
-            } else if (password.length() <= 5) {
-                LoginActivity.errorMessage("Password should be more than 5 characters", mCoordinatorLayout, this);
+                } else if (password.length() <= 5) {
+                    LoginActivity.errorMessage("Password should be more than 5 characters", mCoordinatorLayout, this);
+                }
+
             }
 
         }
+
 
 
     }
