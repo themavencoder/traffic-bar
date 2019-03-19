@@ -35,6 +35,7 @@ import com.getmobileltd.trafficbar.dashboard.home.food.FoodAdapter;
 import com.getmobileltd.trafficbar.dashboard.home.food.FoodModel;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendAdapter;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendModel;
+import com.getmobileltd.trafficbar.dashboard.home.trend.TrendOnClickListener;
 import com.getmobileltd.trafficbar.orderfood.menulist.ListAvailableFoodActivity;
 
 import java.util.List;
@@ -42,7 +43,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, TrendOnClickListener {
     private RecyclerView recyclerViewTrend, recyclerViewFood, recyclerViewDrink;
     private List<TrendModel> modelList = SampleContent.MYTRENDS;
     private List<FoodModel> modelListFood = SampleContent.MYFOOD;
@@ -101,6 +102,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerViewFood.setAdapter(adapterFood);
         recyclerViewDrink.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewDrink.setAdapter(adapterDrink);
+
+    }
+
+    @Override
+    public void onClick(TrendModel model) {
 
     }
 }

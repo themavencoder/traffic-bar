@@ -17,6 +17,8 @@ package com.getmobileltd.trafficbar.registration.login.mvp;
 import android.content.Context;
 import android.content.Intent;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.getmobileltd.trafficbar.registration.register.SignUpActivity;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -54,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private SmoothProgressBar mProgressBar;
     private FrameLayout frameLayout;
     private CoordinatorLayout mCoordinatorLayout;
+    private TextView mTvSignup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +79,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
        // mProgressBar = findViewById(R.id.progress_view);
         frameLayout = findViewById(R.id.progress_view);
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
+        mTvSignup = findViewById(R.id.textview_sign_up);
+        mTvSignup.setOnClickListener(this);
 
       //  frameLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
@@ -126,6 +131,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void onClick(View v) {
+        if (v.getId() == R.id.textview_sign_up) {
+            startActivity(new Intent(this, SignUpActivity.class));
+            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+        }
+
+
             String email = mEditEmail.getText().toString();
             String password = mEditPassword.getText().toString();
             presenter.saveLoginCredentials(email,password);

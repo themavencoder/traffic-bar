@@ -113,6 +113,7 @@
                 android:id="@+id/edit_text_email_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_email"
                 android:layout_below="@id/textview_email"
                 android:layout_marginLeft="36dp"
                 android:layout_marginTop="8dp"
@@ -150,6 +151,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="40dp"
                 android:hint="@string/enter_your_password"
+                android:drawableRight="@drawable/ic_password"
                 android:importantForAutofill="no"
                 android:inputType="textCapWords"
                 android:singleLine="true"
@@ -214,6 +216,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/textview_sign_up"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"

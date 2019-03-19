@@ -112,6 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/textview_email"
                 android:layout_marginLeft="36dp"
+                android:drawableRight="@drawable/ic_email"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="40dp"
 
@@ -142,6 +143,7 @@
                 android:id="@+id/edit_text_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableRight="@drawable/ic_password"
                 android:layout_below="@id/textview_password"
                 android:layout_marginLeft="36dp"
                 android:layout_marginTop="8dp"
