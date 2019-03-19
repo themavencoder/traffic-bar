@@ -16,14 +16,19 @@ package com.getmobileltd.trafficbar.dashboard;
 
 import androidx.annotation.NonNull;
 
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -42,14 +47,16 @@ import static android.view.View.VISIBLE;
 public class DashboardActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNavigationView;
     private FrameLayout mFrameLayout;
-  private HomeFragment homeFragment;
-  private DiscoverFragment discoverFragment;
-  private FavouriteFragment favouriteFragment;
-  private ProfileFragment profileFragment;
-  private MyCartFragment cartFragment;
-  private BottomNavigationMenuView menuView;
-  private BottomNavigationItemView itemView;
-  private View notificationBadge;
+    private HomeFragment homeFragment;
+    private DiscoverFragment discoverFragment;
+    private FavouriteFragment favouriteFragment;
+    private ProfileFragment profileFragment;
+    private MyCartFragment cartFragment;
+    private BottomNavigationMenuView menuView;
+    private BottomNavigationItemView itemView;
+    private View notificationBadge;
+    private AHBottomNavigation bottomNavigation;
+    private AHBottomNavigationItem item1, item2, item3, item4, item5;
 
 
     @Override
@@ -57,27 +64,77 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         mFrameLayout = findViewById(R.id.frame_layout);
-        mBottomNavigationView = findViewById(R.id.bottom_navigation_view);
+        bottomNavigation = findViewById(R.id.bottom_navigation_view);
         homeFragment = new HomeFragment();
         discoverFragment = new DiscoverFragment();
         favouriteFragment = new FavouriteFragment();
         profileFragment = new ProfileFragment();
         cartFragment = new MyCartFragment();
-        addBadgeView();
-        navListener();
 
 
+        item1 = new AHBottomNavigationItem(R.string.nav_home, R.drawable.ic_home_black_24dp, R.color.white);
+        item2 = new AHBottomNavigationItem(R.string.nav_discover, R.drawable.ic_discover_black_24dp, R.color.white);
+        item3 = new AHBottomNavigationItem(R.string.cart, R.drawable.ic_shopping_cart_black_24dp, R.color.white);
+        item4 = new AHBottomNavigationItem(R.string.favourites, R.drawable.ic_favorite_black_24dp, R.color.white);
+        item5 = new AHBottomNavigationItem(R.string.profile, R.drawable.ic_person_black_24dp, R.color.white);
+        bottomNavigation.addItem(item1);
+        bottomNavigation.addItem(item2);
+        bottomNavigation.addItem(item3);
+        bottomNavigation.addItem(item4);
+        bottomNavigation.addItem(item5);
+
+        //      bottomNavigation.setDefaultBackgroundColor(getResources().getColor(R.color.ash));
+        bottomNavigation.setBehaviorTranslationEnabled(false);
+        bottomNavigation.setInactiveColor(getResources().getColor(R.color.ash));
+        bottomNavigation.setAccentColor(getResources().getColor(R.color.colorAccent));
+        bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
+
+
+        bottomNavigation.setNotification("1", 2);
+
+        defaultPosition();
+
+
+        navSelectedListener();
+        bottomNavigation.setCurrentItem(1);
     }
 
-    private void addBadgeView() {
-        if (menuView != null) {
-             menuView = (BottomNavigationMenuView) mBottomNavigationView.getChildAt(2);
-            itemView = (BottomNavigationItemView) menuView.getChildAt(2);
-            notificationBadge = LayoutInflater.from(this).inflate(R.layout.view_notification_badge, menuView, false);
-            itemView.addView(notificationBadge);
-        }
 
+    private void defaultPosition() {
+        bottomNavigation.setOnNavigationPositionListener(new AHBottomNavigation.OnNavigationPositionListener() {
+            @Override
+            public void onPositionChange(int y) {
+                setFragment(discoverFragment);
+            }
+        });
     }
+
+    private void navSelectedListener() {
+        bottomNavigation.setOnTabSelectedListener(new AHBottomNavigation.OnTabSelectedListener() {
+            @Override
+            public boolean onTabSelected(int position, boolean wasSelected) {
+                if (position == 0) {
+                    setFragment(homeFragment);
+                    return true;
+                } else if (position == 1) {
+                    setFragment(discoverFragment);
+                    return true;
+                } else if (position == 2) {
+                    setFragment(cartFragment);
+                    return true;
+                } else if (position == 3) {
+                    setFragment(favouriteFragment);
+                    return true;
+                } else if (position == 4) {
+                    setFragment(profileFragment);
+                    return true;
+                }
+                return false;
+
+            }
+        });
+    }
+
 
     private void navListener() {
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -98,7 +155,7 @@ public class DashboardActivity extends AppCompatActivity {
                         return true;
                     case R.id.nav_profile:
                         setFragment(profileFragment);
-                        return  true;
+                        return true;
 
                     default:
                         return false;
@@ -110,7 +167,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
 
     }
