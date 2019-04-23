@@ -15,6 +15,7 @@
 package com.getmobileltd.trafficbar.dashboard.mycart;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,10 +23,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.application.SampleContent;
+import com.getmobileltd.trafficbar.checkout.CheckoutActivity;
 import com.getmobileltd.trafficbar.dashboard.mycart.adapter.MyCartAdapter;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
 
@@ -34,11 +37,12 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyCartFragment extends Fragment {
+public class MyCartFragment extends Fragment implements View.OnClickListener {
     private View v;
     private RecyclerView mRecyclerView;
     private MyCartAdapter mAdapter;
     private List<MyCartModel> cartList = SampleContent.MYCART;
+    private Button mButtonCheckout;
 
 
     public MyCartFragment() {
@@ -56,8 +60,14 @@ public class MyCartFragment extends Fragment {
         mAdapter = new MyCartAdapter(getContext(),cartList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         mRecyclerView.setAdapter(mAdapter);
+        mButtonCheckout = v.findViewById(R.id.button_checkout);
+        mButtonCheckout.setOnClickListener(this);
 
         return v;
     }
 
+    @Override
+    public void onClick(View v) {
+        startActivity(new Intent(getActivity(), CheckoutActivity.class));
+    }
 }

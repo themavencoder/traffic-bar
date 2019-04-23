@@ -197,13 +197,14 @@ public class ConfirmRegisterActivity extends AppCompatActivity implements Confir
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                 assert response.body() != null;
 
-                if (response.code() == 200) {
+                if (response.body().getCode() == 201) {
                     // mConfirmSignUpDialog.dismiss();
-                    frameLayout.setVisibility(View.GONE);
                     LoginActivity.errorMessage("Account created successfully",mCoordinatorLayout,getApplicationContext());
+                    frameLayout.setVisibility(View.GONE);
+
                  //   Toast.makeText(ConfirmRegisterActivity.this, "Successful login", Toast.LENGTH_SHORT).show();
                     presenter.navigateToNextActivity();
-                } else if (response.code() == 409) {
+                } else if (response.body().getCode() == 409) {
                     frameLayout.setVisibility(View.GONE);
                     LoginActivity.errorMessage("A user with this email already exist. Try a different one", mCoordinatorLayout, getApplicationContext());
                     // Toast.makeText(ConfirmRegisterActivity.this, "Problem occured, try again!" + response.code(), Toast.LENGTH_SHORT).show();

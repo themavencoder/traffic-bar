@@ -27,9 +27,9 @@ import retrofit2.http.POST;
  */
 public interface TrafficBarService {
 
-    @POST("auth/signup")
+    @POST("user/create")
     Call<SignUpResponse> createUser(@Body User user);
 
-    @POST("auth/signin")
+    @POST("auth/login")
     Call<LogInResponse> logUser(@Body User user);
 }

@@ -15,13 +15,19 @@
 package com.getmobileltd.trafficbar.orderfood.menudetails;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.SampleContent;
+import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.AddToCartActivity;
+import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.adapter.AddToCartAdapter;
 import com.getmobileltd.trafficbar.orderfood.menudetails.adapter.MenuDetailsAdapter;
 import com.getmobileltd.trafficbar.orderfood.menudetails.listener.MenuDetailsOnClickListener;
 import com.getmobileltd.trafficbar.orderfood.menudetails.model.MenuDetailsModel;
@@ -42,12 +48,14 @@ public class MenuDetailsActivity extends AppCompatActivity  implements MenuDetai
         setTitle("Traffic Breakfast");
         recyclerView = findViewById(R.id.recycler_view_menu_details);
         adapter = new MenuDetailsAdapter(modelList,this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
     }
 
     @Override
     public void onClick(MenuDetailsModel model) {
+        Toast.makeText(this, "You clicked: " + model.getName(), Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, AddToCartActivity.class));
 
     }
 }

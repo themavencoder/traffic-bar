@@ -26,6 +26,7 @@ import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.checkout.CheckoutActivity;
 import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.AddToCartActivity;
+import com.getmobileltd.trafficbar.dashboard.profile.editprofile.EditProfileActivity;
 
 public class ProfileFragment extends Fragment {
     private TextView viewProfile;
@@ -54,7 +55,7 @@ init();
         viewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), CheckoutActivity.class));
+                startActivity(new Intent(v.getContext(), EditProfileActivity.class));
             }
         });
     }

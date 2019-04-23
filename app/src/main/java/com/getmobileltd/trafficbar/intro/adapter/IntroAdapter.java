@@ -11,9 +11,15 @@ package com.getmobileltd.trafficbar.intro.adapter;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
+
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.registration.register.SignUpActivity;
 
 /**
  * Created by themavencoder
@@ -22,6 +28,7 @@ public class IntroAdapter extends PagerAdapter {
     private int[] layouts;
     private LayoutInflater inflater;
     private Context context;
+    private Button buttonGetStarted;
 
 
     public IntroAdapter(int[] layouts, Context context) {
@@ -44,8 +51,20 @@ public class IntroAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        View view = inflater.inflate(layouts[position], container, false);
+        final View view = inflater.inflate(layouts[position], container, false);
         container.addView(view);
+
+        buttonGetStarted = view.findViewById(R.id.button_get_started);
+        if (buttonGetStarted != null) {
+            buttonGetStarted.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    view.getContext().startActivity(new Intent(view.getContext(), SignUpActivity.class));
+                }
+            });
+
+        }
+
 
         return view;
 

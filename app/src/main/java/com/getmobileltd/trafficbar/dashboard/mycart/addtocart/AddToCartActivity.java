@@ -14,9 +14,13 @@
 
 package com.getmobileltd.trafficbar.dashboard.mycart.addtocart;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import androidx.annotation.NonNull;
+
+import com.getmobileltd.trafficbar.dashboard.DashboardActivity;
+import com.getmobileltd.trafficbar.dashboard.mycart.MyCartFragment;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -27,6 +31,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.SampleContent;
@@ -36,13 +42,15 @@ import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.model.AddToCartMod
 
 import java.util.List;
 
-public class AddToCartActivity extends AppCompatActivity implements AddCartExtraListener {
+public class AddToCartActivity extends AppCompatActivity implements AddCartExtraListener, View.OnClickListener {
     private boolean mAppBarExpanded;
     private Menu mCollapsedMenu;
     private CollapsingToolbarLayout mCollapsingToolbar;
     private RecyclerView mRecyclerView;
     private AddToCartAdapter mAdapter;
     private List<AddToCartModel> modeList = SampleContent.MYEXTRAS;
+    private Button mButtonAddToCart;
+    public static final String EXTRA_CART =  "com.getmobileltd.trafficbar.addtocart.AddToCartActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +88,8 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
         mAdapter = new AddToCartAdapter(this,modeList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+        mButtonAddToCart = findViewById(R.id.button_add_to_cart);
+        mButtonAddToCart.setOnClickListener(this);
     }
 
     private void gradientImage() {
@@ -97,6 +107,15 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
 
     @Override
     public void onClick(AddToCartModel model) {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+       Intent intent  = new Intent(this,DashboardActivity.class);
+       intent.putExtra(EXTRA_CART,"default");
+       startActivity(intent);
+
 
     }
 }

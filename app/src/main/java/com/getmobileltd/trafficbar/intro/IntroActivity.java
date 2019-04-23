@@ -16,37 +16,57 @@ package com.getmobileltd.trafficbar.intro;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.getmobileltd.trafficbar.R;
+import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.intro.adapter.IntroAdapter;
+import com.getmobileltd.trafficbar.registration.register.SignUpActivity;
 
 /**
  * Created by themavencoder
  */
-public class IntroActivity extends AppCompatActivity {
+public class IntroActivity extends AppCompatActivity implements View.OnClickListener{
     private ViewPager mViewPager;
     private IntroAdapter mIntroAdapter;
     private int[] layouts = {R.layout.first_intro_screen, R.layout.second_intro_screen, R.layout.third_intro_screen, R.layout.fourth_intro_screen};
     private LinearLayout mDotsLayout;
     private TextView mTvNext, mTvSkip;
-    LayoutInflater inflater = getLayoutInflater();
+    private Button buttonGetStarted;
+
 
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intro);
-        fullScreen();
+        UiSettings.colorStatusbar(this,R.color.app_background);
         init();
         createDots(0);
         pageListener();
+
+
+
+    }
+
+    private void activateGetStarted() {
+        View view = LayoutInflater.from(getApplicationContext()).inflate(R.layout.fourth_intro_screen,null);
+        buttonGetStarted = view.findViewById(R.id.button_get_started);
+        buttonGetStarted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SignUpActivity.class));
+            }
+        });
     }
 
     private void fullScreen() {
@@ -64,6 +84,8 @@ public class IntroActivity extends AppCompatActivity {
         mViewPager.setAdapter(mIntroAdapter);
         mTvNext = findViewById(R.id.textview_next);
         mTvSkip = findViewById(R.id.textview_skip);
+        mTvSkip.setOnClickListener(this);
+        mTvNext.setOnClickListener(this);
     }
 
     private void createDots(int current_position) {
@@ -80,8 +102,9 @@ public class IntroActivity extends AppCompatActivity {
                 dots[i].setImageDrawable(ContextCompat.getDrawable(this, R.drawable.inactive_dots));
             }
             if (current_position == 3) {
-                mTvNext.setVisibility(View.INVISIBLE);
-                mTvSkip.setVisibility(View.INVISIBLE);
+                mTvNext.setVisibility(View.GONE);
+                mTvSkip.setVisibility(View.GONE);
+
             } else {
                 mTvSkip.setVisibility(View.VISIBLE);
                 mTvNext.setVisibility(View.VISIBLE);
@@ -112,5 +135,16 @@ public class IntroActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.textview_skip) {
+            startActivity(new Intent(this, SignUpActivity.class));
+
+        }
+        if (v.getId() == R.id.textview_next) {
+            mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1, true);
+        }
     }
 }

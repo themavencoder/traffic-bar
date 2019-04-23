@@ -19,13 +19,13 @@
     android:layout_marginBottom="@dimen/thirty_two_dp"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".dashboard.mycart.MyCartFragment">
+
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,6 +40,32 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:elevation="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/sixteen_sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="27,000"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sixteen_sp" />
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView3"
@@ -87,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/sixteen_dp"
-                    android:layout_marginTop="@dimen/six_dp"
+                    android:layout_marginTop="@dimen/sixteen_dp"
                     android:text="@string/payment_information"
                     android:textColor="@color/black_text"
                     android:textSize="@dimen/fourteen_sp"

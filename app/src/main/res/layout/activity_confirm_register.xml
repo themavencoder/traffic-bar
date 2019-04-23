@@ -150,7 +150,7 @@
                 android:layout_marginRight="40dp"
                 android:hint="@string/enter_your_password"
                 android:importantForAutofill="no"
-                android:inputType="textCapWords"
+                android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/black_text"
                 tools:targetApi="o" />

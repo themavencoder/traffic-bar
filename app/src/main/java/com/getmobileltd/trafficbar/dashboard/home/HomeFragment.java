@@ -26,13 +26,17 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.SampleContent;
+import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinksAdapter;
 import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinksModel;
+import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinksOnClickListener;
 import com.getmobileltd.trafficbar.dashboard.home.food.FoodAdapter;
 import com.getmobileltd.trafficbar.dashboard.home.food.FoodModel;
+import com.getmobileltd.trafficbar.dashboard.home.food.FoodOnClickListener;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendAdapter;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendModel;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendOnClickListener;
@@ -43,7 +47,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment implements View.OnClickListener, TrendOnClickListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, TrendOnClickListener, FoodOnClickListener, DrinksOnClickListener {
     private RecyclerView recyclerViewTrend, recyclerViewFood, recyclerViewDrink;
     private List<TrendModel> modelList = SampleContent.MYTRENDS;
     private List<FoodModel> modelListFood = SampleContent.MYFOOD;
@@ -66,6 +70,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Tren
         // Inflate the layout for this fragment
 
         v = inflater.inflate(R.layout.fragment_home, container, false);
+        UiSettings.colorStatusbar(getActivity(),R.color.deep_ash);
+
         init(v);
 
         return v;
@@ -93,9 +99,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Tren
         recyclerViewTrend = v.findViewById(R.id.recycler_view_trending);
         recyclerViewFood = v.findViewById(R.id.recycler_view_food);
         recyclerViewDrink = v.findViewById(R.id.recycler_view_drinks);
-        adapterTrend = new TrendAdapter(getActivity(), modelList);
-        adapterFood = new FoodAdapter(getActivity(), modelListFood);
-        adapterDrink = new DrinksAdapter(getActivity(), modelListDrinks);
+        adapterTrend = new TrendAdapter(this, modelList);
+        adapterFood = new FoodAdapter(this, modelListFood);
+        adapterDrink = new DrinksAdapter(this, modelListDrinks);
         recyclerViewTrend.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewTrend.setAdapter(adapterTrend);
         recyclerViewFood.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
@@ -107,6 +113,18 @@ public class HomeFragment extends Fragment implements View.OnClickListener, Tren
 
     @Override
     public void onClick(TrendModel model) {
+        Toast.makeText(getActivity(), "You clicked " + model.getPrice(), Toast.LENGTH_SHORT).show();
 
+    }
+
+    @Override
+    public void onClick(FoodModel model) {
+        Toast.makeText(getActivity(), "You clicked " + model.getPrice(), Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void onClick(DrinksModel model) {
+        Toast.makeText(getActivity(), "You clicked" + model.getPrice(), Toast.LENGTH_SHORT).show();
     }
 }

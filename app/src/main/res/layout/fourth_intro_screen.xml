@@ -12,15 +12,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/constraint_layout_get_started"
     android:layout_height="match_parent"
-    android:background="@drawable/fourth_slide_background"
+
     >
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/fourth_slide_background"
+        android:layout_height="match_parent" />
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="388dp"
+
         android:text="@string/primary_text_fourth_slide"
         android:textColor="@color/white"
         android:textSize="@dimen/intro_large"
@@ -47,6 +54,7 @@
 
 
     <Button
+        android:id="@+id/button_get_started"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
@@ -54,7 +62,7 @@
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="24dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/red_button"
         android:text="@string/button_get_started"
         android:textAllCaps="false"
         android:textColor="@color/white"

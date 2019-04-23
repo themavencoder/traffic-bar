@@ -149,11 +149,12 @@
                 android:layout_below="@id/textview_password"
                 android:layout_marginLeft="36dp"
                 android:layout_marginTop="8dp"
+
                 android:layout_marginRight="40dp"
                 android:hint="@string/enter_your_password"
                 android:drawableRight="@drawable/ic_password"
                 android:importantForAutofill="no"
-                android:inputType="textCapWords"
+                android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="@color/black_text"
                 tools:targetApi="o" />

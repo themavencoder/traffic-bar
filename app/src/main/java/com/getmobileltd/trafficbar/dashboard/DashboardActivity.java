@@ -28,12 +28,14 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.dashboard.discover.DiscoverFragment;
@@ -43,6 +45,7 @@ import com.getmobileltd.trafficbar.dashboard.mycart.MyCartFragment;
 import com.getmobileltd.trafficbar.dashboard.profile.ProfileFragment;
 
 import static android.view.View.VISIBLE;
+import static com.getmobileltd.trafficbar.dashboard.mycart.addtocart.AddToCartActivity.EXTRA_CART;
 
 public class DashboardActivity extends AppCompatActivity {
     private BottomNavigationView mBottomNavigationView;
@@ -63,6 +66,7 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        Intent intent = getIntent();
         mFrameLayout = findViewById(R.id.frame_layout);
         bottomNavigation = findViewById(R.id.bottom_navigation_view);
         homeFragment = new HomeFragment();
@@ -96,7 +100,15 @@ public class DashboardActivity extends AppCompatActivity {
 
 
         navSelectedListener();
-        bottomNavigation.setCurrentItem(1);
+
+   if (intent.hasExtra(EXTRA_CART)) {
+       bottomNavigation.setCurrentItem(2);
+   } else {
+
+       bottomNavigation.setCurrentItem(1);
+
+   }
+
     }
 
 

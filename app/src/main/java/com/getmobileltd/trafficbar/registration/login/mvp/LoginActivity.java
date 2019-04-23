@@ -16,6 +16,8 @@ package com.getmobileltd.trafficbar.registration.login.mvp;
 
 import android.content.Context;
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.getmobileltd.trafficbar.registration.register.SignUpActivity;
@@ -160,10 +162,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         loginCall = trafficBarService.logUser(user);
         loginCall.enqueue(new Callback<LogInResponse>() {
             @Override
-            public void onResponse(Call<LogInResponse> call, Response<LogInResponse> response) {
-                if (response.code() == 200) {
+            public void onResponse(@NonNull Call<LogInResponse> call,@NonNull Response<LogInResponse> response) {
+                assert response.body() != null;
+                if (response.body().getCode() == 200) {
                            // mLoginDialog.dismiss();
-                    frameLayout.setVisibility(View.GONE);
+                          frameLayout.setVisibility(View.GONE);
                         presenter.navigateToNextActivity();
                 } else {
                   //  mLoginDialog.dismiss();

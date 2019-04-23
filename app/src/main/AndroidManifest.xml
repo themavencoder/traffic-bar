@@ -28,6 +28,10 @@
             android:name=".dashboard.DashboardActivity"
             android:hardwareAccelerated="true" />
         <activity android:name=".registration.register.SignUpActivity">
+
+        </activity>
+        <activity android:name=".intro.IntroActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -36,7 +40,6 @@
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-        <activity android:name=".intro.IntroActivity" />
         <activity android:name=".MainActivity" />
     </application>
 

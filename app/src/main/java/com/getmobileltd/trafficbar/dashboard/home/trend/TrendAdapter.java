@@ -34,8 +34,8 @@ public class TrendAdapter extends RecyclerView.Adapter<TrendAdapter.MyViewHolder
     private Context context;
     private List<TrendModel> modelList;
 
-    public TrendAdapter(Context context, List<TrendModel> modelList) {
-        this.context = context;
+    public TrendAdapter(TrendOnClickListener trendOnClickListener, List<TrendModel> modelList) {
+        this.trendOnClickListener = trendOnClickListener;
         this.modelList = modelList;
     }
     @NonNull
@@ -59,12 +59,12 @@ public class TrendAdapter extends RecyclerView.Adapter<TrendAdapter.MyViewHolder
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView price;
-        public MyViewHolder(@NonNull View itemView) {
+        MyViewHolder(@NonNull View itemView) {
             super(itemView);
             price = itemView.findViewById(R.id.textview_price);
         }
 
-        public void bind(final TrendOnClickListener trendOnClickListener, final TrendModel model) {
+        void bind(final TrendOnClickListener trendOnClickListener, final TrendModel model) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

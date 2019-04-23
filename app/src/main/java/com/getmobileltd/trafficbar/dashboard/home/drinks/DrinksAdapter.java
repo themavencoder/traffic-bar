@@ -35,8 +35,8 @@ public class DrinksAdapter extends RecyclerView.Adapter<DrinksAdapter.MyViewHold
     private Context context;
     private DrinksOnClickListener mListener;
 
-    public DrinksAdapter(Context context, List<DrinksModel> modelList) {
-        this.context = context;
+    public DrinksAdapter(DrinksOnClickListener drinksOnClickListener, List<DrinksModel> modelList) {
+        this.mListener = drinksOnClickListener;
         this.modelList = modelList;
     }
     @NonNull

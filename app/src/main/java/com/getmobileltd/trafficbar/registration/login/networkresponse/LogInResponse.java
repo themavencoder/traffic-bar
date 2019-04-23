@@ -14,8 +14,16 @@
 
 package com.getmobileltd.trafficbar.registration.login.networkresponse;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by themavencoder on 26,February,2019
  */
 public class LogInResponse {
+    @SerializedName("code")
+    private int code;
+
+    public int getCode() {
+        return code;
+    }
 }

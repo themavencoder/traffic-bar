@@ -25,9 +25,9 @@ import com.google.gson.annotations.SerializedName;
  */
 public class User {
 
-    @SerializedName("firstname")
+    @SerializedName("first_name")
     private String firstName;
-    @SerializedName("lastname")
+    @SerializedName("last_name")
     private String lastName;
     @SerializedName("email")
     private String emailAddress;

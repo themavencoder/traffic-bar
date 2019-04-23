@@ -21,6 +21,7 @@ import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.getmobileltd.trafficbar.R;
@@ -65,14 +66,16 @@ public class MenuDetailsAdapter extends RecyclerView.Adapter<MenuDetailsAdapter.
 
     class MyViewModel extends RecyclerView.ViewHolder {
         private TextView textViewName, textViewPrice;
+        private Button buttonOrderNow;
         MyViewModel(@NonNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.textview_food_name);
             textViewPrice = itemView.findViewById(R.id.textview_food_price);
+            buttonOrderNow = itemView.findViewById(R.id.button_order_now);
         }
 
         void bind(final MenuDetailsOnClickListener mListener, final MenuDetailsModel model) {
-            itemView.setOnClickListener(new View.OnClickListener() {
+            buttonOrderNow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mListener.onClick(model);
