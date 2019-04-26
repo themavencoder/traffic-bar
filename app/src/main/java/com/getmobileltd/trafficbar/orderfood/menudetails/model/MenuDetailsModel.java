@@ -14,10 +14,38 @@
 
 package com.getmobileltd.trafficbar.orderfood.menudetails.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by themavencoder on 06,March,2019
  */
 public class MenuDetailsModel {
+    @SerializedName("status")
+    private String status;
+    @SerializedName("code")
+    private int code;
+    @SerializedName("message")
+    private String message;
+
+    @SerializedName("data")
+    private MenuDetailsInformation data;
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public MenuDetailsInformation getData() {
+        return data;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
     private String name;
     private String price;
 

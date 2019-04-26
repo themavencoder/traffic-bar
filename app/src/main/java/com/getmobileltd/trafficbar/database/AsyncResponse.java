@@ -1,6 +1,6 @@
 /*
  * *
- * Creator: Tobiloba Adejumo on 3/6/19 3:50 PM Last modified: 3/6/19 3:50 PM Copyright: All rights reserved Ⓒ 2019
+ * Creator: Tobiloba Adejumo on 4/24/19 11:23 AM Last modified: 4/24/19 11:23 AM Copyright: All rights reserved Ⓒ 2019
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,14 +12,11 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.orderfood.menudetails.listener;
-
-import com.getmobileltd.trafficbar.orderfood.menudetails.model.MenuDetailsModel;
-import com.getmobileltd.trafficbar.orderfood.menudetails.model.Menus;
+package com.getmobileltd.trafficbar.database;
 
 /**
- * Created by themavencoder on 06,March,2019
+ * Created by themavencoder on 24,April,2019
  */
-public interface MenuDetailsOnClickListener {
-    void onClick(Menus model);
+public interface AsyncResponse {
+    void processFinish(String apiKey);
 }

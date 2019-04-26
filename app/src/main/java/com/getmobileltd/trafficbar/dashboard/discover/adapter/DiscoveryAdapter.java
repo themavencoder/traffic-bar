@@ -15,16 +15,21 @@
 package com.getmobileltd.trafficbar.dashboard.discover.adapter;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.dashboard.discover.listener.RestaurantClickListener;
 import com.getmobileltd.trafficbar.dashboard.discover.model.DiscoveryModel;
+import com.getmobileltd.trafficbar.dashboard.discover.response.DiscoverResponse;
+import com.getmobileltd.trafficbar.dashboard.discover.response.Restaurant;
 
 import java.util.List;
 
@@ -33,12 +38,12 @@ import java.util.List;
  */
 public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryAdapter.DiscoveryViewHolder> {
     private Context context;
-    private List<DiscoveryModel> modelList;
+    private List<Restaurant> modelList;
     private RestaurantClickListener mRestaurantClickListener;
+    private int selectedPos = RecyclerView.NO_POSITION;
 
 
-
-    public DiscoveryAdapter(Context context, List<DiscoveryModel> modelList) {
+    public DiscoveryAdapter(Context context, List<Restaurant> modelList) {
         this.context = context;
         this.modelList = modelList;
     }
@@ -47,43 +52,67 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryAdapter.Disc
     @NonNull
     @Override
     public DiscoveryViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_discover_fragment_restaurant,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_discover_fragment_restaurant, viewGroup, false);
         return new DiscoveryViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull DiscoveryViewHolder discoveryViewHolder, int i) {
-        DiscoveryModel model = modelList.get(i);
-       discoveryViewHolder.bind(mRestaurantClickListener,model);
+        Restaurant model = modelList.get(i);
+        discoveryViewHolder.itemView.setSelected(selectedPos == i);
+        if (discoveryViewHolder.itemView.isSelected()) {
+            discoveryViewHolder.restaurantSelected.setVisibility(View.VISIBLE);
+        } else {
+            discoveryViewHolder.restaurantSelected.setVisibility(View.INVISIBLE);
+        }
+        discoveryViewHolder.bind(mRestaurantClickListener, model);
+
 
     }
 
     @Override
     public int getItemCount() {
-        return null != modelList ?  modelList.size() : 0;
+        return null != modelList ? modelList.size() : 0;
     }
 
     class DiscoveryViewHolder extends RecyclerView.ViewHolder {
-        private TextView state,street,rating;
+        private TextView state, street, rating;
+        private RestaurantTickVisible restaurantTickVisible;
+        private ImageView restaurantSelected;
+
         DiscoveryViewHolder(@NonNull View itemView) {
             super(itemView);
             state = itemView.findViewById(R.id.textview_state);
             street = itemView.findViewById(R.id.textview_street);
             rating = itemView.findViewById(R.id.textview_rating);
+            restaurantSelected = itemView.findViewById(R.id.imageview_selected);
+
+
         }
 
-        void bind(final RestaurantClickListener clickListener, final DiscoveryModel model) {
+
+        void bind(final RestaurantClickListener clickListener, final Restaurant model) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    clickListener.onClick(model);
+                    notifyItemChanged(selectedPos);
+                    selectedPos = getAdapterPosition();
+                    notifyItemChanged(selectedPos);
+                    clickListener.onClick(model, restaurantSelected);
+
+
+
                 }
             });
-            state.setText(model.getState());
-            street.setText(model.getStreet());
-            rating.setText(model.getRating());
+
+            street.setText(model.getAddress());
+
 
         }
+    }
+
+    public void setmRestaurantClickListener(RestaurantClickListener restaurantClickListener) {
+        this.mRestaurantClickListener = restaurantClickListener;
     }
 
 

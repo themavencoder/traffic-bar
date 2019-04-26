@@ -56,8 +56,10 @@
             >
 
             <ImageView
+                android:id="@+id/imageview_selected"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:visibility="gone"
                 android:src="@drawable/ic_selected"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent" />
@@ -73,6 +75,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="2dp"
@@ -86,6 +89,7 @@
                     android:id="@+id/textview_rating"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:visibility="gone"
                     android:gravity="center"
                     android:text="4.5"
                     android:textColor="@color/black_text"
@@ -150,9 +154,10 @@
 
                 <TextView
                     android:id="@+id/textview_street"
-                    android:layout_width="wrap_content"
+                    android:layout_width="140dp"
                     android:layout_height="wrap_content"
-                    android:text="Aminu kano street,"
+                    android:text="15, Idumota road lagos state"
+                    android:lineSpacingMultiplier="1.3"
                     android:padding="2dp"
                     android:textColor="@color/black_text"
                     android:textSize="@dimen/fourteen_sp"
@@ -160,6 +165,7 @@
                     tools:layout_editor_absoluteY="19dp" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/textview_state"
                     android:padding="2dp"
                     android:layout_width="wrap_content"

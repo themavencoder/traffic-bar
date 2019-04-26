@@ -14,31 +14,50 @@
 
 package com.getmobileltd.trafficbar.orderfood.menulist.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 /**
  * Created by themavencoder on 06,March,2019
  */
-public class MenuModel {
-    private String name;
-    private String number;
+public class MenuResponse {
+    @SerializedName("status")
+     private String status;
+    @SerializedName("code")
+    private int code;
+    @SerializedName("message")
+    private String message;
+    @SerializedName("data")
+    private List<Information> data;
 
-    public MenuModel(String name, String number) {
-        this.name = name;
-        this.number = number;
+    public String getStatus() {
+        return status;
     }
 
-    public String getName() {
-        return name;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getMessage() {
+        return message;
     }
 
-    public String getNumber() {
-        return number;
+    public int getCode() {
+        return code;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public List<Information> getData() {
+        return data;
     }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public void setData(List<Information> data) {
+        this.data = data;
+    }
+
+
 }

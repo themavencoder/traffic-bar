@@ -1,6 +1,6 @@
 /*
  * *
- * Creator: Tobiloba Adejumo on 2/26/19 1:25 PM Last modified: 2/26/19 1:24 PM Copyright: All rights reserved Ⓒ 2019
+ * Creator: Tobiloba Adejumo on 4/23/19 11:23 AM Last modified: 4/23/19 11:23 AM Copyright: All rights reserved Ⓒ 2019
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,25 +12,39 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.registration.login.networkresponse;
+package com.getmobileltd.trafficbar.dashboard.discover.response;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
- * Created by themavencoder on 26,February,2019
+ * Created by themavencoder on 23,April,2019
  */
-public class LogInResponse {
+public class    DiscoverResponse {
+
+    @SerializedName("status")
+    private String status;
     @SerializedName("code")
     private int code;
+    @SerializedName("message")
+    private String message;
+    @SerializedName("data")
+    private List<Restaurant> data;
 
     public int getCode() {
         return code;
     }
 
-    @SerializedName("data")
-    private Data data;
-
-    public Data getData() {
+    public List<Restaurant> getData() {
         return data;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

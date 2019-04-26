@@ -17,16 +17,22 @@ package com.getmobileltd.trafficbar.orderfood.menudetails.adapter;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.orderfood.menudetails.listener.MenuDetailsOnClickListener;
 import com.getmobileltd.trafficbar.orderfood.menudetails.model.MenuDetailsModel;
+import com.getmobileltd.trafficbar.orderfood.menudetails.model.Menus;
+import com.getmobileltd.trafficbar.orderfood.menulist.menulistener.MenuOnClickListener;
 
 import java.util.List;
 
@@ -35,11 +41,15 @@ import java.util.List;
  */
 public class MenuDetailsAdapter extends RecyclerView.Adapter<MenuDetailsAdapter.MyViewModel> {
 
-    private List<MenuDetailsModel> modelList;
+    private List<Menus> modelList;
     private MenuDetailsOnClickListener mListener;
 
-    public MenuDetailsAdapter(List<MenuDetailsModel> modelList,MenuDetailsOnClickListener listener) {
+    public MenuDetailsAdapter(List<Menus> modelList) {
         this.modelList = modelList;
+
+
+    }
+    public void     setmenuClickListener(MenuDetailsOnClickListener listener) {
         this.mListener = listener;
 
     }
@@ -54,7 +64,7 @@ public class MenuDetailsAdapter extends RecyclerView.Adapter<MenuDetailsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewModel myViewModel, int i) {
-        MenuDetailsModel model = modelList.get(i);
+        Menus model = modelList.get(i);
         myViewModel.bind(mListener,model);
 
     }
@@ -65,24 +75,37 @@ public class MenuDetailsAdapter extends RecyclerView.Adapter<MenuDetailsAdapter.
     }
 
     class MyViewModel extends RecyclerView.ViewHolder {
+        String link = "https://i.ibb.co/yn8s6Yv/bread-butter-medium.png";
         private TextView textViewName, textViewPrice;
         private Button buttonOrderNow;
+        private ImageView imageViewSmall;
         MyViewModel(@NonNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.textview_food_name);
             textViewPrice = itemView.findViewById(R.id.textview_food_price);
             buttonOrderNow = itemView.findViewById(R.id.button_order_now);
+            imageViewSmall = itemView.findViewById(R.id.imageview_menu_food);
         }
 
-        void bind(final MenuDetailsOnClickListener mListener, final MenuDetailsModel model) {
+
+
+        void bind(final MenuDetailsOnClickListener mListener, final Menus model) {
             buttonOrderNow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mListener.onClick(model);
                 }
             });
-            textViewPrice.setText(model.getPrice());
-            textViewName.setText(model.getName());
+            textViewPrice.setText(model.getMenu_price());
+            textViewName.setText(model.getMenu_name());
+
+            Glide.with(itemView.getContext())
+                    .load(model.getMenu_image_sm())
+                    .apply(new RequestOptions()
+                    .placeholder(R.color.colorAccent)
+                    .error(R.color.black))
+                    .into(imageViewSmall);
         }
+
     }
 }

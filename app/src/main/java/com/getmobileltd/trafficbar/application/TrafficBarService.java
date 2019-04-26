@@ -14,22 +14,39 @@
 
 package com.getmobileltd.trafficbar.application;
 
+import com.getmobileltd.trafficbar.dashboard.discover.response.DiscoverResponse;
+import com.getmobileltd.trafficbar.orderfood.menudetails.model.MenuDetailsModel;
+import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuResponse;
 import com.getmobileltd.trafficbar.registration.login.networkresponse.LogInResponse;
 import com.getmobileltd.trafficbar.registration.register.model.User;
 import com.getmobileltd.trafficbar.registration.register.networkresponse.SignUpResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by themavencoder on 26,February,2019
  */
 public interface TrafficBarService {
+    String a = "category_details";
 
     @POST("user/create")
     Call<SignUpResponse> createUser(@Body User user);
 
     @POST("auth/login")
     Call<LogInResponse> logUser(@Body User user);
+
+    @GET("restaurants")
+    Call<DiscoverResponse> getRestaurants(@Header("Authorization") String value);
+
+    @GET("menu_category")
+    Call<MenuResponse> getMenuCategory();
+
+    @GET("menu_category/{id}")
+    Call<MenuDetailsModel> getMenuCategoryDetails(@Path("id") int id);
+
 }

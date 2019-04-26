@@ -1,6 +1,6 @@
 /*
  * *
- * Creator: Tobiloba Adejumo on 3/6/19 3:50 PM Last modified: 3/6/19 3:50 PM Copyright: All rights reserved Ⓒ 2019
+ * Creator: Tobiloba Adejumo on 4/26/19 1:17 PM Last modified: 4/26/19 1:17 PM Copyright: All rights reserved Ⓒ 2019
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,14 +12,21 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.orderfood.menudetails.listener;
+package com.getmobileltd.trafficbar.orderfood.menudetails.model;
 
-import com.getmobileltd.trafficbar.orderfood.menudetails.model.MenuDetailsModel;
-import com.getmobileltd.trafficbar.orderfood.menudetails.model.Menus;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 /**
- * Created by themavencoder on 06,March,2019
+ * Created by themavencoder on 26,April,2019
  */
-public interface MenuDetailsOnClickListener {
-    void onClick(Menus model);
+public class MenuDetailsInformation {
+
+    @SerializedName("menus")
+    private List<Menus> menus;
+
+    public List<Menus> getMenus() {
+        return menus;
+    }
 }

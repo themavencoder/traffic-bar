@@ -23,10 +23,9 @@ public class DiscoveryModel {
     private String country;
     private String rating;
 
-    public DiscoveryModel(String street, String country, String rating) {
+    public DiscoveryModel(String street) {
         this.street = street;
-        this.country = country;
-        this.rating = rating;
+
 
     }
     public DiscoveryModel() {

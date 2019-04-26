@@ -16,6 +16,7 @@ package com.getmobileltd.trafficbar.orderfood.menulist.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,32 +24,35 @@ import android.widget.TextView;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.orderfood.menulist.menulistener.MenuOnClickListener;
-import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuModel;
+import com.getmobileltd.trafficbar.orderfood.menulist.model.Information;
+import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuResponse;
 
 import java.util.List;
 
 /**
  * Created by themavencoder on 06,March,2019
  */
-public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
-    private List<MenuModel> modelList;
+public class MenuAdapter extends RecyclerView.Adapter<MenuAdapter.MyViewHolder> {
+    private List<Information> modelList;
     private MenuOnClickListener mListener;
 
-    public MenuAdapter(List<MenuModel> modelList, MenuOnClickListener mListener) {
-        this.modelList =modelList;
-        this.mListener = mListener;
+    public MenuAdapter(List<Information> modelList) {
+        this.modelList = modelList;
+
     }
+
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_menu,viewGroup,false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_menu, viewGroup, false);
         return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        MenuModel model = modelList.get(i);
-        myViewHolder.bind(mListener,model);
+        Information model = modelList.get(i);
+        myViewHolder.bind(mListener, model);
 
     }
 
@@ -59,13 +63,14 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.MyViewHolder>
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView textViewMenuName, textViewMenuNumber;
+
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewMenuName = itemView.findViewById(R.id.textview_menu_name);
             textViewMenuNumber = itemView.findViewById(R.id.textview_menu_number);
         }
 
-        void bind(final MenuOnClickListener mListener, final MenuModel model) {
+        void bind(final MenuOnClickListener mListener, final Information model) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -74,8 +79,11 @@ public class MenuAdapter  extends RecyclerView.Adapter<MenuAdapter.MyViewHolder>
             });
 
             textViewMenuName.setText(model.getName());
-            textViewMenuNumber.setText(model.getNumber());
+            textViewMenuNumber.setText(String.valueOf(model.getCount()));
 
         }
+    }
+    public void setMenuListner(MenuOnClickListener listner) {
+        this.mListener = listner;
     }
 }

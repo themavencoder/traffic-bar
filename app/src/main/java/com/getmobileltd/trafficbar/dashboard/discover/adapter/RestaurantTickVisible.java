@@ -1,6 +1,6 @@
 /*
  * *
- * Creator: Tobiloba Adejumo on 2/27/19 11:57 AM Last modified: 2/27/19 11:57 AM Copyright: All rights reserved Ⓒ 2019
+ * Creator: Tobiloba Adejumo on 4/25/19 10:43 AM Last modified: 4/25/19 10:43 AM Copyright: All rights reserved Ⓒ 2019
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,17 +12,14 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.dashboard.discover.listener;
+package com.getmobileltd.trafficbar.dashboard.discover.adapter;
 
 import android.widget.ImageView;
 
-import com.getmobileltd.trafficbar.dashboard.discover.model.DiscoveryModel;
-import com.getmobileltd.trafficbar.dashboard.discover.response.DiscoverResponse;
-import com.getmobileltd.trafficbar.dashboard.discover.response.Restaurant;
-
 /**
- * Created by themavencoder on 27,February,2019
+ * Created by themavencoder on 25,April,2019
  */
-public interface RestaurantClickListener {
-    void onClick(Restaurant model, ImageView iv);
+public interface RestaurantTickVisible {
+
+    void setVisiblity(ImageView iv);
 }

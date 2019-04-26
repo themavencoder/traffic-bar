@@ -38,6 +38,11 @@
     </com.google.android.material.appbar.AppBarLayout>
 
 
+    <include
+        layout="@layout/progress_view_overlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.recyclerview.widget.RecyclerView

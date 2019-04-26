@@ -20,9 +20,13 @@ import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.getmobileltd.trafficbar.AppInstance;
+import com.getmobileltd.trafficbar.database.repository.UserRepository;
 import com.getmobileltd.trafficbar.registration.register.SignUpActivity;
 import com.google.android.material.snackbar.Snackbar;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -59,12 +63,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private FrameLayout frameLayout;
     private CoordinatorLayout mCoordinatorLayout;
     private TextView mTvSignup;
+    private UserRepository repository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        UiSettings.colorStatusbar(this,R.color.app_background);
+        UiSettings.colorStatusbar(this, R.color.app_background);
+        repository = new UserRepository(getApplication());
         init();
         trafficBarService = TrafficBarApplication.get(this).getTrafficBarService();
 
@@ -78,13 +84,13 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         mButtonLogin.setOnClickListener(this);
         presenter = new LoginPresenter(this);
         mLoginDialog = new LoginDialog();
-       // mProgressBar = findViewById(R.id.progress_view);
+        // mProgressBar = findViewById(R.id.progress_view);
         frameLayout = findViewById(R.id.progress_view);
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
         mTvSignup = findViewById(R.id.textview_sign_up);
         mTvSignup.setOnClickListener(this);
 
-      //  frameLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        //  frameLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
     }
 
@@ -93,14 +99,14 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     public void onBackPressed() {
 
         if (frameLayout.getVisibility() == View.VISIBLE) {
-            if (loginCall != null){
+            if (loginCall != null) {
                 loginCall.cancel();
             }
             frameLayout.setVisibility(View.GONE);
 
         } else if (frameLayout.getVisibility() == View.GONE) {
             super.onBackPressed();
-            overridePendingTransition(android.R.anim.slide_in_left,android.R.anim.slide_out_right);
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 
         }
 
@@ -124,10 +130,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void buttonClick() {
-       Intent intent = new Intent(this, DashboardActivity.class);
-       startActivity(intent);
-   //    startActivity(new Intent(this, MainActivity.class));
-      //  startActivity(new Intent());
+        Intent intent = new Intent(this, DashboardActivity.class);
+        startActivity(intent);
+        //    startActivity(new Intent(this, MainActivity.class));
+        //  startActivity(new Intent());
 
     }
 
@@ -135,26 +141,26 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     public void onClick(View v) {
         if (v.getId() == R.id.textview_sign_up) {
             startActivity(new Intent(this, SignUpActivity.class));
-            overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }
 
 
-            String email = mEditEmail.getText().toString();
-            String password = mEditPassword.getText().toString();
-            presenter.saveLoginCredentials(email,password);
-            if (presenter.checkParameters()) {
+        String email = mEditEmail.getText().toString();
+        String password = mEditPassword.getText().toString();
+        presenter.saveLoginCredentials(email, password);
+        if (presenter.checkParameters()) {
               /*  mLoginDialog.setCancelable(false);
                 mLoginDialog.show(getSupportFragmentManager(),"my_dialog");*/
             frameLayout.setVisibility(View.VISIBLE);
-                user = new User(email,password);
-                loginUser(user);
-            } else {
-                if (email.isEmpty()) {
-                    errorMessage("Email field is empty",mCoordinatorLayout,getApplication());
-                    return;
-                }
-                errorMessage("Password should be more than five characters",mCoordinatorLayout,getApplicationContext());
+            user = new User(email, password);
+            loginUser(user);
+        } else {
+            if (email.isEmpty()) {
+                errorMessage("Email field is empty", mCoordinatorLayout, getApplication());
+                return;
             }
+            errorMessage("Password should be more than five characters", mCoordinatorLayout, getApplicationContext());
+        }
 
     }
 
@@ -162,27 +168,34 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         loginCall = trafficBarService.logUser(user);
         loginCall.enqueue(new Callback<LogInResponse>() {
             @Override
-            public void onResponse(@NonNull Call<LogInResponse> call,@NonNull Response<LogInResponse> response) {
+            public void onResponse(@NonNull Call<LogInResponse> call, @NonNull Response<LogInResponse> response) {
                 assert response.body() != null;
                 if (response.body().getCode() == 200) {
-                           // mLoginDialog.dismiss();
-                          frameLayout.setVisibility(View.GONE);
-                        presenter.navigateToNextActivity();
-                } else {
-                  //  mLoginDialog.dismiss();
+                    // mLoginDialog.dismiss();
+                    String apikey = response.body().getData().getUser().getKey();
+                    AppInstance appInstance = AppInstance.getInstance();
+                    appInstance.setApi_key(apikey);
+                    com.getmobileltd.trafficbar.database.model.User user = new com.getmobileltd.trafficbar.database.model.User(1, apikey);
+                    repository.insert(user);
+
+
                     frameLayout.setVisibility(View.GONE);
-                  //  presenter.setError();
-                    errorMessage("Password and email do not match. Try again",mCoordinatorLayout,getApplicationContext());
+                    presenter.navigateToNextActivity();
+                } else {
+                    //  mLoginDialog.dismiss();
+                    frameLayout.setVisibility(View.GONE);
+                    //  presenter.setError();
+                    errorMessage("Password and email do not match. Try again", mCoordinatorLayout, getApplicationContext());
                 }
             }
 
             @Override
             public void onFailure(Call<LogInResponse> call, Throwable t) {
-             //   mLoginDialog.dismiss();
+                //   mLoginDialog.dismiss();
                 frameLayout.setVisibility(View.GONE);
-                Log.i(TAG,t.getMessage());
-                errorMessage("Unable to process your request. Please try again",mCoordinatorLayout,getApplicationContext());
-             //  Toast.makeText(LoginActivity.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.i(TAG, t.getMessage());
+                errorMessage("Unable to process your request. Please try again", mCoordinatorLayout, getApplicationContext());
+                //  Toast.makeText(LoginActivity.this, "Error" + t.getMessage(), Toast.LENGTH_SHORT).show();
 
             }
         });

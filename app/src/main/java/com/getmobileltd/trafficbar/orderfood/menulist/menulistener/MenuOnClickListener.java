@@ -14,11 +14,12 @@
 
 package com.getmobileltd.trafficbar.orderfood.menulist.menulistener;
 
-import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuModel;
+import com.getmobileltd.trafficbar.orderfood.menulist.model.Information;
+import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuResponse;
 
 /**
  * Created by themavencoder on 06,March,2019
  */
 public interface MenuOnClickListener {
-    void onClick(MenuModel model);
+    void onClick(Information model);
 }
