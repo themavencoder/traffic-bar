@@ -14,12 +14,15 @@
 
 package com.getmobileltd.trafficbar.orderfood.menudetails.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by themavencoder on 26,April,2019
  */
-public class Menus {
+public class Menus implements  Parcelable{
 
     @SerializedName("id")
     private int id;
@@ -36,12 +39,38 @@ public class Menus {
     @SerializedName("menu_image_bg")
     private String menu_image_bg;
 
-    public Menus(String menu_name, String menu_price, String menu_image_sm) {
+    public Menus(String menu_name, String menu_price, String menu_image_sm, String menu_image_bg,String menu_description) {
         this.menu_name = menu_name;
         this.menu_price = menu_price;
         this.menu_image_sm = menu_image_sm;
+        this.menu_description = menu_description;
+        this.menu_image_bg = menu_image_bg;
+
 
     }
+
+
+    protected Menus(Parcel in) {
+        id = in.readInt();
+        category_id = in.readInt();
+        menu_name = in.readString();
+        menu_description = in.readString();
+        menu_price = in.readString();
+        menu_image_sm = in.readString();
+        menu_image_bg = in.readString();
+    }
+
+    public static final Creator<Menus> CREATOR = new Creator<Menus>() {
+        @Override
+        public Menus createFromParcel(Parcel in) {
+            return new Menus(in);
+        }
+
+        @Override
+        public Menus[] newArray(int size) {
+            return new Menus[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -71,4 +100,19 @@ public class Menus {
         return menu_price;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(category_id);
+        dest.writeString(menu_name);
+        dest.writeString(menu_description);
+        dest.writeString(menu_price);
+        dest.writeString(menu_image_sm);
+        dest.writeString(menu_image_bg);
+    }
 }

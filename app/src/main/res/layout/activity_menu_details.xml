@@ -20,6 +20,7 @@
     android:layout_height="match_parent"
     tools:context=".orderfood.menudetails.MenuDetailsActivity">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:id="@+id/include1"
@@ -27,6 +28,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_height="wrap_content">
+        <include
+            layout="@layout/progress_view_overlay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -35,14 +41,13 @@
            >
 
         </androidx.appcompat.widget.Toolbar>
+
     </com.google.android.material.appbar.AppBarLayout>
 
 
-    <include
-        layout="@layout/progress_view_overlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -55,4 +60,6 @@
         app:layout_constraintTop_toBottomOf="@+id/include1">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

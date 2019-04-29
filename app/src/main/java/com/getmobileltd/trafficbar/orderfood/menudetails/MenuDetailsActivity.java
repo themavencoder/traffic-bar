@@ -47,7 +47,8 @@ import java.util.List;
 
 import static com.getmobileltd.trafficbar.orderfood.menulist.ListAvailableFoodActivity.EXTRA_MENU_DETAILS_ID;
 
-public class MenuDetailsActivity extends AppCompatActivity  implements MenuDetailsOnClickListener {
+public class MenuDetailsActivity extends AppCompatActivity  {
+    public static final String MENU_DETAILS_KEY = "menu_details_key";
         private RecyclerView recyclerView;
         private List<Menus> modelList = new ArrayList<>();
         private MenuDetailsAdapter adapter;
@@ -86,6 +87,9 @@ public class MenuDetailsActivity extends AppCompatActivity  implements MenuDetai
         mlistener = new MenuDetailsOnClickListener() {
             @Override
             public void onClick(Menus model) {
+                Intent intent = new Intent(MenuDetailsActivity.this,AddToCartActivity.class);
+                intent.putExtra(MENU_DETAILS_KEY,model);
+                startActivity(intent);
 
             }
         };
@@ -102,12 +106,10 @@ public class MenuDetailsActivity extends AppCompatActivity  implements MenuDetai
                     MenuDetailsInformation information = response.body().getData();
                    List<Menus> menus =  information.getMenus();
                    for (Menus menu : menus) {
-                       modelList.add(new Menus(menu.getMenu_name(),menu.getMenu_price(),menu.getMenu_image_sm()));
+                       modelList.add(new Menus(menu.getMenu_name(),menu.getMenu_price(),menu.getMenu_image_sm(),menu.getMenu_image_bg(),menu.getMenu_description()));
                       // Toast.makeText(MenuDetailsActivity.this, "" + menu.getMenu_image_sm(), Toast.LENGTH_SHORT).show();
 
                    }
-
-
                     adapter = new MenuDetailsAdapter(modelList);
                     adapter.setmenuClickListener(mlistener);
                     recyclerView.setAdapter(adapter);
@@ -127,10 +129,4 @@ public class MenuDetailsActivity extends AppCompatActivity  implements MenuDetai
     }
 
 
-    @Override
-    public void onClick(Menus model) {
-        Toast.makeText(this, "You clicked: " + model.getMenu_name(), Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, AddToCartActivity.class));
-
-    }
 }

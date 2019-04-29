@@ -17,22 +17,32 @@ package com.getmobileltd.trafficbar.dashboard.mycart.addtocart;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.getmobileltd.trafficbar.dashboard.DashboardActivity;
 import com.getmobileltd.trafficbar.dashboard.mycart.MyCartFragment;
+import com.getmobileltd.trafficbar.orderfood.menudetails.model.Menus;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
+
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
+
 import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.SampleContent;
@@ -40,7 +50,10 @@ import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.adapter.AddToCartA
 import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.listener.AddCartExtraListener;
 import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.model.AddToCartModel;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import static com.getmobileltd.trafficbar.orderfood.menudetails.MenuDetailsActivity.MENU_DETAILS_KEY;
 
 public class AddToCartActivity extends AppCompatActivity implements AddCartExtraListener, View.OnClickListener {
     private boolean mAppBarExpanded;
@@ -50,7 +63,13 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
     private AddToCartAdapter mAdapter;
     private List<AddToCartModel> modeList = SampleContent.MYEXTRAS;
     private Button mButtonAddToCart;
-    public static final String EXTRA_CART =  "com.getmobileltd.trafficbar.addtocart.AddToCartActivity";
+    public static final String EXTRA_CART = "com.getmobileltd.trafficbar.addtocart.AddToCartActivity";
+    private Menus menus;
+    private TextView mTvName, mTvPrice, mTvDescription, mTvQuantity;
+    private ImageView mImageHeader, mImageMinus, mImagePlus;
+    public static final String one = "1";
+
+    public double initial_price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +79,8 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
         CoordinatorLayout mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_keyboard_backspace_black_24dp));
-       // toolbar.setTitleTextColor(getResources().getColor(R.color.white));
-        mCollapsingToolbar =findViewById(R.id.collapsing_toolbar);
+        // toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        mCollapsingToolbar = findViewById(R.id.collapsing_toolbar);
         mCollapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.black));
 
         AppBarLayout appBarLayout = findViewById(R.id.app_bar_layout);
@@ -78,18 +97,50 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
                 }
             }
         });
-        init();
 
+        init();
         gradientImage();
+        menus = getIntent().getParcelableExtra(MENU_DETAILS_KEY);
+        if (menus != null) {
+            getData();
+        }
+
+
+    }
+
+    private void getData() {
+
+
+        mTvName.setText(menus.getMenu_name());
+        mTvPrice.setText(menus.getMenu_price());
+        initial_price = Double.parseDouble(mTvPrice.getText().toString());
+        mTvDescription.setText(menus.getMenu_description());
+        Glide.with(this)
+                .load(menus.getMenu_image_bg())
+                .apply(new RequestOptions()
+                        .placeholder(R.color.colorAccent)
+                        .error(R.color.black))
+                .into(mImageHeader);
+        mTvQuantity.setText(one);
+
     }
 
     private void init() {
         mRecyclerView = findViewById(R.id.recyclerView);
-        mAdapter = new AddToCartAdapter(this,modeList);
+        mAdapter = new AddToCartAdapter(this, modeList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
         mButtonAddToCart = findViewById(R.id.button_add_to_cart);
         mButtonAddToCart.setOnClickListener(this);
+        mTvName = findViewById(R.id.textview_name);
+        mTvPrice = findViewById(R.id.textview_price);
+        mTvDescription = findViewById(R.id.textview_description);
+        mImageHeader = findViewById(R.id.imageview_header);
+        mTvQuantity = findViewById(R.id.textview_quantity);
+        mImagePlus = findViewById(R.id.imageview_plus);
+        mImageMinus = findViewById(R.id.imageview_minus);
+        mImageMinus.setOnClickListener(this);
+        mImagePlus.setOnClickListener(this);
     }
 
     private void gradientImage() {
@@ -112,9 +163,58 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
 
     @Override
     public void onClick(View v) {
-       Intent intent  = new Intent(this,DashboardActivity.class);
-       intent.putExtra(EXTRA_CART,"default");
-       startActivity(intent);
+        switch (v.getId()) {
+            case R.id.button_add_to_cart:
+                Intent intent = new Intent(this, DashboardActivity.class);
+                intent.putExtra(EXTRA_CART, "default");
+                startActivity(intent);
+                break;
+            case R.id.imageview_plus:
+                add(mTvQuantity.getText().toString());
+                break;
+            case R.id.imageview_minus:
+                sub(mTvQuantity.getText().toString());
+                break;
+            default:
+
+        }
+
+
+    }
+
+    private void add(String j) {
+        int i = Integer.parseInt(j);
+        int result = i + 1;
+
+        double price = Double.parseDouble(menus.getMenu_price());
+        BigDecimal priceDecimal = BigDecimal.valueOf(price);
+        BigDecimal resultDecimal = BigDecimal.valueOf(result);
+        BigDecimal resultPrice = priceDecimal.multiply(resultDecimal);
+        mTvQuantity.setText(String.valueOf(result));
+        mTvPrice.setText(String.valueOf(resultPrice));
+
+
+    }
+
+    private void sub(String j) {
+        int i = Integer.parseInt(j);
+        if (i == 1) {
+            mTvQuantity.setText(one);
+            Double price = Double.parseDouble(menus.getMenu_price());
+            mTvPrice.setText(String.valueOf(price));
+
+        } else {
+            int result = i - 1;
+            double price = Double.parseDouble(menus.getMenu_price());
+            BigDecimal priceDecimal = BigDecimal.valueOf(price);
+            BigDecimal resultDecimal = BigDecimal.valueOf(result);
+            BigDecimal resultPrice = priceDecimal.multiply(resultDecimal);
+            mTvQuantity.setText(String.valueOf(result));
+            mTvPrice.setText(String.valueOf(resultPrice));
+
+
+
+        }
 
 
     }
