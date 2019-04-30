@@ -22,6 +22,9 @@ import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.getmobileltd.trafficbar.AppInstance;
+import com.getmobileltd.trafficbar.application.TrafficBarApplication;
+import com.getmobileltd.trafficbar.application.TrafficBarService;
 import com.getmobileltd.trafficbar.dashboard.DashboardActivity;
 import com.getmobileltd.trafficbar.dashboard.mycart.MyCartFragment;
 import com.getmobileltd.trafficbar.orderfood.menudetails.model.Menus;
@@ -37,12 +40,18 @@ import androidx.palette.graphics.Palette;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.SampleContent;
@@ -68,6 +77,10 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
     private TextView mTvName, mTvPrice, mTvDescription, mTvQuantity;
     private ImageView mImageHeader, mImageMinus, mImagePlus;
     public static final String one = "1";
+    private TrafficBarService trafficBarService;
+    private Call<AddToCartResponse> cartResponse;
+    private AppInstance appInstance;
+    private FrameLayout frameLayout;
 
     public double initial_price;
 
@@ -78,6 +91,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
         Toolbar toolbar = findViewById(R.id.toolbar);
         CoordinatorLayout mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
         setSupportActionBar(toolbar);
+        appInstance = AppInstance.getInstance();
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_keyboard_backspace_black_24dp));
         // toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         mCollapsingToolbar = findViewById(R.id.collapsing_toolbar);
@@ -97,7 +111,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
                 }
             }
         });
-
+        trafficBarService = TrafficBarApplication.get(this).getTrafficBarService();
         init();
         gradientImage();
         menus = getIntent().getParcelableExtra(MENU_DETAILS_KEY);
@@ -130,6 +144,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
         mAdapter = new AddToCartAdapter(this, modeList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+        frameLayout = findViewById(R.id.progress_view);
         mButtonAddToCart = findViewById(R.id.button_add_to_cart);
         mButtonAddToCart.setOnClickListener(this);
         mTvName = findViewById(R.id.textview_name);
@@ -165,9 +180,8 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_add_to_cart:
-                Intent intent = new Intent(this, DashboardActivity.class);
-                intent.putExtra(EXTRA_CART, "default");
-                startActivity(intent);
+                addToCart();
+
                 break;
             case R.id.imageview_plus:
                 add(mTvQuantity.getText().toString());
@@ -180,6 +194,51 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
         }
 
 
+    }
+
+    private void addToCart() {
+        String quantity = mTvQuantity.getText().toString();
+        int quantityInt = Integer.parseInt(quantity);
+        AddToCartModel model = new AddToCartModel(menus.getId(), quantityInt);
+        cartResponse = trafficBarService.createCart(appInstance.getApi_key(),model);
+        mButtonAddToCart.setBackgroundColor(getResources().getColor(R.color.deep_ash));
+        mButtonAddToCart.setEnabled(false);
+        mButtonAddToCart.setText(getString(R.string.addingToCart));
+        mButtonAddToCart.setTextColor(getResources().getColor(R.color.black));
+        frameLayout.setVisibility(View.VISIBLE);
+        cartResponse.enqueue(new Callback<AddToCartResponse>() {
+            @Override
+            public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
+                assert response.body() != null;
+                if (response.body().getStatus().equals("success") ) {
+                    frameLayout.setVisibility(View.GONE);
+                    mButtonAddToCart.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    mButtonAddToCart.setEnabled(true);
+                    mButtonAddToCart.setText(getResources().getString(R.string.addTocart));
+                    mButtonAddToCart.setTextColor(getResources().getColor(R.color.white));
+                    Toast.makeText(AddToCartActivity.this, "Added to cart successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(AddToCartActivity.this, DashboardActivity.class);
+                    intent.putExtra(EXTRA_CART, "default");
+                    startActivity(intent);
+                } else {
+                    frameLayout.setVisibility(View.GONE);
+                    mButtonAddToCart.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    mButtonAddToCart.setEnabled(true);
+                    mButtonAddToCart.setText(getString(R.string.retry));
+                    Toast.makeText(AddToCartActivity.this, "Error to add to cart", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AddToCartResponse> call, Throwable t) {
+                frameLayout.setVisibility(View.GONE);;
+                mButtonAddToCart.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                mButtonAddToCart.setEnabled(true);
+                mButtonAddToCart.setText(getString(R.string.retry));
+                Toast.makeText(AddToCartActivity.this, "Unknown error occurred", Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void add(String j) {

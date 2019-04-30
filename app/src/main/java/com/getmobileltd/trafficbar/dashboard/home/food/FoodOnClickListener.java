@@ -18,5 +18,5 @@ package com.getmobileltd.trafficbar.dashboard.home.food;
  * Created by themavencoder on 06,March,2019
  */
 public interface FoodOnClickListener {
-    void onClick(FoodModel model);
+    void onClick(FoodData model);
 }

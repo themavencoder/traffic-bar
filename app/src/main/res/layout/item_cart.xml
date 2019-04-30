@@ -23,7 +23,7 @@
 
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/imageview_item"
         android:layout_width="106dp"
         android:layout_height="101dp"
         android:scaleType="fitXY"
@@ -34,7 +34,7 @@
 
 
     <TextView
-        android:id="@+id/textview_heading_one"
+        android:id="@+id/textview_food"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -43,11 +43,11 @@
         android:text="@string/ceaser_salad"
         android:textColor="@color/black_text"
         android:textSize="@dimen/fourteen_sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintStart_toEndOf="@+id/imageview_item"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textview_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -55,11 +55,11 @@
         android:layout_marginTop="4dp"
         android:text="Salad Special"
         android:textSize="@dimen/twelve_sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/textview_heading_one" />
+        app:layout_constraintStart_toEndOf="@+id/imageview_item"
+        app:layout_constraintTop_toBottomOf="@+id/textview_food" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textview_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -68,8 +68,8 @@
         android:text="N4,000"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/twelve_sp"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toEndOf="@+id/imageview_item"
+        app:layout_constraintTop_toBottomOf="@+id/textview_category" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -77,15 +77,17 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintBottom_toBottomOf="@+id/imageview_item"
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
+            android:id="@+id/imageview_minus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/svg_sub" />
 
         <TextView
+            android:id="@+id/textview_quantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/sixteen_dp"
@@ -93,6 +95,7 @@
             android:textSize="@dimen/text_size_eighteen" />
 
         <ImageView
+            android:id="@+id/imageview_plus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/sixteen_dp"
@@ -101,6 +104,7 @@
     </LinearLayout>
 
     <ImageView
+        android:id="@+id/imageview_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -118,5 +122,5 @@
         android:layout_marginRight="8dp"
         android:background="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+        app:layout_constraintTop_toBottomOf="@+id/imageview_item" />
 </androidx.constraintlayout.widget.ConstraintLayout>

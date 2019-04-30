@@ -21,8 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.getmobileltd.trafficbar.R;
 
 import java.util.List;
@@ -31,14 +34,19 @@ import java.util.List;
  * Created by themavencoder on 06,March,2019
  */
 public class DrinksAdapter extends RecyclerView.Adapter<DrinksAdapter.MyViewHolder> {
-    private List<DrinksModel> modelList;
+    private List<DrinkData> modelList;
     private Context context;
     private DrinksOnClickListener mListener;
 
-    public DrinksAdapter(DrinksOnClickListener drinksOnClickListener, List<DrinksModel> modelList) {
-        this.mListener = drinksOnClickListener;
+    public DrinksAdapter(List<DrinkData> modelList) {
+
         this.modelList = modelList;
     }
+
+    public void setDrinkListener(DrinksOnClickListener mListener) {
+        this.mListener = mListener;
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -48,7 +56,7 @@ public class DrinksAdapter extends RecyclerView.Adapter<DrinksAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        DrinksModel model = modelList.get(i);
+        DrinkData model = modelList.get(i);
         myViewHolder.bind(mListener, model);
 
 
@@ -60,13 +68,17 @@ public class DrinksAdapter extends RecyclerView.Adapter<DrinksAdapter.MyViewHold
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView textViewPrice;
+        private TextView textViewPrice, textViewHeaderOne, textViewHeaderTwo;
+        private ImageView imageViewDrinks;
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewPrice = itemView.findViewById(R.id.textview_price);
+            textViewHeaderOne = itemView.findViewById(R.id.textview_header_one);
+            textViewHeaderTwo = itemView.findViewById(R.id.textview_header_two);
+            imageViewDrinks = itemView.findViewById(R.id.imageview_drinks);
         }
 
-        void bind(final DrinksOnClickListener mListener, final DrinksModel model) {
+        void bind(final DrinksOnClickListener mListener, final DrinkData model) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -75,6 +87,15 @@ public class DrinksAdapter extends RecyclerView.Adapter<DrinksAdapter.MyViewHold
             });
 
             textViewPrice.setText(model.getPrice());
+            textViewHeaderOne.setText(model.getName());
+            textViewHeaderTwo.setText(model.getMenu_category_name());
+            Glide.with(itemView.getContext())
+                    .load(model.getImage())
+                    .apply(new RequestOptions()
+                            .placeholder(R.color.colorAccent)
+                            .error(R.color.black))
+                    .into(imageViewDrinks);
+
         }
     }
 }

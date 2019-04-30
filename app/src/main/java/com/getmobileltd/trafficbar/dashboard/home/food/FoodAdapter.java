@@ -20,8 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.getmobileltd.trafficbar.R;
 
 import java.util.List;
@@ -30,26 +33,31 @@ import java.util.List;
  * Created by themavencoder on 06,March,2019
  */
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> {
-    private List<FoodModel> modelList;
+    private List<FoodData> modelList;
     private Context context;
     private FoodOnClickListener mListener;
 
-    public FoodAdapter(FoodOnClickListener foodOnClickListener, List<FoodModel> modelList) {
-        this.mListener = foodOnClickListener;
+    public FoodAdapter(List<FoodData> modelList) {
+
         this.modelList = modelList;
 
+    }
+
+    public void setFoodListener(FoodOnClickListener mListener) {
+        this.mListener = mListener;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_food,viewGroup,false);
         return new MyViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        FoodModel model = modelList.get(i);
+        FoodData model = modelList.get(i);
         myViewHolder.bind(mListener, model);
 
     }
@@ -61,13 +69,18 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
 
      class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView textViewprice;
+        private TextView textViewHeaderOne, textViewHeaderTwo;
+        private ImageView imageviewFood;
          MyViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewprice = itemView.findViewById(R.id.textview_price);
+            textViewHeaderOne = itemView.findViewById(R.id.textview_header_one);
+            textViewHeaderTwo = itemView.findViewById(R.id.textview_header_two);
+            imageviewFood  = itemView.findViewById(R.id.imageview_food);
 
         }
 
-        void bind(final FoodOnClickListener mListener, final FoodModel model) {
+        void bind(final FoodOnClickListener mListener, final FoodData model) {
              itemView.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
@@ -76,6 +89,14 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
              });
 
              textViewprice.setText(model.getPrice());
+             textViewHeaderOne.setText(model.getName());
+             textViewHeaderTwo.setText(model.getMenu_category_name());
+            Glide.with(itemView.getContext())
+                    .load(model.getImage())
+                    .apply(new RequestOptions()
+                            .placeholder(R.color.colorAccent)
+                            .error(R.color.black))
+                    .into(imageviewFood);
         }
     }
 }

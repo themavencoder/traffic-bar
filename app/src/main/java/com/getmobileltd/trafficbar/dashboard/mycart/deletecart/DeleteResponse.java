@@ -1,6 +1,6 @@
 /*
  * *
- * Creator: Tobiloba Adejumo on 3/5/19 3:51 PM Last modified: 3/5/19 3:51 PM Copyright: All rights reserved Ⓒ 2019
+ * Creator: Tobiloba Adejumo on 4/29/19 3:04 PM Last modified: 4/29/19 3:03 PM Copyright: All rights reserved Ⓒ 2019
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,11 +12,25 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.dashboard.home.trend;
+package com.getmobileltd.trafficbar.dashboard.mycart.deletecart;
+
+import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by themavencoder on 05,March,2019
+ * Created by themavencoder on 29,April,2019
  */
-public interface TrendOnClickListener {
-    void onClick(TrendData model);
+public class DeleteResponse {
+    @SerializedName("status")
+    private String status;
+
+    @SerializedName("code")
+    private int code;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public int getCode() {
+        return code;
+    }
 }

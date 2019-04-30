@@ -15,6 +15,13 @@
 package com.getmobileltd.trafficbar.application;
 
 import com.getmobileltd.trafficbar.dashboard.discover.response.DiscoverResponse;
+import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinkResponse;
+import com.getmobileltd.trafficbar.dashboard.home.food.FoodResponse;
+import com.getmobileltd.trafficbar.dashboard.home.trend.TrendingResponse;
+import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.AddToCartResponse;
+import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.model.AddToCartModel;
+import com.getmobileltd.trafficbar.dashboard.mycart.deletecart.DeleteResponse;
+import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartResponse;
 import com.getmobileltd.trafficbar.orderfood.menudetails.model.MenuDetailsModel;
 import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuResponse;
 import com.getmobileltd.trafficbar.registration.login.networkresponse.LogInResponse;
@@ -23,6 +30,7 @@ import com.getmobileltd.trafficbar.registration.register.networkresponse.SignUpR
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -48,5 +56,25 @@ public interface TrafficBarService {
 
     @GET("menu_category/{id}")
     Call<MenuDetailsModel> getMenuCategoryDetails(@Path("id") int id);
+
+    @POST("carts/create")
+    Call<AddToCartResponse> createCart(@Header("Authorization") String value, @Body AddToCartModel model);
+
+    @GET("carts")
+    Call<MyCartResponse> getCart(@Header("Authorization") String value);
+
+
+    @DELETE("carts/delete/{id}")
+    Call<DeleteResponse> deleteCart(@Header("Authorization") String value, @Path("id") int id);
+
+    @GET("dashboard/trending")
+    Call<TrendingResponse> getTrending();
+
+    @GET("dashboard/drink")
+    Call<DrinkResponse> getDrinks();
+
+    @GET("dashboard/Food")
+    Call<FoodResponse> getFood();
+
 
 }

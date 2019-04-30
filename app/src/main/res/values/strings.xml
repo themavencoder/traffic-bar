@@ -63,4 +63,9 @@
     <string name="sample_text_details">Complete Enghlish Breakfast with 2 sausages, Grilled Tomatoes, Minute Steak, Eggs (of your choice) and Mushrooms served with a choice of toast or French Fries</string>
     <string name="card_number">Card Number</string>
     <string name="payment_information">PAYMENT INFORMATION</string>
+    <string name="retry">Retry</string>
+    <string name="added_to_cart">Added to cart</string>
+    <string name="addingToCart">Adding to cart...</string>
+    <string name="addTocart">Add to cart</string>
+    <string name="checkout">Checkout</string>
 </resources>

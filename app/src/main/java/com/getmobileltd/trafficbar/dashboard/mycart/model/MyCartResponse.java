@@ -1,6 +1,6 @@
 /*
  * *
- * Creator: Tobiloba Adejumo on 3/5/19 3:51 PM Last modified: 3/5/19 3:51 PM Copyright: All rights reserved Ⓒ 2019
+ * Creator: Tobiloba Adejumo on 4/29/19 12:42 PM Last modified: 4/29/19 12:42 PM Copyright: All rights reserved Ⓒ 2019
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,11 +12,28 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.dashboard.home.trend;
+package com.getmobileltd.trafficbar.dashboard.mycart.model;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 /**
- * Created by themavencoder on 05,March,2019
+ * Created by themavencoder on 29,April,2019
  */
-public interface TrendOnClickListener {
-    void onClick(TrendData model);
+public class MyCartResponse {
+
+    @SerializedName("status")
+    public String status;
+
+    @SerializedName("data")
+    public List<CartData> data;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public List<CartData> getData() {
+        return data;
+    }
 }

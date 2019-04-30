@@ -14,11 +14,44 @@
 
 package com.getmobileltd.trafficbar.dashboard.mycart.addtocart.model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by themavencoder on 16,March,2019
  */
 public class AddToCartModel {
+
+    @SerializedName("menu_id")
+    private int menuId;
+    @SerializedName("quantity")
+    private int quantity;
+
+    public AddToCartModel(int menuId, int quantity) {
+        this.menuId = menuId;
+        this.quantity = quantity;
+
+    }
+
+    public int getMenuId() {
+        return menuId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setMenuId(int menuId) {
+        this.menuId = menuId;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    @Expose(deserialize = false)
     private String name;
+    @Expose(deserialize = false)
     private String price;
     public AddToCartModel() {}
 

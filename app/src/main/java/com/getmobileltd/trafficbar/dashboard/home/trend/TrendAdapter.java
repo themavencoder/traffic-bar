@@ -20,8 +20,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.getmobileltd.trafficbar.R;
 
 import java.util.List;
@@ -31,13 +34,17 @@ import java.util.List;
  */
 public class TrendAdapter extends RecyclerView.Adapter<TrendAdapter.MyViewHolder> {
     private TrendOnClickListener trendOnClickListener;
-    private Context context;
-    private List<TrendModel> modelList;
+    private List<TrendData> modelList;
 
-    public TrendAdapter(TrendOnClickListener trendOnClickListener, List<TrendModel> modelList) {
-        this.trendOnClickListener = trendOnClickListener;
+    public TrendAdapter(List<TrendData> modelList) {
+
         this.modelList = modelList;
     }
+
+    public void setTrendOnClickListener(TrendOnClickListener trendOnClickListener) {
+        this.trendOnClickListener = trendOnClickListener;
+    }
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -47,7 +54,7 @@ public class TrendAdapter extends RecyclerView.Adapter<TrendAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        TrendModel model = modelList.get(i);
+        TrendData model = modelList.get(i);
         myViewHolder.bind(trendOnClickListener, model);
 
     }
@@ -58,13 +65,17 @@ public class TrendAdapter extends RecyclerView.Adapter<TrendAdapter.MyViewHolder
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView price;
+        private TextView price, textViewHeaderOne, textViewHeaderTwo;
+        private ImageView imageViewTrend;
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
             price = itemView.findViewById(R.id.textview_price);
+            textViewHeaderOne = itemView.findViewById(R.id.textview_header_one);
+            textViewHeaderTwo = itemView.findViewById(R.id.textview_header_two);
+            imageViewTrend = itemView.findViewById(R.id.imageview_trend);
         }
 
-        void bind(final TrendOnClickListener trendOnClickListener, final TrendModel model) {
+        void bind(final TrendOnClickListener trendOnClickListener, final TrendData model) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -72,6 +83,15 @@ public class TrendAdapter extends RecyclerView.Adapter<TrendAdapter.MyViewHolder
                 }
             });
             price.setText(model.getPrice());
+            textViewHeaderOne.setText(model.getName());
+            textViewHeaderTwo.setText(model.getMenu_category_name());
+
+            Glide.with(itemView.getContext())
+                    .load(model.getImage())
+                    .apply(new RequestOptions()
+                            .placeholder(R.color.colorAccent)
+                            .error(R.color.black))
+                    .into(imageViewTrend);
 
         }
     }

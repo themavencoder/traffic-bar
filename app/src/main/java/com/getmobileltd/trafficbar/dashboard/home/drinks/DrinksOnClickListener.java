@@ -18,5 +18,5 @@ package com.getmobileltd.trafficbar.dashboard.home.drinks;
  * Created by themavencoder on 06,March,2019
  */
 public interface DrinksOnClickListener {
-    void onClick(DrinksModel model);
+    void onClick(DrinkData model);
 }

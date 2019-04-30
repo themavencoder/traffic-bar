@@ -106,7 +106,7 @@ public class MenuDetailsActivity extends AppCompatActivity  {
                     MenuDetailsInformation information = response.body().getData();
                    List<Menus> menus =  information.getMenus();
                    for (Menus menu : menus) {
-                       modelList.add(new Menus(menu.getMenu_name(),menu.getMenu_price(),menu.getMenu_image_sm(),menu.getMenu_image_bg(),menu.getMenu_description()));
+                       modelList.add(new Menus(menu.getMenu_name(),menu.getMenu_price(),menu.getMenu_image_sm(),menu.getMenu_image_bg(),menu.getMenu_description(),menu.getId()));
                       // Toast.makeText(MenuDetailsActivity.this, "" + menu.getMenu_image_sm(), Toast.LENGTH_SHORT).show();
 
                    }

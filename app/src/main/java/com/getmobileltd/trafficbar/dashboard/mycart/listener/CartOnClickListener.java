@@ -14,11 +14,18 @@
 
 package com.getmobileltd.trafficbar.dashboard.mycart.listener;
 
+import android.view.View;
+
+import com.getmobileltd.trafficbar.dashboard.mycart.model.CartData;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
 
 /**
  * Created by themavencoder on 04,March,2019
  */
 public interface CartOnClickListener {
-    void onClick(MyCartModel model);
+    void add(CartData model, View v);
+
+    void onDelete(CartData model);
+
+    void onMinus(CartData model);
 }

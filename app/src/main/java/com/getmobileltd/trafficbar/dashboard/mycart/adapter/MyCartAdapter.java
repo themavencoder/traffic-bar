@@ -14,16 +14,20 @@
 
 package com.getmobileltd.trafficbar.dashboard.mycart.adapter;
 
-import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.dashboard.mycart.listener.CartOnClickListener;
-import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
+import com.getmobileltd.trafficbar.dashboard.mycart.model.CartData;
 
 import java.util.List;
 
@@ -31,25 +35,31 @@ import java.util.List;
  * Created by themavencoder on 04,March,2019
  */
 public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyViewHolder> {
-    private Context context;
-    private List<MyCartModel> modelList;
+
+    private List<CartData> modelList;
     private CartOnClickListener mListener;
-    public MyCartAdapter(Context context, List<MyCartModel> modelList) {
-        this.context = context;
+
+    public MyCartAdapter(List<CartData> modelList) {
+
         this.modelList = modelList;
 
     }
 
+    public void setCartClickListener(CartOnClickListener listener) {
+        this.mListener = listener;
+    }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_cart,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_cart, viewGroup, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
+        CartData data = modelList.get(i);
+        myViewHolder.bind(data, mListener, myViewHolder.itemView);
 
     }
 
@@ -59,8 +69,55 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.MyViewHold
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
+        private ImageView imageViewDelete, imageViewItem, imageViewAdd, imageViewMinus;
+        private TextView textViewFoodName, textViewCategory, textViewPrice, textViewQuantity;
+
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            imageViewItem = itemView.findViewById(R.id.imageview_item);
+            textViewFoodName = itemView.findViewById(R.id.textview_food);
+            textViewCategory = itemView.findViewById(R.id.textview_category);
+            textViewQuantity = itemView.findViewById(R.id.textview_quantity);
+            imageViewDelete = itemView.findViewById(R.id.imageview_delete);
+            imageViewAdd = itemView.findViewById(R.id.imageview_plus);
+            imageViewMinus = itemView.findViewById(R.id.imageview_minus);
+            textViewPrice = itemView.findViewById(R.id.textview_price);
+
+
+        }
+
+        public void bind(final CartData data, final CartOnClickListener mListener, final View view) {
+
+            imageViewMinus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onMinus(data);
+                }
+            });
+            imageViewAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.add(data,view);
+                }
+            });
+            imageViewDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onDelete(data);
+                }
+            });
+
+            textViewFoodName.setText(data.getName());
+            textViewQuantity.setText(String.valueOf(data.getQuantity()));
+            textViewPrice.setText(data.getPrice());
+
+            Glide.with(itemView.getContext()).load(data.getImage())
+                    .apply(new RequestOptions()
+                            .placeholder(R.color.colorAccent)
+                            .error(R.color.black))
+                    .into(imageViewItem);
+
         }
     }
 }

@@ -39,12 +39,13 @@ public class Menus implements  Parcelable{
     @SerializedName("menu_image_bg")
     private String menu_image_bg;
 
-    public Menus(String menu_name, String menu_price, String menu_image_sm, String menu_image_bg,String menu_description) {
+    public Menus(String menu_name, String menu_price, String menu_image_sm, String menu_image_bg,String menu_description, int id) {
         this.menu_name = menu_name;
         this.menu_price = menu_price;
         this.menu_image_sm = menu_image_sm;
         this.menu_description = menu_description;
         this.menu_image_bg = menu_image_bg;
+        this.id = id;
 
 
     }
