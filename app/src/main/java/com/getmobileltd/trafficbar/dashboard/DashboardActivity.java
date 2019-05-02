@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
+import com.getmobileltd.trafficbar.AppInstance;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
@@ -60,13 +61,15 @@ public class DashboardActivity extends AppCompatActivity {
     private View notificationBadge;
     private AHBottomNavigation bottomNavigation;
     private AHBottomNavigationItem item1, item2, item3, item4, item5;
-
+    private static int count;
+    private AppInstance appInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         Intent intent = getIntent();
+
         mFrameLayout = findViewById(R.id.frame_layout);
         bottomNavigation = findViewById(R.id.bottom_navigation_view);
         homeFragment = new HomeFragment();
@@ -74,6 +77,10 @@ public class DashboardActivity extends AppCompatActivity {
         favouriteFragment = new FavouriteFragment();
         profileFragment = new ProfileFragment();
         cartFragment = new MyCartFragment();
+        appInstance = AppInstance.getInstance();
+
+
+
 
 
         item1 = new AHBottomNavigationItem(R.string.nav_home, R.drawable.ic_home_black_24dp, R.color.white);
@@ -94,7 +101,7 @@ public class DashboardActivity extends AppCompatActivity {
         bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
 
 
-        bottomNavigation.setNotification("1", 2);
+        bottomNavigation.setNotification(String.valueOf(appInstance.getCart_count()), 2);
 
         defaultPosition();
 
@@ -127,18 +134,25 @@ public class DashboardActivity extends AppCompatActivity {
             public boolean onTabSelected(int position, boolean wasSelected) {
                 if (position == 0) {
                     setFragment(homeFragment);
+
+
                     return true;
                 } else if (position == 1) {
                     setFragment(discoverFragment);
+
                     return true;
                 } else if (position == 2) {
                     setFragment(cartFragment);
+                    bottomNavigation.setNotification(String.valueOf(appInstance.getCart_count()), 2);
+
                     return true;
                 } else if (position == 3) {
                     setFragment(favouriteFragment);
+
                     return true;
                 } else if (position == 4) {
                     setFragment(profileFragment);
+
                     return true;
                 }
                 return false;
@@ -160,6 +174,7 @@ public class DashboardActivity extends AppCompatActivity {
                         setFragment(discoverFragment);
                         return true;
                     case R.id.nav_cart:
+
                         setFragment(cartFragment);
                         return true;
                     case R.id.nav_favourites:

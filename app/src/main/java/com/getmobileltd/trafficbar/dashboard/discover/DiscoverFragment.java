@@ -19,6 +19,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
@@ -44,6 +45,7 @@ import com.getmobileltd.trafficbar.dashboard.discover.listener.RestaurantClickLi
 import com.getmobileltd.trafficbar.dashboard.discover.model.DiscoveryModel;
 import com.getmobileltd.trafficbar.dashboard.discover.response.DiscoverResponse;
 import com.getmobileltd.trafficbar.dashboard.discover.response.Restaurant;
+import com.getmobileltd.trafficbar.dashboard.home.HomeFragment;
 import com.getmobileltd.trafficbar.database.AsyncResponse;
 import com.getmobileltd.trafficbar.database.repository.UserRepository;
 
@@ -68,8 +70,11 @@ public class DiscoverFragment extends Fragment implements RestaurantClickListene
     private Button mButtonRestaurant;
     private String address;
 
+    private HomeFragment homeFragment = new HomeFragment();
+
     public DiscoverFragment() {
         // Required empty public constructor
+
     }
 
 
@@ -112,6 +117,11 @@ public class DiscoverFragment extends Fragment implements RestaurantClickListene
             public void onClick(View v) {
                 if (address !=  null) {
                     Toast.makeText(getActivity(), address, Toast.LENGTH_SHORT).show();
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.frame_layout,homeFragment)
+                            .addToBackStack(null)
+                            .commit();
+
                 } else {
                     Toast.makeText(getActivity(), "Please select a restaurant first!", Toast.LENGTH_SHORT).show();
                 }
@@ -158,6 +168,17 @@ public class DiscoverFragment extends Fragment implements RestaurantClickListene
 
     }
 
+    @Override
+    public void onDestroyView() {
+        address = null;
+        super.onDestroyView();
 
+    }
+
+    @Override
+    public void onDestroy() {
+        address = null;
+        super.onDestroy();
+    }
 }
 

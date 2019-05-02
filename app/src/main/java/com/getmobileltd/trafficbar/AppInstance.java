@@ -22,6 +22,7 @@ public class AppInstance {
 
     private String api_key;
 
+    private int cart_count;
     public static AppInstance getInstance() {
         if (sInstance == null) {
             sInstance = new AppInstance();
@@ -35,5 +36,13 @@ public class AppInstance {
 
     public void setApi_key(String api_key) {
         this.api_key = api_key;
+    }
+
+    public int getCart_count() {
+        return cart_count;
+    }
+
+    public void setCart_count(int cart_count) {
+        this.cart_count = cart_count;
     }
 }

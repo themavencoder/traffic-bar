@@ -29,6 +29,13 @@ public class MyCartResponse {
     @SerializedName("data")
     public List<CartData> data;
 
+    @SerializedName("count")
+    private int count;
+
+    public int getCount() {
+        return count;
+    }
+
     public String getStatus() {
         return status;
     }

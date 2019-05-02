@@ -54,6 +54,7 @@ import com.getmobileltd.trafficbar.dashboard.home.trend.TrendData;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendModel;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendOnClickListener;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendingResponse;
+import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.AddToCartActivity;
 import com.getmobileltd.trafficbar.orderfood.menulist.ListAvailableFoodActivity;
 
 import java.util.ArrayList;
@@ -80,7 +81,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private FoodOnClickListener foodOnClickListener;
     private DrinksOnClickListener drinksOnClickListener;
     private FrameLayout framelayout;
-
+    public static final String INTENT_POPULAR_TREMDS_KEY = "popular_trends_key";
+    public static final String INTENT_POPULAR_FOOD_KEY = "popular_food_key";
+    public static final String INTENT_POPULAR_DRINK_KEY = "popular_drink_key";
 
     public HomeFragment() {
         // Required empty public constructor
@@ -110,6 +113,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         drinksOnClickListener = new DrinksOnClickListener() {
             @Override
             public void onClick(DrinkData model) {
+                Intent intent = new Intent(getActivity(),AddToCartActivity.class);
+                intent.putExtra(INTENT_POPULAR_DRINK_KEY,model);
+                startActivity(intent);
 
             }
         };
@@ -126,7 +132,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     framelayout.setVisibility(View.GONE);
                     List<DrinkData> data = response.body().getData();
                     for (DrinkData datas : data) {
-                        modelListDrinks.add(new DrinkData(datas.getId(),datas.getName(),datas.getPrice(),datas.getImage(),datas.getHref(),datas.getMenu_category_name()));
+                        modelListDrinks.add(new DrinkData(datas.getId(),datas.getName(),datas.getPrice(),datas.getImage(),datas.getHref(),datas.getMenu_category_name(),datas.getBig_image(),datas.getDescription()));
                     }
                     adapterDrink = new DrinksAdapter(modelListDrinks);
                     adapterDrink.setDrinkListener(drinksOnClickListener);
@@ -152,6 +158,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         foodOnClickListener = new FoodOnClickListener() {
             @Override
             public void onClick(FoodData model) {
+                Intent intent = new Intent(getActivity(), AddToCartActivity.class);
+                intent.putExtra(INTENT_POPULAR_FOOD_KEY,model);
+                startActivity(intent);
 
             }
         };
@@ -168,7 +177,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     framelayout.setVisibility(View.GONE);
                     List<FoodData> data = response.body().getData();
                     for (FoodData datas : data) {
-                        modelListFood.add(new FoodData(datas.getId(), datas.getName(), datas.getPrice(), datas.getImage(), datas.getHref(), datas.getMenu_category_name()));
+                        modelListFood.add(new FoodData(datas.getId(), datas.getName(), datas.getPrice(), datas.getImage(), datas.getHref(), datas.getMenu_category_name(),datas.getBig_image(),datas.getDescription()));
 
                     }
                     adapterFood = new FoodAdapter(modelListFood);
@@ -194,6 +203,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         trendOnClickListener = new TrendOnClickListener() {
             @Override
             public void onClick(TrendData model) {
+                Intent intent =  new Intent(getActivity(), AddToCartActivity.class);
+                intent.putExtra(INTENT_POPULAR_TREMDS_KEY,model);
+                startActivity(intent);
 
             }
         };
@@ -210,7 +222,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     framelayout.setVisibility(View.GONE);
                     List<TrendData> data = response.body().getData();
                     for (TrendData datas : data) {
-                        modelList.add(new TrendData(datas.getId(), datas.getName(), datas.getPrice(), datas.getImage(), datas.getHref(), datas.getMenu_category_name()));
+                        modelList.add(new TrendData(datas.getId(), datas.getName(), datas.getPrice(), datas.getImage(), datas.getHref(), datas.getMenu_category_name(),datas.getBig_image(),datas.getDescription()));
                     }
 
                     adapterTrend = new TrendAdapter(modelList);

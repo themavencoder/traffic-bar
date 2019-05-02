@@ -26,6 +26,9 @@ import com.getmobileltd.trafficbar.AppInstance;
 import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
 import com.getmobileltd.trafficbar.dashboard.DashboardActivity;
+import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinkData;
+import com.getmobileltd.trafficbar.dashboard.home.food.FoodData;
+import com.getmobileltd.trafficbar.dashboard.home.trend.TrendData;
 import com.getmobileltd.trafficbar.dashboard.mycart.MyCartFragment;
 import com.getmobileltd.trafficbar.orderfood.menudetails.model.Menus;
 import com.google.android.material.appbar.AppBarLayout;
@@ -62,6 +65,9 @@ import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.model.AddToCartMod
 import java.math.BigDecimal;
 import java.util.List;
 
+import static com.getmobileltd.trafficbar.dashboard.home.HomeFragment.INTENT_POPULAR_DRINK_KEY;
+import static com.getmobileltd.trafficbar.dashboard.home.HomeFragment.INTENT_POPULAR_FOOD_KEY;
+import static com.getmobileltd.trafficbar.dashboard.home.HomeFragment.INTENT_POPULAR_TREMDS_KEY;
 import static com.getmobileltd.trafficbar.orderfood.menudetails.MenuDetailsActivity.MENU_DETAILS_KEY;
 
 public class AddToCartActivity extends AppCompatActivity implements AddCartExtraListener, View.OnClickListener {
@@ -74,6 +80,9 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
     private Button mButtonAddToCart;
     public static final String EXTRA_CART = "com.getmobileltd.trafficbar.addtocart.AddToCartActivity";
     private Menus menus;
+    private TrendData trendMenus;
+    private DrinkData drinkNenus;
+    private FoodData foodMenus;
     private TextView mTvName, mTvPrice, mTvDescription, mTvQuantity;
     private ImageView mImageHeader, mImageMinus, mImagePlus;
     public static final String one = "1";
@@ -115,11 +124,68 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
         init();
         gradientImage();
         menus = getIntent().getParcelableExtra(MENU_DETAILS_KEY);
+        trendMenus = getIntent().getParcelableExtra(INTENT_POPULAR_TREMDS_KEY);
+        foodMenus = getIntent().getParcelableExtra(INTENT_POPULAR_FOOD_KEY);
+        drinkNenus = getIntent().getParcelableExtra(INTENT_POPULAR_DRINK_KEY);
+
         if (menus != null) {
             getData();
         }
+        if (foodMenus != null) {
+            getFoodData();
+
+        }
+        if (drinkNenus != null) {
+            getDrinkData();
+
+        }
+        if (trendMenus != null) {
+            getTrendData();
+        }
 
 
+    }
+
+    private void getTrendData() {
+        mTvName.setText(trendMenus.getName());
+        mTvPrice.setText(trendMenus.getPrice());
+        initial_price = Double.parseDouble(mTvPrice.getText().toString());
+        mTvDescription.setText(trendMenus.getDescription());
+        Glide.with(this)
+                .load(trendMenus.getBig_image())
+                .apply(new RequestOptions()
+                        .placeholder(R.color.colorAccent)
+                        .error(R.color.black))
+                .into(mImageHeader);
+        mTvQuantity.setText(one);
+    }
+
+    private void getDrinkData() {
+        mTvName.setText(drinkNenus.getName());
+        mTvPrice.setText(drinkNenus.getPrice());
+        initial_price = Double.parseDouble(mTvPrice.getText().toString());
+        mTvDescription.setText(drinkNenus.getDescription());
+        Glide.with(this)
+                .load(drinkNenus.getBig_image())
+                .apply(new RequestOptions()
+                        .placeholder(R.color.colorAccent)
+                        .error(R.color.black))
+                .into(mImageHeader);
+        mTvQuantity.setText(one);
+    }
+
+    private void getFoodData() {
+        mTvName.setText(foodMenus.getName());
+        mTvPrice.setText(foodMenus.getPrice());
+        initial_price = Double.parseDouble(mTvPrice.getText().toString());
+        mTvDescription.setText(foodMenus.getDescription());
+        Glide.with(this)
+                .load(foodMenus.getBig_image())
+                .apply(new RequestOptions()
+                        .placeholder(R.color.colorAccent)
+                        .error(R.color.black))
+                .into(mImageHeader);
+        mTvQuantity.setText(one);
     }
 
     private void getData() {
@@ -199,8 +265,23 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
     private void addToCart() {
         String quantity = mTvQuantity.getText().toString();
         int quantityInt = Integer.parseInt(quantity);
-        AddToCartModel model = new AddToCartModel(menus.getId(), quantityInt);
-        cartResponse = trafficBarService.createCart(appInstance.getApi_key(),model);
+        if (menus != null) {
+            AddToCartModel model = new AddToCartModel(menus.getId(), quantityInt);
+            cartResponse = trafficBarService.createCart(appInstance.getApi_key(),model);
+        }
+       if (drinkNenus != null) {
+           AddToCartModel model = new AddToCartModel(drinkNenus.getId(),quantityInt);
+           cartResponse = trafficBarService.createCart(appInstance.getApi_key(),model);
+       }
+       if (foodMenus != null) {
+           AddToCartModel model = new AddToCartModel(foodMenus.getId(), quantityInt);
+           cartResponse = trafficBarService.createCart(appInstance.getApi_key(),model);
+       }
+       if (trendMenus != null) {
+           AddToCartModel model = new AddToCartModel(trendMenus.getId(),quantityInt);
+           cartResponse = trafficBarService.createCart(appInstance.getApi_key(),model);
+       }
+
         mButtonAddToCart.setBackgroundColor(getResources().getColor(R.color.deep_ash));
         mButtonAddToCart.setEnabled(false);
         mButtonAddToCart.setText(getString(R.string.addingToCart));

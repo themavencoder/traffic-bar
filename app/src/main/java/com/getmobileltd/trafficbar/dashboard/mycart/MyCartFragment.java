@@ -65,6 +65,8 @@ public class MyCartFragment extends Fragment implements View.OnClickListener {
     private AppInstance appInstance;
     private CartOnClickListener mListener;
     private FrameLayout frameLayout;
+    private int numberOfItemsInCart;
+
 
 
     public MyCartFragment() {
@@ -116,6 +118,7 @@ public class MyCartFragment extends Fragment implements View.OnClickListener {
                             frameLayout.setVisibility(View.GONE);
                             Toast.makeText(getActivity(), "Item deleted successfully", Toast.LENGTH_SHORT).show();
                             getCart();
+
                         } else {
                             frameLayout.setVisibility(View.GONE);
                             Toast.makeText(getActivity(), "Error in deleting Try again!", Toast.LENGTH_SHORT).show();
@@ -159,6 +162,9 @@ public class MyCartFragment extends Fragment implements View.OnClickListener {
                 assert response.body() != null;
                 if (response.body().status.equals("success")) {
                     cartList.clear();
+                    numberOfItemsInCart = response.body().getCount();
+                   appInstance.setCart_count(response.body().getCount());
+                    Toast.makeText(getActivity(), "" + numberOfItemsInCart, Toast.LENGTH_SHORT).show();
                     frameLayout.setVisibility(View.GONE);
                     List<CartData> cartData = response.body().getData();
                     for (CartData datas : cartData) {
@@ -180,4 +186,5 @@ public class MyCartFragment extends Fragment implements View.OnClickListener {
             }
         });
     }
+
 }
