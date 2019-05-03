@@ -68,7 +68,7 @@
                 android:layout_height="match_parent"
 
                 android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
+
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -137,15 +137,18 @@
                         android:layout_height="wrap_content"
                         android:text="@string/traffic"
                         android:textColor="@color/black_text"
-                        android:textSize="@dimen/fourteen_sp"
+                        android:textSize="@dimen/sixteen_sp"
+                        android:textStyle="bold"
                         tools:layout_editor_absoluteX="152dp"
                         tools:layout_editor_absoluteY="19dp" />
 
                     <TextView
+                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="2dp"
                         android:text="@string/bar"
+                        android:textSize="@dimen/sixteen_sp"
                         android:textColor="@color/colorAccent"
                         app:layout_constraintStart_toEndOf="@+id/textView2"
                         tools:layout_editor_absoluteY="19dp" />

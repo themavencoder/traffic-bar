@@ -133,6 +133,7 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
                 if (position == 0) {
+                    bottomNavigation.setCurrentItem(1);
                     setFragment(homeFragment);
 
 

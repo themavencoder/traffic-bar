@@ -69,7 +69,7 @@
                 android:id="@+id/textview_header_one"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-
+android:textStyle="bold"
                 android:layout_marginStart="12dp"
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="8dp"
