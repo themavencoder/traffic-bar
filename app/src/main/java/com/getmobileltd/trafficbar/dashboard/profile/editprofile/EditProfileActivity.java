@@ -28,6 +28,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
@@ -39,6 +40,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private static final int STORAGE_PERMISSION_CODE = 2;
     private ImageView mImageViewButton, mImageViewPhoto;
     private Uri imageUri;
+    private String firstName, lastName;
+    private TextView mTextViewName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +49,20 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_edit_profile);
         UiSettings.colorStatusbar(this, R.color.colorAccent);
         init();
+Intent intent = getIntent();
+                if (getIntent() != null) {
+                     firstName = intent.getStringExtra("firstNameConstant");
+                     lastName = intent.getStringExtra("lastNameConstant");
+                }
+           String fullName = firstName + " " + lastName;
+                mTextViewName.setText(fullName);
 
     }
 
     private void init() {
         mImageViewButton = findViewById(R.id.imageview_upload_photo);
         mImageViewPhoto = findViewById(R.id.imageview_photo);
+        mTextViewName = findViewById(R.id.textview_name);
         mImageViewButton.setOnClickListener(this);
     }
 

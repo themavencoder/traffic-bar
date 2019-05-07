@@ -106,10 +106,11 @@ public class MenuDetailsActivity extends AppCompatActivity  {
                     MenuDetailsInformation information = response.body().getData();
                    List<Menus> menus =  information.getMenus();
                    for (Menus menu : menus) {
-                       modelList.add(new Menus(menu.getMenu_name(),menu.getMenu_price(),menu.getMenu_image_sm(),menu.getMenu_image_bg(),menu.getMenu_description(),menu.getId()));
+                       modelList.add(new Menus(menu.getMenu_name(),menu.getMenu_price(),menu.getMenu_image_sm(),menu.getMenu_image_bg(),menu.getMenu_description(),menu.getId(),menu.getMenu_extra()));
                       // Toast.makeText(MenuDetailsActivity.this, "" + menu.getMenu_image_sm(), Toast.LENGTH_SHORT).show();
-
+                       Toast.makeText(MenuDetailsActivity.this, "" + menu.getMenu_extra(), Toast.LENGTH_SHORT).show();
                    }
+
                     adapter = new MenuDetailsAdapter(modelList);
                     adapter.setmenuClickListener(mlistener);
                     recyclerView.setAdapter(adapter);

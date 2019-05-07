@@ -20,7 +20,9 @@ import android.service.autofill.UserData;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.getmobileltd.trafficbar.database.AsyncResponse;
+import com.getmobileltd.trafficbar.database.OnRetrieveFirstName;
+import com.getmobileltd.trafficbar.database.OnRetrieveLastName;
+import com.getmobileltd.trafficbar.database.OnRetrieveUserApi;
 import com.getmobileltd.trafficbar.database.UserDatabase;
 import com.getmobileltd.trafficbar.database.contract.UserDao;
 import com.getmobileltd.trafficbar.database.model.User;
@@ -30,15 +32,11 @@ import com.getmobileltd.trafficbar.database.model.User;
  */
 public class UserRepository {
     private UserDao userDao;
-    private String apiKey;
-   public static AsyncResponse delegate;
+
 
     public UserRepository(Application application) {
         UserDatabase userDatabase = UserDatabase.getInstance(application);
         userDao = userDatabase.userDao();
-
-    //    apiKey = userDao.getApiKey();
-
     }
 
     public void insert(User user) {
@@ -46,8 +44,17 @@ public class UserRepository {
         Log.d("INSERT", "Successfully inserted");
 
     }
-    public void getApikey() {
-        new GetApiKeyAsyncTask(userDao).execute();
+
+    public void getApikey(OnRetrieveUserApi onRetrieveUserApi) {
+        new GetApiKeyAsyncTask(userDao,onRetrieveUserApi).execute();
+    }
+
+    public void getFirstName(OnRetrieveFirstName onRetrieveFirstName) {
+        new GetFirstNameAsyncTask(userDao,onRetrieveFirstName).execute();
+
+    }
+    public void getLastName(OnRetrieveLastName onRetrieveLastName) {
+        new GetLastNameAsyncTask(userDao,onRetrieveLastName).execute();
     }
 
     private static class InsertUserAsyncTask extends AsyncTask<User, Void, Void> {
@@ -64,30 +71,90 @@ public class UserRepository {
         }
 
     }
+    public static class GetFirstNameAsyncTask extends AsyncTask<Void, Void, String> {
 
-    public static class GetApiKeyAsyncTask extends AsyncTask<Void, Void, String> {
+        private static UserDao userDao;
+        private OnRetrieveFirstName onRetrieveFirstName;
 
-        private UserDao userDao;
-        private AsyncResponse delegate;
 
-        public GetApiKeyAsyncTask(UserDao userDao) {
+        public GetFirstNameAsyncTask(UserDao userDao, OnRetrieveFirstName onRetrieveFirstName) {
 
             this.userDao  =userDao;
+            this.onRetrieveFirstName = onRetrieveFirstName;
         }
 
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
 
         @Override
         protected String doInBackground(Void... voids) {
-            String abc = "abc sample";
-            return abc;
-            //
-            // return userDao.getApiKey();
+
+            return userDao.getFirstName();
         }
 
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-//          delegate.processFinish(s);
+            onRetrieveFirstName.getFirstName(s);
+        }
+    }
+    public static class GetLastNameAsyncTask extends AsyncTask<Void, Void, String> {
+
+        private static UserDao userDao;
+        private OnRetrieveLastName onRetrieveLastName;
+
+
+        public GetLastNameAsyncTask(UserDao userDao, OnRetrieveLastName onRetrieveLastName) {
+
+            this.userDao  =userDao;
+            this.onRetrieveLastName = onRetrieveLastName;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            return userDao.getLastName();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            onRetrieveLastName.getLastName(s);
+        }
+    }
+    public static class GetApiKeyAsyncTask extends AsyncTask<Void, Void, String> {
+
+        private static UserDao userDao;
+        private OnRetrieveUserApi onRetrieveUserApi;
+
+
+        public GetApiKeyAsyncTask(UserDao userDao, OnRetrieveUserApi onRetrieveUserApi) {
+
+            this.userDao  =userDao;
+            this.onRetrieveUserApi = onRetrieveUserApi;
+        }
+
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            return userDao.getApiKey();
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            onRetrieveUserApi.pnRetrieveUserFinish(s);
         }
     }
 

@@ -92,6 +92,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
     private FrameLayout frameLayout;
 
     public double initial_price;
+    public double price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -326,7 +327,23 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
         int i = Integer.parseInt(j);
         int result = i + 1;
 
-        double price = Double.parseDouble(menus.getMenu_price());
+
+        if (menus != null) {
+             price = Double.parseDouble(menus.getMenu_price());
+        }
+        if (foodMenus != null) {
+           price = Double.parseDouble(foodMenus.getPrice());
+
+        }
+        if (drinkNenus != null) {
+           price = Double.parseDouble(drinkNenus.getPrice());
+
+        }
+        if (trendMenus != null) {
+            price = Double.parseDouble(trendMenus.getPrice());
+        }
+
+
         BigDecimal priceDecimal = BigDecimal.valueOf(price);
         BigDecimal resultDecimal = BigDecimal.valueOf(result);
         BigDecimal resultPrice = priceDecimal.multiply(resultDecimal);
@@ -340,12 +357,40 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
         int i = Integer.parseInt(j);
         if (i == 1) {
             mTvQuantity.setText(one);
-            Double price = Double.parseDouble(menus.getMenu_price());
+            if (menus != null) {
+                price = Double.parseDouble(menus.getMenu_price());
+            }
+            if (foodMenus != null) {
+                price = Double.parseDouble(foodMenus.getPrice());
+
+            }
+            if (drinkNenus != null) {
+                price = Double.parseDouble(drinkNenus.getPrice());
+
+            }
+            if (trendMenus != null) {
+                price = Double.parseDouble(trendMenus.getPrice());
+            }
+
             mTvPrice.setText(String.valueOf(price));
 
         } else {
             int result = i - 1;
-            double price = Double.parseDouble(menus.getMenu_price());
+            if (menus != null) {
+                price = Double.parseDouble(menus.getMenu_price());
+            }
+            if (foodMenus != null) {
+                price = Double.parseDouble(foodMenus.getPrice());
+
+            }
+            if (drinkNenus != null) {
+                price = Double.parseDouble(drinkNenus.getPrice());
+
+            }
+            if (trendMenus != null) {
+                price = Double.parseDouble(trendMenus.getPrice());
+            }
+
             BigDecimal priceDecimal = BigDecimal.valueOf(price);
             BigDecimal resultDecimal = BigDecimal.valueOf(result);
             BigDecimal resultPrice = priceDecimal.multiply(resultDecimal);

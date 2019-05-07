@@ -23,6 +23,11 @@ public class AppInstance {
     private String api_key;
 
     private int cart_count;
+
+    private String firstName;
+    private String lastName;
+
+    private int navlocation;
     public static AppInstance getInstance() {
         if (sInstance == null) {
             sInstance = new AppInstance();
@@ -32,6 +37,30 @@ public class AppInstance {
 
     public String getApi_key() {
         return api_key;
+    }
+
+    public int getNavlocation() {
+        return navlocation;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setNavlocation(int navlocation) {
+        this.navlocation = navlocation;
     }
 
     public void setApi_key(String api_key) {

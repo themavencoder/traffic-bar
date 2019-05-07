@@ -17,6 +17,6 @@ package com.getmobileltd.trafficbar.database;
 /**
  * Created by themavencoder on 24,April,2019
  */
-public interface AsyncResponse {
-    void processFinish(String apiKey);
+public interface OnRetrieveUserApi {
+    void pnRetrieveUserFinish(String apiKey);
 }

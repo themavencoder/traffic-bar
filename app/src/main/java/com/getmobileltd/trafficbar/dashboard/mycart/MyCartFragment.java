@@ -15,6 +15,7 @@
 package com.getmobileltd.trafficbar.dashboard.mycart;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,12 +40,14 @@ import com.getmobileltd.trafficbar.application.TrafficBarService;
 import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.application.SampleContent;
 import com.getmobileltd.trafficbar.checkout.CheckoutActivity;
+import com.getmobileltd.trafficbar.dashboard.DashboardActivity;
 import com.getmobileltd.trafficbar.dashboard.mycart.adapter.MyCartAdapter;
 import com.getmobileltd.trafficbar.dashboard.mycart.deletecart.DeleteResponse;
 import com.getmobileltd.trafficbar.dashboard.mycart.listener.CartOnClickListener;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.CartData;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartResponse;
+import com.getmobileltd.trafficbar.dashboard.mycart.updatecart.UpdateCartResponse;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -66,8 +70,14 @@ public class MyCartFragment extends Fragment implements View.OnClickListener {
     private CartOnClickListener mListener;
     private FrameLayout frameLayout;
     private int numberOfItemsInCart;
+    private MyCartFragmentCallback myCartFragmentCallback;
+    private Call<UpdateCartResponse> updateCartResponseCall;
+    private String repoApiKey;
 
 
+public interface MyCartFragmentCallback {
+    void getCartTotal(int total);
+    }
 
     public MyCartFragment() {
         // Required empty public constructor
@@ -86,7 +96,7 @@ public class MyCartFragment extends Fragment implements View.OnClickListener {
         mAdapter.setCartClickListener(mListener);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         mRecyclerView.setAdapter(mAdapter);
-
+        repoApiKey = ((DashboardActivity)getActivity()).getApiKeyFromDatabase();
         mButtonCheckout = v.findViewById(R.id.button_checkout);
         mButtonCheckout.setOnClickListener(this);
         trafficBarService = TrafficBarApplication.get(getActivity()).getTrafficBarService();
@@ -98,17 +108,35 @@ public class MyCartFragment extends Fragment implements View.OnClickListener {
         return v;
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+         try {
+            this.myCartFragmentCallback = (MyCartFragmentCallback) context;
+        } catch (ClassCastException e) {
+            Log.e("MyCartFragment",e.getMessage());
+
+        }
+
+    }
+
+    private void updateCart(int id) {
+    updateCartResponseCall = trafficBarService.updateCart(repoApiKey,id);
+
+    }
+
     private void checkout() {
         mListener = new CartOnClickListener() {
             @Override
             public void add(CartData model, View v) {
                 Toast.makeText(getActivity(), "add", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
             public void onDelete(CartData model) {
                 Toast.makeText(getActivity(), "Delete", Toast.LENGTH_SHORT).show();
-                deleteResponseCall = trafficBarService.deleteCart(appInstance.getApi_key(),model.getId());
+                deleteResponseCall = trafficBarService.deleteCart(repoApiKey,model.getId());
                 frameLayout.setVisibility(View.VISIBLE);
                 deleteResponseCall.enqueue(new Callback<DeleteResponse>() {
                     @Override
@@ -155,7 +183,7 @@ public class MyCartFragment extends Fragment implements View.OnClickListener {
 
     private void getCart() {
         frameLayout.setVisibility(View.VISIBLE);
-        cartResponseCall = trafficBarService.getCart(appInstance.getApi_key());
+        cartResponseCall = trafficBarService.getCart(repoApiKey);
         cartResponseCall.enqueue(new Callback<MyCartResponse>() {
             @Override
             public void onResponse(Call<MyCartResponse> call, @NotNull Response<MyCartResponse> response) {
@@ -164,7 +192,7 @@ public class MyCartFragment extends Fragment implements View.OnClickListener {
                     cartList.clear();
                     numberOfItemsInCart = response.body().getCount();
                    appInstance.setCart_count(response.body().getCount());
-                    Toast.makeText(getActivity(), "" + numberOfItemsInCart, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "" + numberOfItemsInCart, Toast.LENGTH_SHORT).show();
                     frameLayout.setVisibility(View.GONE);
                     List<CartData> cartData = response.body().getData();
                     for (CartData datas : cartData) {
@@ -173,6 +201,7 @@ public class MyCartFragment extends Fragment implements View.OnClickListener {
                     mAdapter = new MyCartAdapter(cartList);
                     mAdapter.setCartClickListener(mListener);
                     mRecyclerView.setAdapter(mAdapter);
+                    myCartFragmentCallback.getCartTotal(response.body().getCount());
                 } else {
                     frameLayout.setVisibility(View.GONE);
                     Toast.makeText(getActivity(), "Could not process. Try again!", Toast.LENGTH_SHORT).show();

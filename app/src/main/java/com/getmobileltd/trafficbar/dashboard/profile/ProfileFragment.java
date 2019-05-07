@@ -16,48 +16,79 @@ package com.getmobileltd.trafficbar.dashboard.profile;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.getmobileltd.trafficbar.AppInstance;
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.checkout.CheckoutActivity;
+import com.getmobileltd.trafficbar.dashboard.DashboardActivity;
 import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.AddToCartActivity;
+import com.getmobileltd.trafficbar.dashboard.profile.callback.FirstNamePasserCallback;
+import com.getmobileltd.trafficbar.dashboard.profile.callback.LastNamePasserCallback;
 import com.getmobileltd.trafficbar.dashboard.profile.editprofile.EditProfileActivity;
+import com.getmobileltd.trafficbar.database.OnRetrieveFirstName;
+import com.getmobileltd.trafficbar.database.OnRetrieveLastName;
+import com.getmobileltd.trafficbar.database.repository.UserRepository;
 
 public class ProfileFragment extends Fragment {
-    private TextView viewProfile;
+    private TextView viewProfile, mTextViewFullName;
     private View v;
-
+    private UserRepository repository;
+    private String firstName, lastName;
+    private AppInstance appInstance;
+    private String repoFirstName, repoLastName;
 
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        UiSettings.colorStatusbar(getActivity(),R.color.colorAccent);
+        UiSettings.colorStatusbar(getActivity(), R.color.colorAccent);
         // Inflate the layout for this fragment
+        DashboardActivity dashboardActivity = (DashboardActivity) getActivity();
+        assert dashboardActivity != null;
 
+        repoFirstName = dashboardActivity.getFirstNamee();
+        repoLastName = dashboardActivity.getLastNamee();
+        v = inflater.inflate(R.layout.fragment_profile, container, false);
+        appInstance = AppInstance.getInstance();
+        firstName = appInstance.getFirstName();
+        lastName = appInstance.getLastName();
+        init();
 
-        v =  inflater.inflate(R.layout.fragment_profile, container, false);
+        String fullName = repoFirstName + " " + repoLastName;
+        mTextViewFullName.setText(fullName);
 
-init();
         return v;
 
 
     }
 
-    private void init()  {
+    private void init() {
         viewProfile = v.findViewById(R.id.textview_view_profile);
+        mTextViewFullName = v.findViewById(R.id.textview_full_name);
+
         viewProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), EditProfileActivity.class));
+                Intent intent = new Intent(v.getContext(),EditProfileActivity.class);
+                intent.putExtra("firstNameConstant",repoFirstName);
+                intent.putExtra("lastNameConstant",repoLastName);
+                startActivity(intent);
             }
         });
     }
+
+
+
 }
 

@@ -27,11 +27,15 @@ public class User {
     @PrimaryKey
     private int id;
     private String apiKey;
+    private String firstName;
+    private String lastName;
 
 
-    public User(int id, String apiKey) {
+    public User(int id, String apiKey,String firstName, String lastName) {
         this.id = id;
         this.apiKey = apiKey;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public int getId() {
@@ -48,5 +52,13 @@ public class User {
 
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 }

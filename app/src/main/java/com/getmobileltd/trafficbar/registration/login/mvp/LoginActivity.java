@@ -173,9 +173,13 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                 if (response.body().getCode() == 200) {
                     // mLoginDialog.dismiss();
                     String apikey = response.body().getData().getUser().getKey();
+                    String firstName = response.body().getData().getUser().getFirstName();
+                    String lastName = response.body().getData().getUser().getLastName();
                     AppInstance appInstance = AppInstance.getInstance();
                     appInstance.setApi_key(apikey);
-                    com.getmobileltd.trafficbar.database.model.User user = new com.getmobileltd.trafficbar.database.model.User(1, apikey);
+                    appInstance.setFirstName(firstName);
+                    appInstance.setLastName(lastName);
+                    com.getmobileltd.trafficbar.database.model.User user = new com.getmobileltd.trafficbar.database.model.User(1, apikey, firstName,lastName);
                     repository.insert(user);
 
 

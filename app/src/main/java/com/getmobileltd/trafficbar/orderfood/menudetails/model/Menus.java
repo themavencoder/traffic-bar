@@ -32,6 +32,8 @@ public class Menus implements  Parcelable{
     private String menu_name;
     @SerializedName("menu_description")
     private String menu_description;
+    @SerializedName("menu_extra")
+    private String menu_extra;
     @SerializedName("menu_price")
     private String menu_price;
     @SerializedName("menu_image_sm")
@@ -39,13 +41,14 @@ public class Menus implements  Parcelable{
     @SerializedName("menu_image_bg")
     private String menu_image_bg;
 
-    public Menus(String menu_name, String menu_price, String menu_image_sm, String menu_image_bg,String menu_description, int id) {
+    public Menus(String menu_name, String menu_price, String menu_image_sm, String menu_image_bg,String menu_description, int id,String menu_extra) {
         this.menu_name = menu_name;
         this.menu_price = menu_price;
         this.menu_image_sm = menu_image_sm;
         this.menu_description = menu_description;
         this.menu_image_bg = menu_image_bg;
         this.id = id;
+        this.menu_extra = menu_extra;
 
 
     }
@@ -75,6 +78,10 @@ public class Menus implements  Parcelable{
 
     public int getId() {
         return id;
+    }
+
+    public String getMenu_extra() {
+        return menu_extra;
     }
 
     public int getCategory_id() {

@@ -21,10 +21,31 @@ import com.google.gson.annotations.SerializedName;
  */
 public class LoginUser {
 
+    @SerializedName("first_name")
+    private String firstName;
+
+    @SerializedName("last_name")
+    private String lastName;
+
+    @SerializedName("id")
+    private String userId;
+
     @SerializedName("api_key")
     private String key;
 
     public String getKey() {
         return key;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 }

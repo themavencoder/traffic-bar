@@ -22,6 +22,7 @@ import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.AddToCartResponse;
 import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.model.AddToCartModel;
 import com.getmobileltd.trafficbar.dashboard.mycart.deletecart.DeleteResponse;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartResponse;
+import com.getmobileltd.trafficbar.dashboard.mycart.updatecart.UpdateCartResponse;
 import com.getmobileltd.trafficbar.orderfood.menudetails.model.MenuDetailsModel;
 import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuResponse;
 import com.getmobileltd.trafficbar.registration.login.networkresponse.LogInResponse;
@@ -34,6 +35,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 /**
@@ -68,13 +70,16 @@ public interface TrafficBarService {
     Call<DeleteResponse> deleteCart(@Header("Authorization") String value, @Path("id") int id);
 
     @GET("dashboard/trending")
-    Call<TrendingResponse> getTrending();
+    Call<TrendingResponse> getTrending(@Header("Authorization") String value);
 
     @GET("dashboard/drink")
-    Call<DrinkResponse> getDrinks();
+    Call<DrinkResponse> getDrinks(@Header("Authorization") String value);
 
     @GET("dashboard/Food")
-    Call<FoodResponse> getFood();
+    Call<FoodResponse> getFood(@Header("Authorization") String value);
+
+    @PUT("carts/update/{id}")
+    Call<UpdateCartResponse> updateCart(@Header("Authorization") String value, @Path("id") int id);
 
 
 }

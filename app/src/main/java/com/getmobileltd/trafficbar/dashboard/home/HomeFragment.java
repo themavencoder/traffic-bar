@@ -39,6 +39,7 @@ import com.getmobileltd.trafficbar.application.SampleContent;
 import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
 import com.getmobileltd.trafficbar.application.UiSettings;
+import com.getmobileltd.trafficbar.dashboard.DashboardActivity;
 import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinkData;
 import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinkResponse;
 import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinksAdapter;
@@ -55,6 +56,8 @@ import com.getmobileltd.trafficbar.dashboard.home.trend.TrendModel;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendOnClickListener;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendingResponse;
 import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.AddToCartActivity;
+import com.getmobileltd.trafficbar.database.OnRetrieveUserApi;
+import com.getmobileltd.trafficbar.database.repository.UserRepository;
 import com.getmobileltd.trafficbar.orderfood.menulist.ListAvailableFoodActivity;
 
 import java.util.ArrayList;
@@ -84,6 +87,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public static final String INTENT_POPULAR_TREMDS_KEY = "popular_trends_key";
     public static final String INTENT_POPULAR_FOOD_KEY = "popular_food_key";
     public static final String INTENT_POPULAR_DRINK_KEY = "popular_drink_key";
+    private UserRepository repository;
+    private String repoApiKey;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -97,8 +102,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         v = inflater.inflate(R.layout.fragment_home, container, false);
         UiSettings.colorStatusbar(getActivity(), R.color.deep_ash);
+       repoApiKey = ((DashboardActivity)getActivity()).getApiKeyFromDatabase();
         trafficBarService = TrafficBarApplication.get(getActivity()).getTrafficBarService();
         init(v);
+
 
         trendClick();
         foodClick();
@@ -123,13 +130,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void getDrinks() {
         framelayout.setVisibility(View.VISIBLE);
-        drinkResponseCall = trafficBarService.getDrinks();
+        drinkResponseCall = trafficBarService.getDrinks(repoApiKey);
         drinkResponseCall.enqueue(new Callback<DrinkResponse>() {
             @Override
             public void onResponse(Call<DrinkResponse> call, Response<DrinkResponse> response) {
                 assert response.body() != null;
                 if (response.body().getCode() == 200) {
+                    modelListDrinks.clear();
                     framelayout.setVisibility(View.GONE);
+
                     List<DrinkData> data = response.body().getData();
                     for (DrinkData datas : data) {
                         modelListDrinks.add(new DrinkData(datas.getId(),datas.getName(),datas.getPrice(),datas.getImage(),datas.getHref(),datas.getMenu_category_name(),datas.getBig_image(),datas.getDescription()));
@@ -168,12 +177,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void getFood() {
         framelayout.setVisibility(View.VISIBLE);
-        foodResponseCall = trafficBarService.getFood();
+        foodResponseCall = trafficBarService.getFood(repoApiKey);
         foodResponseCall.enqueue(new Callback<FoodResponse>() {
             @Override
             public void onResponse(Call<FoodResponse> call, Response<FoodResponse> response) {
                 assert response.body() != null;
                 if (response.body().getCode() == 200) {
+                    modelListFood.clear();
                     framelayout.setVisibility(View.GONE);
                     List<FoodData> data = response.body().getData();
                     for (FoodData datas : data) {
@@ -213,12 +223,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void getTrending() {
         framelayout.setVisibility(View.VISIBLE);
-        trendingResponseCall = trafficBarService.getTrending();
+        trendingResponseCall = trafficBarService.getTrending(repoApiKey);
         trendingResponseCall.enqueue(new Callback<TrendingResponse>() {
             @Override
             public void onResponse(Call<TrendingResponse> call, Response<TrendingResponse> response) {
                 assert response.body() != null;
                 if (response.body().getCode() == 200) {
+                    modelList.clear();
                     framelayout.setVisibility(View.GONE);
                     List<TrendData> data = response.body().getData();
                     for (TrendData datas : data) {

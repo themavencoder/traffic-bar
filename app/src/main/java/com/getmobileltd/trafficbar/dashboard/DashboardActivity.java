@@ -19,6 +19,14 @@ import androidx.annotation.NonNull;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.getmobileltd.trafficbar.AppInstance;
+import com.getmobileltd.trafficbar.dashboard.discover.callback.ApiPasserCallback;
+import com.getmobileltd.trafficbar.dashboard.profile.callback.FirstNamePasserCallback;
+import com.getmobileltd.trafficbar.dashboard.profile.callback.LastNamePasserCallback;
+import com.getmobileltd.trafficbar.database.OnRetrieveFirstName;
+import com.getmobileltd.trafficbar.database.OnRetrieveLastName;
+import com.getmobileltd.trafficbar.database.OnRetrieveUserApi;
+import com.getmobileltd.trafficbar.database.repository.UserRepository;
+import com.getmobileltd.trafficbar.orderfood.menulist.menulistener.MenuOnClickListener;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
@@ -48,7 +56,8 @@ import com.getmobileltd.trafficbar.dashboard.profile.ProfileFragment;
 import static android.view.View.VISIBLE;
 import static com.getmobileltd.trafficbar.dashboard.mycart.addtocart.AddToCartActivity.EXTRA_CART;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements DiscoverFragment.OnMenuClickListener , MyCartFragment.MyCartFragmentCallback {
+
     private BottomNavigationView mBottomNavigationView;
     private FrameLayout mFrameLayout;
     private HomeFragment homeFragment;
@@ -63,12 +72,22 @@ public class DashboardActivity extends AppCompatActivity {
     private AHBottomNavigationItem item1, item2, item3, item4, item5;
     private static int count;
     private AppInstance appInstance;
+    private UserRepository repository;
+    public static final String DASHBOARD_TO_DISCOVER_FRAGMENT = "dashboard_to_discover_fragment";
+    public String callbackApi;
+    private ApiPasserCallback apiPasserCallback;
+    private FirstNamePasserCallback firstNamePasserCallback;
+    private LastNamePasserCallback lastNamePasserCallback;
+    private String firstNamee, lastNamee;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         Intent intent = getIntent();
+        apiPasserCallback = this.discoverFragment;
 
         mFrameLayout = findViewById(R.id.frame_layout);
         bottomNavigation = findViewById(R.id.bottom_navigation_view);
@@ -78,10 +97,51 @@ public class DashboardActivity extends AppCompatActivity {
         profileFragment = new ProfileFragment();
         cartFragment = new MyCartFragment();
         appInstance = AppInstance.getInstance();
+        repository = new UserRepository(getApplication());
+        repository.getApikey(new OnRetrieveUserApi() {
+            @Override
+            public void pnRetrieveUserFinish(String apiKey) {
+                Toast.makeText(DashboardActivity.this, "Yay! activity" + apiKey, Toast.LENGTH_SHORT).show();
+                callbackApi = apiKey;
+                if (apiPasserCallback != null) apiPasserCallback.getApiFromDb(apiKey);
+            }
+        });
+        repository.getFirstName(new OnRetrieveFirstName() {
+            @Override
+            public void getFirstName(String name) {
+                Toast.makeText(DashboardActivity.this, " yay! activity first name " + name, Toast.LENGTH_SHORT).show();
+                firstNamee = name;
+                if (firstNamePasserCallback != null) {
+                    firstNamePasserCallback.getFirstNameFromDb(name);
+                }
 
 
+            }
 
 
+        });
+
+repository.getLastName(new OnRetrieveLastName() {
+    @Override
+    public void getLastName(String name) {
+        Toast.makeText(DashboardActivity.this, "activity last name yay!" +name , Toast.LENGTH_SHORT).show();
+        lastNamee = name;
+        if (lastNamePasserCallback != null) {
+            lastNamePasserCallback.getLastNameFromDb(name);
+        }
+
+    }
+
+    @Override
+    public void startProgressbar() {
+
+    }
+
+    @Override
+    public void stopProgressbar() {
+
+    }
+});
 
         item1 = new AHBottomNavigationItem(R.string.nav_home, R.drawable.ic_home_black_24dp, R.color.white);
         item2 = new AHBottomNavigationItem(R.string.nav_discover, R.drawable.ic_discover_black_24dp, R.color.white);
@@ -93,6 +153,9 @@ public class DashboardActivity extends AppCompatActivity {
         bottomNavigation.addItem(item3);
         bottomNavigation.addItem(item4);
         bottomNavigation.addItem(item5);
+
+        Toast.makeText(this, "Current nav location " + appInstance.getNavlocation(), Toast.LENGTH_SHORT).show();
+
 
         //      bottomNavigation.setDefaultBackgroundColor(getResources().getColor(R.color.ash));
         bottomNavigation.setBehaviorTranslationEnabled(false);
@@ -118,11 +181,17 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
+    public void setApiPasserCallback(ApiPasserCallback apiPasserCallback) {
+        this.apiPasserCallback = apiPasserCallback;
+    }
+
+
 
     private void defaultPosition() {
         bottomNavigation.setOnNavigationPositionListener(new AHBottomNavigation.OnNavigationPositionListener() {
             @Override
             public void onPositionChange(int y) {
+
                 setFragment(discoverFragment);
             }
         });
@@ -133,7 +202,7 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
                 if (position == 0) {
-                    bottomNavigation.setCurrentItem(1);
+
                     setFragment(homeFragment);
 
 
@@ -196,7 +265,38 @@ public class DashboardActivity extends AppCompatActivity {
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
+
         fragmentTransaction.commit();
 
+    }
+
+    @Override
+    public void getPosition(int position) {
+        bottomNavigation.setCurrentItem(position);
+    }
+
+    @Override
+    public void getCartTotal(int total) {
+        bottomNavigation.setNotification(String.valueOf(total), 2);
+    }
+
+    public String getApiKeyFromDatabase() {
+        return callbackApi;
+    }
+
+    public String getFirstNamee() {
+        return firstNamee;
+    }
+
+    public void setFirstNamee(String firstNamee) {
+        this.firstNamee = firstNamee;
+    }
+
+    public String getLastNamee() {
+        return lastNamee;
+    }
+
+    public void setLastNamee(String lastNamee) {
+        this.lastNamee = lastNamee;
     }
 }

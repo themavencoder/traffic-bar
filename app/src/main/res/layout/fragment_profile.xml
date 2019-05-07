@@ -45,12 +45,14 @@ tools:context=".dashboard.profile.ProfileFragment">
             android:textStyle="bold" />
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleimageview"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:src="@drawable/ope" />
+           android:src="@drawable/ic_add_a_photo_black_24dp" />
 
         <TextView
+            android:id="@+id/textview_full_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -74,7 +76,9 @@ tools:context=".dashboard.profile.ProfileFragment">
 
     </LinearLayout>
 
-<LinearLayout
+
+
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
     android:layout_weight="6"
@@ -207,4 +211,5 @@ tools:context=".dashboard.profile.ProfileFragment">
 
 
 </LinearLayout>
+
 </LinearLayout>

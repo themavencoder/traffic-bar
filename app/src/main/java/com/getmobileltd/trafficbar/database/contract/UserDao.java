@@ -34,4 +34,10 @@ public interface UserDao {
 
     @Query("SELECT apiKey FROM user_table WHERE id = 1")
     String getApiKey();
+
+    @Query("SELECT firstName FROM user_table WHERE id = 1")
+    String getFirstName();
+
+    @Query("SELECT lastName FROM user_table WHERE id = 1")
+    String getLastName();
 }
