@@ -30,6 +30,8 @@ import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinkData;
 import com.getmobileltd.trafficbar.dashboard.home.food.FoodData;
 import com.getmobileltd.trafficbar.dashboard.home.trend.TrendData;
 import com.getmobileltd.trafficbar.dashboard.mycart.MyCartFragment;
+import com.getmobileltd.trafficbar.database.OnRetrieveUserApi;
+import com.getmobileltd.trafficbar.database.repository.UserRepository;
 import com.getmobileltd.trafficbar.orderfood.menudetails.model.Menus;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
@@ -89,7 +91,9 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
     private TrafficBarService trafficBarService;
     private Call<AddToCartResponse> cartResponse;
     private AppInstance appInstance;
+    private UserRepository repository;
     private FrameLayout frameLayout;
+    private String dbApiKey;
 
     public double initial_price;
     public double price;
@@ -119,6 +123,13 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
                     mCollapsingToolbar.setTitle(" ");
 
                 }
+            }
+        });
+        repository = new UserRepository(getApplication());
+         repository.getApikey(new OnRetrieveUserApi() {
+            @Override
+            public void pnRetrieveUserFinish(String apiKey) {
+                dbApiKey = apiKey;
             }
         });
         trafficBarService = TrafficBarApplication.get(this).getTrafficBarService();
@@ -268,19 +279,19 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
         int quantityInt = Integer.parseInt(quantity);
         if (menus != null) {
             AddToCartModel model = new AddToCartModel(menus.getId(), quantityInt);
-            cartResponse = trafficBarService.createCart(appInstance.getApi_key(),model);
+            cartResponse = trafficBarService.createCart(dbApiKey,model);
         }
        if (drinkNenus != null) {
            AddToCartModel model = new AddToCartModel(drinkNenus.getId(),quantityInt);
-           cartResponse = trafficBarService.createCart(appInstance.getApi_key(),model);
+           cartResponse = trafficBarService.createCart(dbApiKey,model);
        }
        if (foodMenus != null) {
            AddToCartModel model = new AddToCartModel(foodMenus.getId(), quantityInt);
-           cartResponse = trafficBarService.createCart(appInstance.getApi_key(),model);
+           cartResponse = trafficBarService.createCart(dbApiKey,model);
        }
        if (trendMenus != null) {
            AddToCartModel model = new AddToCartModel(trendMenus.getId(),quantityInt);
-           cartResponse = trafficBarService.createCart(appInstance.getApi_key(),model);
+           cartResponse = trafficBarService.createCart(dbApiKey,model);
        }
 
         mButtonAddToCart.setBackgroundColor(getResources().getColor(R.color.deep_ash));
@@ -292,7 +303,10 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
             @Override
             public void onResponse(Call<AddToCartResponse> call, Response<AddToCartResponse> response) {
                 assert response.body() != null;
-                if (response.body().getStatus().equals("success") ) {
+                if (response.code() == 401) {
+                    Toast.makeText(AddToCartActivity.this, "Unauthorized", Toast.LENGTH_SHORT).show();
+                }
+                 else if (response.body().getStatus().equals("success") ) {
                     frameLayout.setVisibility(View.GONE);
                     mButtonAddToCart.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     mButtonAddToCart.setEnabled(true);

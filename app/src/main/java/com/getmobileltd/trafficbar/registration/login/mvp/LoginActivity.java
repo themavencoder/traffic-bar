@@ -22,6 +22,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.getmobileltd.trafficbar.AppInstance;
 import com.getmobileltd.trafficbar.database.repository.UserRepository;
+import com.getmobileltd.trafficbar.registration.forgotpassword.ForgotPasswordActivity;
 import com.getmobileltd.trafficbar.registration.register.SignUpActivity;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -64,6 +65,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     private CoordinatorLayout mCoordinatorLayout;
     private TextView mTvSignup;
     private UserRepository repository;
+    private TextView mTvForgotPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +90,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         frameLayout = findViewById(R.id.progress_view);
         mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
         mTvSignup = findViewById(R.id.textview_sign_up);
+        mTvForgotPassword = findViewById(R.id.textview_forgot_password);
+        mTvForgotPassword.setOnClickListener(this);
         mTvSignup.setOnClickListener(this);
 
         //  frameLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
@@ -139,7 +143,10 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.textview_sign_up) {
+        if (v.getId() == R.id.textview_forgot_password) {
+            startActivity(new Intent(this, ForgotPasswordActivity.class));
+        }
+        else if (v.getId() == R.id.textview_sign_up) {
             startActivity(new Intent(this, SignUpActivity.class));
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         }

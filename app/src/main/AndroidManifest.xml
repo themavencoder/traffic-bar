@@ -3,8 +3,8 @@
     package="com.getmobileltd.trafficbar">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".application.TrafficBarApplication"
@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".checkout.CheckoutActivity"></activity>
+        <activity android:name=".registration.forgotpassword.ForgotPasswordActivity"></activity>
+        <activity android:name=".checkout.CheckoutActivity" />
         <activity android:name=".dashboard.mycart.addtocart.AddToCartActivity" />
         <activity android:name=".dashboard.profile.editprofile.EditProfileActivity" />
         <activity android:name=".registration.login.mvp.LoginActivity" />
@@ -24,15 +25,11 @@
             android:hardwareAccelerated="true" />
         <activity android:name=".orderfood.menudetails.MenuDetailsActivity" />
         <activity android:name=".orderfood.menulist.ListAvailableFoodActivity" />
-
-        <activity android:name=".registration.register.SignUpActivity">
-
-        </activity>
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
-            android:theme="@style/Base.Theme.AppCompat"/>
-        <activity android:name=".intro.IntroActivity" >
-
-
+        <activity android:name=".registration.register.SignUpActivity"></activity>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
+        <activity android:name=".intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

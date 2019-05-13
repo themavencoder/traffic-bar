@@ -144,12 +144,10 @@ repository.getLastName(new OnRetrieveLastName() {
 });
 
         item1 = new AHBottomNavigationItem(R.string.nav_home, R.drawable.ic_home_black_24dp, R.color.white);
-        item2 = new AHBottomNavigationItem(R.string.nav_discover, R.drawable.ic_discover_black_24dp, R.color.white);
         item3 = new AHBottomNavigationItem(R.string.cart, R.drawable.ic_shopping_cart_black_24dp, R.color.white);
         item4 = new AHBottomNavigationItem(R.string.favourites, R.drawable.ic_favorite_black_24dp, R.color.white);
         item5 = new AHBottomNavigationItem(R.string.profile, R.drawable.ic_person_black_24dp, R.color.white);
         bottomNavigation.addItem(item1);
-        bottomNavigation.addItem(item2);
         bottomNavigation.addItem(item3);
         bottomNavigation.addItem(item4);
         bottomNavigation.addItem(item5);
@@ -164,7 +162,7 @@ repository.getLastName(new OnRetrieveLastName() {
         bottomNavigation.setTitleState(AHBottomNavigation.TitleState.ALWAYS_SHOW);
 
 
-        bottomNavigation.setNotification(String.valueOf(appInstance.getCart_count()), 2);
+        bottomNavigation.setNotification(String.valueOf(appInstance.getCart_count()), 1);
 
         defaultPosition();
 
@@ -172,10 +170,10 @@ repository.getLastName(new OnRetrieveLastName() {
         navSelectedListener();
 
    if (intent.hasExtra(EXTRA_CART)) {
-       bottomNavigation.setCurrentItem(2);
+       bottomNavigation.setCurrentItem(1);
    } else {
 
-       bottomNavigation.setCurrentItem(1);
+       bottomNavigation.setCurrentItem(0);
 
    }
 
@@ -202,27 +200,16 @@ repository.getLastName(new OnRetrieveLastName() {
             @Override
             public boolean onTabSelected(int position, boolean wasSelected) {
                 if (position == 0) {
-
-                    setFragment(homeFragment);
-
-
+                    setFragment(discoverFragment);
                     return true;
                 } else if (position == 1) {
-                    setFragment(discoverFragment);
-
+                    setFragment(cartFragment);
                     return true;
                 } else if (position == 2) {
-                    setFragment(cartFragment);
-                    bottomNavigation.setNotification(String.valueOf(appInstance.getCart_count()), 2);
-
+                    setFragment(favouriteFragment);
                     return true;
                 } else if (position == 3) {
-                    setFragment(favouriteFragment);
-
-                    return true;
-                } else if (position == 4) {
                     setFragment(profileFragment);
-
                     return true;
                 }
                 return false;
@@ -230,7 +217,6 @@ repository.getLastName(new OnRetrieveLastName() {
             }
         });
     }
-
 
     private void navListener() {
         mBottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -244,7 +230,6 @@ repository.getLastName(new OnRetrieveLastName() {
                         setFragment(discoverFragment);
                         return true;
                     case R.id.nav_cart:
-
                         setFragment(cartFragment);
                         return true;
                     case R.id.nav_favourites:
@@ -253,7 +238,6 @@ repository.getLastName(new OnRetrieveLastName() {
                     case R.id.nav_profile:
                         setFragment(profileFragment);
                         return true;
-
                     default:
                         return false;
                 }
@@ -262,7 +246,7 @@ repository.getLastName(new OnRetrieveLastName() {
         });
     }
 
-    private void setFragment(Fragment fragment) {
+    public void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
 
@@ -277,7 +261,7 @@ repository.getLastName(new OnRetrieveLastName() {
 
     @Override
     public void getCartTotal(int total) {
-        bottomNavigation.setNotification(String.valueOf(total), 2);
+        bottomNavigation.setNotification(String.valueOf(total), 1);
     }
 
     public String getApiKeyFromDatabase() {

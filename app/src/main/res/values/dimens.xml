@@ -31,5 +31,6 @@
     <dimen name="six_dp">6dp</dimen>
     <dimen name="one_dp">1dp</dimen>
     <dimen name="dimen_half_dp">0.5dp</dimen>
+    <dimen name="dimen_32">32dp</dimen>
 
 </resources>

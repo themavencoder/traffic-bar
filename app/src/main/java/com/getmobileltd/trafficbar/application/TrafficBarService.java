@@ -25,6 +25,8 @@ import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartResponse;
 import com.getmobileltd.trafficbar.dashboard.mycart.updatecart.UpdateCartResponse;
 import com.getmobileltd.trafficbar.orderfood.menudetails.model.MenuDetailsModel;
 import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuResponse;
+import com.getmobileltd.trafficbar.registration.forgotpassword.ResetPasswordResponse;
+import com.getmobileltd.trafficbar.registration.forgotpassword.ResetUser;
 import com.getmobileltd.trafficbar.registration.login.networkresponse.LogInResponse;
 import com.getmobileltd.trafficbar.registration.register.model.User;
 import com.getmobileltd.trafficbar.registration.register.networkresponse.SignUpResponse;
@@ -49,6 +51,10 @@ public interface TrafficBarService {
 
     @POST("auth/login")
     Call<LogInResponse> logUser(@Body User user);
+
+    @POST("auth/password/create")
+    Call<ResetPasswordResponse> resetPassword(@Body ResetUser user);
+
 
     @GET("restaurants")
     Call<DiscoverResponse> getRestaurants(@Header("Authorization") String value);
@@ -80,6 +86,8 @@ public interface TrafficBarService {
 
     @PUT("carts/update/{id}")
     Call<UpdateCartResponse> updateCart(@Header("Authorization") String value, @Path("id") int id);
+
+
 
 
 }

@@ -123,13 +123,7 @@ public class DiscoverFragment extends Fragment implements RestaurantClickListene
 
         callbackApiKey = appInstance.getApi_key();
         repository = new UserRepository(getActivity().getApplication());
-       /* UserRepository.delegate =  new AsyncResponse() {
-            @Override
-            public void processFinish(String apiKey) {
-                callbackApiKey = apiKey;
-            }
-        };
-*/
+
 
         repository.getApikey(new OnRetrieveUserApi() {
             @Override
@@ -172,11 +166,8 @@ public class DiscoverFragment extends Fragment implements RestaurantClickListene
                 if (address !=  null) {
 
                     Toast.makeText(getActivity(), address, Toast.LENGTH_SHORT).show();
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.frame_layout,homeFragment)
-                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-                            .addToBackStack(null)
-                            .commit();
+                    ((DashboardActivity) getActivity()).setFragment(homeFragment);
+
 
                     onMenuClickListener.getPosition(0);
 
