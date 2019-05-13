@@ -76,15 +76,15 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryAdapter.Disc
     }
 
     class DiscoveryViewHolder extends RecyclerView.ViewHolder {
-        private TextView state, street, rating;
+        private TextView location, street, rating;
         private RestaurantTickVisible restaurantTickVisible;
         private ImageView restaurantSelected;
 
         DiscoveryViewHolder(@NonNull View itemView) {
             super(itemView);
-            state = itemView.findViewById(R.id.textview_state);
             street = itemView.findViewById(R.id.textview_street);
             rating = itemView.findViewById(R.id.textview_rating);
+            location = itemView.findViewById(R.id.textview_location);
             restaurantSelected = itemView.findViewById(R.id.imageview_selected);
 
 
@@ -106,6 +106,7 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryAdapter.Disc
             });
 
             street.setText(model.getAddress());
+            location.setText(model.getLocation());
 
 
         }

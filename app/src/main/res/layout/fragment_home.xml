@@ -19,7 +19,7 @@
     android:fillViewport="true"
     android:scrollbars="none"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    app:layout_constraintTop_toBottomOf="@+id/button3">
+    app:layout_constraintTop_toBottomOf="@+id/cardview_order_for_someone">
 
 
     <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -30,7 +30,7 @@
         android:fillViewport="true"
         android:scrollbars="none"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintTop_toBottomOf="@+id/button3">
+        app:layout_constraintTop_toBottomOf="@+id/cardview_order_for_someone">
 
         <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -105,20 +105,38 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/editText">
 
-                        <ImageView
+
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_location_on_black_24dp" />
+                            android:orientation="horizontal"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_location_on_black_24dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:text="Trafficbar, "
+                                android:textColor="@color/black_text" />
+
+                            <TextView
+                                android:id="@+id/textview_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:paddingLeft="2dp"
+                                android:text="location"
+                                android:textColor="@color/black_text" />
+                        </LinearLayout>
+
+
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-
-                            android:text="Trafficbar, Maitama"
-                            android:textColor="@color/black_text" />
-
-                        <TextView
+                            android:id="@+id/textview_change_location"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="end|center"
@@ -132,7 +150,7 @@
             </LinearLayout>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/button3"
+                android:id="@+id/cardview_order_for_someone"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_marginStart="16dp"
@@ -140,7 +158,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
-                android:text="Button3"
+                android:text="cardview_order_for_someone"
                 app:cardBackgroundColor="#6C63FF"
                 app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toStartOf="@+id/cardview_order_for_food"
@@ -194,7 +212,7 @@
                 app:cardBackgroundColor="@color/colorAccent"
                 app:cardCornerRadius="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/button3"
+                app:layout_constraintStart_toEndOf="@+id/cardview_order_for_someone"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
                 <LinearLayout
@@ -235,7 +253,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="36dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button3">
+                app:layout_constraintTop_toBottomOf="@+id/cardview_order_for_someone">
 
                 <LinearLayout
                     android:id="@+id/linearLayout3"
@@ -269,13 +287,20 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="8dp"
                         android:src="@drawable/red_circle" />
+                    <TextView
+                        android:id="@+id/textview_trending_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:text="10" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="8dp"
-                        android:text="10 items" />
+                        android:paddingLeft="2dp"
+                        android:text="items" />
 
                 </LinearLayout>
 
@@ -327,11 +352,19 @@
                         android:src="@drawable/red_circle" />
 
                     <TextView
+                        android:id="@+id/textview_food_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="8dp"
-                        android:text="10 Dishes" />
+                        android:text="10" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="2dp"
+                        android:text="dishes" />
 
                 </LinearLayout>
 
@@ -380,13 +413,20 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="8dp"
                         android:src="@drawable/red_circle" />
+                    <TextView
+                        android:id="@+id/textview_drinks_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="8dp"
+                        android:text="10" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="8dp"
-                        android:text="24 Drinks" />
+                        android:paddingLeft="2dp"
+                        android:text="drinks" />
 
                 </LinearLayout>
 

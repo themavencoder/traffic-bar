@@ -30,6 +30,9 @@ public class DrinkResponse {
     @SerializedName("code")
     private int code;
 
+    @SerializedName("count")
+    private int count;
+
     @SerializedName("messsage")
     private String message;
 
@@ -50,5 +53,9 @@ public class DrinkResponse {
 
     public List<DrinkData> getData() {
         return data;
+    }
+
+    public int getCount() {
+        return count;
     }
 }

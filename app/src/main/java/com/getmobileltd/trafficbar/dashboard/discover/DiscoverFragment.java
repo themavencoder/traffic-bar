@@ -85,6 +85,7 @@ public class DiscoverFragment extends Fragment implements RestaurantClickListene
     private OnMenuClickListener onMenuClickListener;
     private String apiKeyFromCallback;
     private String bundleApikey;
+    private String tickedLocation;
 
     public DiscoverFragment() {
         // Required empty public constructor
@@ -134,7 +135,7 @@ public class DiscoverFragment extends Fragment implements RestaurantClickListene
         mRecyclerView = v.findViewById(R.id.recycler_view);
         mAdapter = new DiscoveryAdapter(getContext(), discoveryList);
         mAdapter.setmRestaurantClickListener(this);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         mRecyclerView.setAdapter(mAdapter);
         frameLayout = v.findViewById(R.id.progress_view);
         frameLayout.setVisibility(View.VISIBLE);
@@ -166,6 +167,7 @@ public class DiscoverFragment extends Fragment implements RestaurantClickListene
                 if (address !=  null) {
 
                     Toast.makeText(getActivity(), address, Toast.LENGTH_SHORT).show();
+                    ((DashboardActivity) getActivity()).setTickedLocation(tickedLocation);
                     ((DashboardActivity) getActivity()).setFragment(homeFragment);
 
 
@@ -197,7 +199,7 @@ public class DiscoverFragment extends Fragment implements RestaurantClickListene
                     frameLayout.setVisibility(View.GONE);
                     List<Restaurant> restaurants = response.body().getData();
                     for (Restaurant restaurant : restaurants) {
-                        discoveryList.add(new Restaurant(restaurant.getAddress()));
+                        discoveryList.add(new Restaurant(restaurant.getAddress(),restaurant.getLocation()));
                     }
 
                 } else {
@@ -219,6 +221,8 @@ public class DiscoverFragment extends Fragment implements RestaurantClickListene
     @Override
     public void onClick(final Restaurant model, final ImageView iv) {
      address = model.getAddress();
+     tickedLocation = model.getLocation();
+
 
     }
 

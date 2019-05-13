@@ -79,7 +79,7 @@ public class DashboardActivity extends AppCompatActivity implements DiscoverFrag
     private FirstNamePasserCallback firstNamePasserCallback;
     private LastNamePasserCallback lastNamePasserCallback;
     private String firstNamee, lastNamee;
-
+    private String tickedLocation;
 
 
     @Override
@@ -282,5 +282,13 @@ repository.getLastName(new OnRetrieveLastName() {
 
     public void setLastNamee(String lastNamee) {
         this.lastNamee = lastNamee;
+    }
+
+    public String getTickedLocation() {
+        return tickedLocation;
+    }
+
+    public void setTickedLocation(String tickedLocation) {
+        this.tickedLocation = tickedLocation;
     }
 }

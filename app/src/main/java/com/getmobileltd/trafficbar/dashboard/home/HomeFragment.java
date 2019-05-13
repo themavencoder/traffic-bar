@@ -32,6 +32,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getmobileltd.trafficbar.R;
@@ -40,6 +41,7 @@ import com.getmobileltd.trafficbar.application.TrafficBarApplication;
 import com.getmobileltd.trafficbar.application.TrafficBarService;
 import com.getmobileltd.trafficbar.application.UiSettings;
 import com.getmobileltd.trafficbar.dashboard.DashboardActivity;
+import com.getmobileltd.trafficbar.dashboard.discover.DiscoverFragment;
 import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinkData;
 import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinkResponse;
 import com.getmobileltd.trafficbar.dashboard.home.drinks.DrinksAdapter;
@@ -75,7 +77,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private FoodAdapter adapterFood;
     private DrinksAdapter adapterDrink;
     private View v;
-    private CardView cardViewFood;
+    private CardView cardViewFood, cardViewSomeone;
     private TrafficBarService trafficBarService;
     private Call<TrendingResponse> trendingResponseCall;
     private Call<DrinkResponse> drinkResponseCall;
@@ -89,6 +91,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public static final String INTENT_POPULAR_DRINK_KEY = "popular_drink_key";
     private UserRepository repository;
     private String repoApiKey;
+    private TextView mLocation, mChangeLocation;
+    private TextView mTrendingCount, mFoodCount, mDrinksCount;
+
 
     public HomeFragment() {
         // Required empty public constructor
@@ -102,7 +107,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         v = inflater.inflate(R.layout.fragment_home, container, false);
         UiSettings.colorStatusbar(getActivity(), R.color.deep_ash);
-       repoApiKey = ((DashboardActivity)getActivity()).getApiKeyFromDatabase();
+        repoApiKey = ((DashboardActivity) getActivity()).getApiKeyFromDatabase();
         trafficBarService = TrafficBarApplication.get(getActivity()).getTrafficBarService();
         init(v);
 
@@ -120,8 +125,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         drinksOnClickListener = new DrinksOnClickListener() {
             @Override
             public void onClick(DrinkData model) {
-                Intent intent = new Intent(getActivity(),AddToCartActivity.class);
-                intent.putExtra(INTENT_POPULAR_DRINK_KEY,model);
+                Intent intent = new Intent(getActivity(), AddToCartActivity.class);
+                intent.putExtra(INTENT_POPULAR_DRINK_KEY, model);
                 startActivity(intent);
 
             }
@@ -136,12 +141,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<DrinkResponse> call, Response<DrinkResponse> response) {
                 assert response.body() != null;
                 if (response.body().getCode() == 200) {
+                    mDrinksCount.setText(String.valueOf(response.body().getCount()));
                     modelListDrinks.clear();
                     framelayout.setVisibility(View.GONE);
 
                     List<DrinkData> data = response.body().getData();
                     for (DrinkData datas : data) {
-                        modelListDrinks.add(new DrinkData(datas.getId(),datas.getName(),datas.getPrice(),datas.getImage(),datas.getHref(),datas.getMenu_category_name(),datas.getBig_image(),datas.getDescription()));
+                        modelListDrinks.add(new DrinkData(datas.getId(), datas.getName(), datas.getPrice(), datas.getImage(), datas.getHref(), datas.getMenu_category_name(), datas.getBig_image(), datas.getDescription()));
                     }
                     adapterDrink = new DrinksAdapter(modelListDrinks);
                     adapterDrink.setDrinkListener(drinksOnClickListener);
@@ -168,7 +174,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(FoodData model) {
                 Intent intent = new Intent(getActivity(), AddToCartActivity.class);
-                intent.putExtra(INTENT_POPULAR_FOOD_KEY,model);
+                intent.putExtra(INTENT_POPULAR_FOOD_KEY, model);
                 startActivity(intent);
 
             }
@@ -183,11 +189,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<FoodResponse> call, Response<FoodResponse> response) {
                 assert response.body() != null;
                 if (response.body().getCode() == 200) {
+                    mFoodCount.setText(String.valueOf(response.body().getCount()));
                     modelListFood.clear();
                     framelayout.setVisibility(View.GONE);
                     List<FoodData> data = response.body().getData();
                     for (FoodData datas : data) {
-                        modelListFood.add(new FoodData(datas.getId(), datas.getName(), datas.getPrice(), datas.getImage(), datas.getHref(), datas.getMenu_category_name(),datas.getBig_image(),datas.getDescription()));
+                        modelListFood.add(new FoodData(datas.getId(), datas.getName(), datas.getPrice(), datas.getImage(), datas.getHref(), datas.getMenu_category_name(), datas.getBig_image(), datas.getDescription()));
 
                     }
                     adapterFood = new FoodAdapter(modelListFood);
@@ -213,8 +220,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         trendOnClickListener = new TrendOnClickListener() {
             @Override
             public void onClick(TrendData model) {
-                Intent intent =  new Intent(getActivity(), AddToCartActivity.class);
-                intent.putExtra(INTENT_POPULAR_TREMDS_KEY,model);
+                Intent intent = new Intent(getActivity(), AddToCartActivity.class);
+                intent.putExtra(INTENT_POPULAR_TREMDS_KEY, model);
                 startActivity(intent);
 
             }
@@ -229,11 +236,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<TrendingResponse> call, Response<TrendingResponse> response) {
                 assert response.body() != null;
                 if (response.body().getCode() == 200) {
+                    mTrendingCount.setText(String.valueOf(response.body().getCount()));
                     modelList.clear();
                     framelayout.setVisibility(View.GONE);
                     List<TrendData> data = response.body().getData();
                     for (TrendData datas : data) {
-                        modelList.add(new TrendData(datas.getId(), datas.getName(), datas.getPrice(), datas.getImage(), datas.getHref(), datas.getMenu_category_name(),datas.getBig_image(),datas.getDescription()));
+                        modelList.add(new TrendData(datas.getId(), datas.getName(), datas.getPrice(), datas.getImage(), datas.getHref(), datas.getMenu_category_name(), datas.getBig_image(), datas.getDescription()));
                     }
 
                     adapterTrend = new TrendAdapter(modelList);
@@ -261,18 +269,37 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.cardview_order_for_food:
                 startActivity(new Intent(getActivity(), ListAvailableFoodActivity.class));
+                break;
+            case R.id.cardview_order_for_someone:
+                startActivity(new Intent(getActivity(), ListAvailableFoodActivity.class));
+                break;
 
+            case R.id.textview_change_location:
+                DiscoverFragment discoverFragment = new DiscoverFragment();
+                ((DashboardActivity) getActivity()).setFragment(discoverFragment);
+                break;
         }
 
 
     }
 
     private void init(View v) {
+        mTrendingCount = v.findViewById(R.id.textview_trending_count);
+        mFoodCount = v.findViewById(R.id.textview_food_count);
+        mDrinksCount = v.findViewById(R.id.textview_drinks_count);
+        mChangeLocation = v.findViewById(R.id.textview_change_location);
+        mChangeLocation.setOnClickListener(this);
+        mLocation = v.findViewById(R.id.textview_location);
+        String location = ((DashboardActivity) getActivity()).getTickedLocation();
+        mLocation.setText(location);
         cardViewFood = v.findViewById(R.id.cardview_order_for_food);
         cardViewFood.setOnClickListener(this);
+        cardViewSomeone = v.findViewById(R.id.cardview_order_for_someone);
+        cardViewSomeone.setOnClickListener(this);
         recyclerViewTrend = v.findViewById(R.id.recycler_view_trending);
         recyclerViewFood = v.findViewById(R.id.recycler_view_food);
         recyclerViewDrink = v.findViewById(R.id.recycler_view_drinks);
@@ -289,6 +316,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         recyclerViewDrink.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerViewDrink.setAdapter(adapterDrink);
         framelayout = v.findViewById(R.id.progress_view);
+
 
     }
 

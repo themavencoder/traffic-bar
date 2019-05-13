@@ -29,6 +29,8 @@ public class FoodResponse {
     @SerializedName("code")
     private int code;
 
+    @SerializedName("count")
+    private int count;
     @SerializedName("messsage")
     private String message;
 
@@ -49,5 +51,9 @@ public class FoodResponse {
 
     public List<FoodData> getData() {
         return data;
+    }
+
+    public int getCount() {
+        return count;
     }
 }

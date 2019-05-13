@@ -28,7 +28,8 @@ public class TrendingResponse {
 
     @SerializedName("code")
     private int code;
-
+@SerializedName("count")
+private int count;
     @SerializedName("messsage")
     private String message;
 
@@ -49,5 +50,9 @@ public class TrendingResponse {
 
     public List<TrendData> getData() {
         return data;
+    }
+
+    public int getCount() {
+        return count;
     }
 }

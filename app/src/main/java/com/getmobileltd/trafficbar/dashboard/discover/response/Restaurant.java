@@ -38,21 +38,25 @@ public class Restaurant {
         return isSelected;
     }
 
-    public Restaurant(String address) {
+    public Restaurant(String address,String location) {
         this.address = address;
+        this.location = location;
     }
-    @SerializedName("restaurant_name")
-    private String name;
+
+    @SerializedName("restaurant_location")
+    private String location;
 
     @SerializedName("restaurant_address")
     private String address;
 
-    public String getName() {
-        return name;
-    }
+
 
     public int getId() {
         return id;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     public String getAddress() {

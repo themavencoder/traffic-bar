@@ -124,7 +124,7 @@ public class MenuDetailsActivity extends AppCompatActivity  {
             @Override
             public void onFailure(Call<MenuDetailsModel> call, Throwable t) {
                 frameLayout.setVisibility(View.GONE);
-                Toast.makeText(MenuDetailsActivity.this, "Cannot connect to network", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MenuDetailsActivity.this, "Cannot connect to network" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
