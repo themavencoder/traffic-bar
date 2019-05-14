@@ -1,6 +1,6 @@
 /*
  * *
- * Creator: Tobiloba Adejumo on 3/16/19 2:24 PM Last modified: 3/16/19 2:24 PM Copyright: All rights reserved Ⓒ 2019
+ * Creator: Tobiloba Adejumo on 5/13/19 2:14 PM Last modified: 5/13/19 2:14 PM Copyright: All rights reserved Ⓒ 2019
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
@@ -12,14 +12,12 @@
  * /
  */
 
-package com.getmobileltd.trafficbar.dashboard.mycart.addtocart.listener;
-
-import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.model.AddToCartModel;
+package com.getmobileltd.trafficbar.database;
 
 /**
- * Created by themavencoder on 16,March,2019
+ * Created by themavencoder on 13,May,2019
  */
-public interface AddCartExtraListener {
+public interface OnRetrieveUserId {
 
-    void onClick(String model);
+    void getUserId(int id);
 }

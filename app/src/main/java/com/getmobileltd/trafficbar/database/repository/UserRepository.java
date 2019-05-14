@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.getmobileltd.trafficbar.database.OnRetrieveFirstName;
 import com.getmobileltd.trafficbar.database.OnRetrieveLastName;
 import com.getmobileltd.trafficbar.database.OnRetrieveUserApi;
+import com.getmobileltd.trafficbar.database.OnRetrieveUserId;
 import com.getmobileltd.trafficbar.database.UserDatabase;
 import com.getmobileltd.trafficbar.database.contract.UserDao;
 import com.getmobileltd.trafficbar.database.model.User;
@@ -49,6 +50,11 @@ public class UserRepository {
         new GetApiKeyAsyncTask(userDao,onRetrieveUserApi).execute();
     }
 
+   public void getUserId(OnRetrieveUserId onRetrieveUserId) {
+        new GetUserIdAsyncTask(userDao,onRetrieveUserId).execute();
+
+   }
+
     public void getFirstName(OnRetrieveFirstName onRetrieveFirstName) {
         new GetFirstNameAsyncTask(userDao,onRetrieveFirstName).execute();
 
@@ -70,6 +76,26 @@ public class UserRepository {
             return null;
         }
 
+    }
+
+    public static class GetUserIdAsyncTask extends AsyncTask<Void,Void,Integer> {
+private static UserDao userDao;
+private OnRetrieveUserId onRetrieveUserId;
+
+      GetUserIdAsyncTask(UserDao userDao, OnRetrieveUserId onRetrieveUserId) {
+          this.onRetrieveUserId = onRetrieveUserId;
+          this.userDao = userDao;
+      }
+        @Override
+        protected Integer doInBackground(Void... voids) {
+            return userDao.getUserId();
+        }
+
+        @Override
+        protected void onPostExecute(Integer s) {
+            super.onPostExecute(s);
+           onRetrieveUserId.getUserId(s);
+        }
     }
     public static class GetFirstNameAsyncTask extends AsyncTask<Void, Void, String> {
 

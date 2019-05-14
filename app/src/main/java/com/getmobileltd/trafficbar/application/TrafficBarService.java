@@ -23,6 +23,7 @@ import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.model.AddToCartMod
 import com.getmobileltd.trafficbar.dashboard.mycart.deletecart.DeleteResponse;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartResponse;
 import com.getmobileltd.trafficbar.dashboard.mycart.updatecart.UpdateCartResponse;
+import com.getmobileltd.trafficbar.dashboard.profile.editprofile.UserUpdateResponse;
 import com.getmobileltd.trafficbar.orderfood.menudetails.model.MenuDetailsModel;
 import com.getmobileltd.trafficbar.orderfood.menulist.model.MenuResponse;
 import com.getmobileltd.trafficbar.registration.forgotpassword.ResetPasswordResponse;
@@ -31,14 +32,19 @@ import com.getmobileltd.trafficbar.registration.login.networkresponse.LogInRespo
 import com.getmobileltd.trafficbar.registration.register.model.User;
 import com.getmobileltd.trafficbar.registration.register.networkresponse.SignUpResponse;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by themavencoder on 26,February,2019
@@ -87,7 +93,19 @@ public interface TrafficBarService {
     @PUT("carts/update/{id}")
     Call<UpdateCartResponse> updateCart(@Header("Authorization") String value, @Path("id") int id);
 
+    @Multipart
+    @POST("user/update/{id}")
+    Call<UserUpdateResponse> updateUser(@Header("Authorization") String value, @Path("id") int id,@Part MultipartBody.Part photo, @Part MultipartBody.Part first_name,
+                                        @Part MultipartBody.Part last_name
+                                        );
 
 
+   /* @Multipart
+    @POST("user/update/{id}")
+    Call<UserUpdateResponse> updateUser(@Header("Authorization") String value, @Path("id") int id,
+                                        @Query("first_name") String first_name, @Query("last_name")
+                                                String last_name, @Query("email") String email, @Query("password")
+                                                String password, @Part MultipartBody.Part file);
 
+*/
 }

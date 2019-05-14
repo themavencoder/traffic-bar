@@ -51,6 +51,7 @@ public class MenuDetailsActivity extends AppCompatActivity  {
     public static final String MENU_DETAILS_KEY = "menu_details_key";
         private RecyclerView recyclerView;
         private List<Menus> modelList = new ArrayList<>();
+        private List<List<String>> extrasList = new ArrayList<>();
         private MenuDetailsAdapter adapter;
         private Call<MenuDetailsModel> menuDetailsCall;
         private TrafficBarService trafficBarService;
@@ -108,7 +109,7 @@ public class MenuDetailsActivity extends AppCompatActivity  {
                    for (Menus menu : menus) {
                        modelList.add(new Menus(menu.getMenu_name(),menu.getMenu_price(),menu.getMenu_image_sm(),menu.getMenu_image_bg(),menu.getMenu_description(),menu.getId(),menu.getMenu_extra()));
                       // Toast.makeText(MenuDetailsActivity.this, "" + menu.getMenu_image_sm(), Toast.LENGTH_SHORT).show();
-                       Toast.makeText(MenuDetailsActivity.this, "" + menu.getMenu_extra(), Toast.LENGTH_SHORT).show();
+
                    }
 
                     adapter = new MenuDetailsAdapter(modelList);
@@ -124,6 +125,7 @@ public class MenuDetailsActivity extends AppCompatActivity  {
             @Override
             public void onFailure(Call<MenuDetailsModel> call, Throwable t) {
                 frameLayout.setVisibility(View.GONE);
+
                 Toast.makeText(MenuDetailsActivity.this, "Cannot connect to network" + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

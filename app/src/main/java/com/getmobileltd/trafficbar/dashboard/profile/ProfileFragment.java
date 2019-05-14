@@ -18,6 +18,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.LazyHeaders;
+import com.bumptech.glide.request.RequestOptions;
 import com.getmobileltd.trafficbar.AppInstance;
 import com.getmobileltd.trafficbar.R;
 import com.getmobileltd.trafficbar.application.UiSettings;
@@ -39,6 +44,8 @@ import com.getmobileltd.trafficbar.database.OnRetrieveFirstName;
 import com.getmobileltd.trafficbar.database.OnRetrieveLastName;
 import com.getmobileltd.trafficbar.database.repository.UserRepository;
 
+import static com.getmobileltd.trafficbar.application.TrafficBarApplication.IMAGE_BASE_URL;
+
 public class ProfileFragment extends Fragment {
     private TextView viewProfile, mTextViewFullName;
     private View v;
@@ -46,6 +53,8 @@ public class ProfileFragment extends Fragment {
     private String firstName, lastName;
     private AppInstance appInstance;
     private String repoFirstName, repoLastName;
+    private CircleImageView imageViewProfile;
+
 
 
 
@@ -76,6 +85,21 @@ public class ProfileFragment extends Fragment {
     private void init() {
         viewProfile = v.findViewById(R.id.textview_view_profile);
         mTextViewFullName = v.findViewById(R.id.textview_full_name);
+        imageViewProfile = v.findViewById(R.id.imageview_profile_image);
+        String location =  IMAGE_BASE_URL + appInstance.getImageBaseUrl();
+        Toast.makeText(getActivity(), "" + location, Toast.LENGTH_SHORT).show();
+
+        GlideUrl glideUrl = new GlideUrl(location,
+                new LazyHeaders.Builder()
+        .addHeader("Authorization",appInstance.getApi_key()).build());
+
+        Glide.with(getActivity()).load(glideUrl).apply(new RequestOptions()
+        .placeholder(R.color.colorAccent).error(R.color.black)).into(imageViewProfile);
+
+
+
+
+
 
         viewProfile.setOnClickListener(new View.OnClickListener() {
             @Override

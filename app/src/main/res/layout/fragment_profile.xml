@@ -45,7 +45,7 @@ tools:context=".dashboard.profile.ProfileFragment">
             android:textStyle="bold" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circleimageview"
+            android:id="@+id/imageview_profile_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"

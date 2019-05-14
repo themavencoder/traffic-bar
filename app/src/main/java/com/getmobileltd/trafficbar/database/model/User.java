@@ -29,13 +29,23 @@ public class User {
     private String apiKey;
     private String firstName;
     private String lastName;
+    private int userId;
 
 
-    public User(int id, String apiKey,String firstName, String lastName) {
+    public User(int id, String apiKey,String firstName, String lastName, int userId) {
         this.id = id;
         this.apiKey = apiKey;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.userId = userId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getId() {

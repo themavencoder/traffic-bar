@@ -19,6 +19,9 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.lang.reflect.Array;
+import java.util.List;
+
 /**
  * Created by themavencoder on 26,April,2019
  */
@@ -33,7 +36,7 @@ public class Menus implements  Parcelable{
     @SerializedName("menu_description")
     private String menu_description;
     @SerializedName("menu_extra")
-    private String menu_extra;
+    private List<List<String>> menu_extra;
     @SerializedName("menu_price")
     private String menu_price;
     @SerializedName("menu_image_sm")
@@ -41,7 +44,8 @@ public class Menus implements  Parcelable{
     @SerializedName("menu_image_bg")
     private String menu_image_bg;
 
-    public Menus(String menu_name, String menu_price, String menu_image_sm, String menu_image_bg,String menu_description, int id,String menu_extra) {
+
+    public Menus(String menu_name, String menu_price, String menu_image_sm, String menu_image_bg,String menu_description, int id,List<List<String>> menu_extra) {
         this.menu_name = menu_name;
         this.menu_price = menu_price;
         this.menu_image_sm = menu_image_sm;
@@ -49,8 +53,6 @@ public class Menus implements  Parcelable{
         this.menu_image_bg = menu_image_bg;
         this.id = id;
         this.menu_extra = menu_extra;
-
-
     }
 
 
@@ -62,6 +64,7 @@ public class Menus implements  Parcelable{
         menu_price = in.readString();
         menu_image_sm = in.readString();
         menu_image_bg = in.readString();
+      menu_extra = in.readStringList(List<String> list);
     }
 
     public static final Creator<Menus> CREATOR = new Creator<Menus>() {
@@ -80,7 +83,7 @@ public class Menus implements  Parcelable{
         return id;
     }
 
-    public String getMenu_extra() {
+    public List<List<String>> getMenu_extra() {
         return menu_extra;
     }
 
@@ -108,6 +111,7 @@ public class Menus implements  Parcelable{
         return menu_price;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -122,5 +126,32 @@ public class Menus implements  Parcelable{
         dest.writeString(menu_price);
         dest.writeString(menu_image_sm);
         dest.writeString(menu_image_bg);
+    }
+    public static class List<Menus> implements Parcelable {
+
+
+        protected List(Parcel in) {
+        }
+
+        public static final Creator<List> CREATOR = new Creator<List>() {
+            @Override
+            public List createFromParcel(Parcel in) {
+                return new List(in);
+            }
+
+            @Override
+            public List[] newArray(int size) {
+                return new List[size];
+            }
+        };
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+        }
     }
 }

@@ -32,9 +32,9 @@ import java.util.List;
  */
 public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.MyViewHolder> {
     private AddCartExtraListener mAddCartExtraListener;
-    private List<AddToCartModel> modelList;
+    private List<String> modelList;
 
-    public AddToCartAdapter(AddCartExtraListener listener, List<AddToCartModel> modelList) {
+    public AddToCartAdapter(AddCartExtraListener listener, List<String> modelList) {
         this.modelList = modelList;
         this.mAddCartExtraListener = listener;
 
@@ -49,7 +49,7 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.MyVi
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
-        AddToCartModel model = modelList.get(i);
+        String model = modelList.get(i);
         myViewHolder.bind(mAddCartExtraListener,model);
 
     }
@@ -60,23 +60,21 @@ public class AddToCartAdapter extends RecyclerView.Adapter<AddToCartAdapter.MyVi
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        private TextView textviewName, textviewPrice;
+
 
          MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            textviewName = itemView.findViewById(R.id.textview_extras_name);
-            textviewPrice = itemView.findViewById(R.id.textview_extras_price);
+
         }
 
-        void bind(final AddCartExtraListener mAddCartExtraListener, final AddToCartModel model) {
+        void bind(final AddCartExtraListener mAddCartExtraListener, final String model) {
              itemView.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View v) {
                      mAddCartExtraListener.onClick(model);
                  }
              });
-             textviewPrice.setText(model.getPrice());
-             textviewName.setText(model.getName());
+
         }
     }
 }

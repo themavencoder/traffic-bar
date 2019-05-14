@@ -40,4 +40,7 @@ public interface UserDao {
 
     @Query("SELECT lastName FROM user_table WHERE id = 1")
     String getLastName();
+
+    @Query("SELECT userId FROM user_table WHERE id = 1")
+    int getUserId();
 }

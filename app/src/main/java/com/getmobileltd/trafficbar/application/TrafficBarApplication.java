@@ -27,6 +27,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class TrafficBarApplication extends Application {
     public static final String BASE_URL = "https://trafficbar.herokuapp.com/api/v1/";
+    public static final String IMAGE_BASE_URL = "https://trafficbar.herokuapp.com/User/";
     private TrafficBarService trafficBarService;
     //Create Logger
     private static HttpLoggingInterceptor logger = new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY);

@@ -186,7 +186,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
                     appInstance.setApi_key(apikey);
                     appInstance.setFirstName(firstName);
                     appInstance.setLastName(lastName);
-                    com.getmobileltd.trafficbar.database.model.User user = new com.getmobileltd.trafficbar.database.model.User(1, apikey, firstName,lastName);
+                    com.getmobileltd.trafficbar.database.model.User user = new com.getmobileltd.trafficbar.database.model.User(1, apikey, firstName,lastName,Integer.parseInt(response.body().getData().getUser().getUserId()));
                     repository.insert(user);
 
 

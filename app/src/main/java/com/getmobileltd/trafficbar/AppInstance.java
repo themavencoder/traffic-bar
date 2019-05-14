@@ -26,6 +26,7 @@ public class AppInstance {
 
     private String firstName;
     private String lastName;
+    private String imageBaseUrl;
 
     private int navlocation;
     public static AppInstance getInstance() {
@@ -73,5 +74,13 @@ public class AppInstance {
 
     public void setCart_count(int cart_count) {
         this.cart_count = cart_count;
+    }
+
+    public String getImageBaseUrl() {
+        return imageBaseUrl;
+    }
+
+    public void setImageBaseUrl(String imageBaseUrl) {
+        this.imageBaseUrl = imageBaseUrl;
     }
 }

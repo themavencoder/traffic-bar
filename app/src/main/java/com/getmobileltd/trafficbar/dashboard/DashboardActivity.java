@@ -171,6 +171,7 @@ repository.getLastName(new OnRetrieveLastName() {
 
    if (intent.hasExtra(EXTRA_CART)) {
        bottomNavigation.setCurrentItem(1);
+
    } else {
 
        bottomNavigation.setCurrentItem(0);

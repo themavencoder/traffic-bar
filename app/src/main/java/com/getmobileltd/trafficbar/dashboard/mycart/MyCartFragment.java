@@ -48,6 +48,8 @@ import com.getmobileltd.trafficbar.dashboard.mycart.model.CartData;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartModel;
 import com.getmobileltd.trafficbar.dashboard.mycart.model.MyCartResponse;
 import com.getmobileltd.trafficbar.dashboard.mycart.updatecart.UpdateCartResponse;
+import com.getmobileltd.trafficbar.database.OnRetrieveUserApi;
+import com.getmobileltd.trafficbar.database.repository.UserRepository;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -70,6 +72,7 @@ public class MyCartFragment extends Fragment implements View.OnClickListener {
     private CartOnClickListener mListener;
     private FrameLayout frameLayout;
     private int numberOfItemsInCart;
+    private UserRepository repository;
     private MyCartFragmentCallback myCartFragmentCallback;
     private Call<UpdateCartResponse> updateCartResponseCall;
     private String repoApiKey;
@@ -93,10 +96,17 @@ public interface MyCartFragmentCallback {
         mRecyclerView = v.findViewById(R.id.recycler_view);
         mAdapter = new MyCartAdapter(cartList);
         checkout();
+        repository = new UserRepository(getActivity().getApplication());
+        repository.getApikey(new OnRetrieveUserApi() {
+            @Override
+            public void pnRetrieveUserFinish(String apiKey) {
+                repoApiKey = apiKey;
+            }
+        });
         mAdapter.setCartClickListener(mListener);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false));
         mRecyclerView.setAdapter(mAdapter);
-        repoApiKey = ((DashboardActivity)getActivity()).getApiKeyFromDatabase();
+
         mButtonCheckout = v.findViewById(R.id.button_checkout);
         mButtonCheckout.setOnClickListener(this);
         trafficBarService = TrafficBarApplication.get(getActivity()).getTrafficBarService();
@@ -183,12 +193,16 @@ public interface MyCartFragmentCallback {
 
     private void getCart() {
         frameLayout.setVisibility(View.VISIBLE);
-        cartResponseCall = trafficBarService.getCart(repoApiKey);
+        cartResponseCall = trafficBarService.getCart(appInstance.getApi_key());
         cartResponseCall.enqueue(new Callback<MyCartResponse>() {
             @Override
             public void onResponse(Call<MyCartResponse> call, @NotNull Response<MyCartResponse> response) {
                 assert response.body() != null;
-                if (response.body().status.equals("success")) {
+                if(response.code() == 401) {
+                    frameLayout.setVisibility(View.GONE);
+                    Toast.makeText(getActivity(), "Unauthorized request", Toast.LENGTH_SHORT).show();
+                }
+               else if (response.body().status.equals("success")) {
                     cartList.clear();
                     numberOfItemsInCart = response.body().getCount();
                    appInstance.setCart_count(response.body().getCount());

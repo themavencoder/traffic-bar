@@ -65,6 +65,7 @@ import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.listener.AddCartEx
 import com.getmobileltd.trafficbar.dashboard.mycart.addtocart.model.AddToCartModel;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.getmobileltd.trafficbar.dashboard.home.HomeFragment.INTENT_POPULAR_DRINK_KEY;
@@ -94,6 +95,10 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
     private UserRepository repository;
     private FrameLayout frameLayout;
     private String dbApiKey;
+    private List<List<String>> menuExtraList = new ArrayList<>();
+    private List<String> menuExtrasSubstance = new ArrayList<>();
+    private List<String> menuExtrasPrice = new ArrayList<>();
+    private List<String> menuExtras = new ArrayList<>();
 
     public double initial_price;
     public double price;
@@ -103,9 +108,9 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_to_cart);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        appInstance = AppInstance.getInstance();
         CoordinatorLayout mCoordinatorLayout = findViewById(R.id.coordinatorLayout);
         setSupportActionBar(toolbar);
-        appInstance = AppInstance.getInstance();
         toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_keyboard_backspace_black_24dp));
         // toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         mCollapsingToolbar = findViewById(R.id.collapsing_toolbar);
@@ -202,6 +207,21 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
 
     private void getData() {
 
+            menuExtraList = menus.getMenu_extra();
+           for (int i = 0; i <= menuExtraList.size(); i++) {
+               if (i == 0) {
+                  menuExtrasSubstance =  menuExtraList.get(0);
+               }
+               else if (i == 1) {
+                   menuExtrasPrice = menuExtraList.get(1);
+               }
+           }
+      for (int i = 0; i <= menuExtraList.size();i++) {
+         String extra =  menuExtraList.get(i) + "\t" + menuExtrasPrice.get(i);
+          menuExtras.add(extra);
+          mAdapter = new AddToCartAdapter(this,menuExtras);
+          mRecyclerView.setAdapter(mAdapter);
+      }
 
         mTvName.setText(menus.getMenu_name());
         mTvPrice.setText(menus.getMenu_price());
@@ -219,7 +239,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
 
     private void init() {
         mRecyclerView = findViewById(R.id.recyclerView);
-        mAdapter = new AddToCartAdapter(this, modeList);
+        mAdapter = new AddToCartAdapter(this, menuExtras);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
         frameLayout = findViewById(R.id.progress_view);
@@ -250,7 +270,7 @@ public class AddToCartActivity extends AppCompatActivity implements AddCartExtra
     }
 
     @Override
-    public void onClick(AddToCartModel model) {
+    public void onClick(String model) {
 
     }
 
